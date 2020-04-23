@@ -1,12 +1,11 @@
 {% extends 'main.template.html' %}
 
-    {% block title %} Beauty Sharings {% endblock %}     
+    {% block title %} Edit Your Review {% endblock %}     
 
-
+    
     {% block content %}
-    {% for r in reviews%}
         Title: {{r.title}}<br/>
-        Posted By: {% for u in users %} {% if r.user_id==u._id %}{{u.name}}{% endif %}{% endfor%}<br/>
+        Posted By: {{u.name}}<br/>
         Posted On: {{r.posted}}<br/>
         Product Name: {{r.product_name}}<br/>
         Brand: {{r.product_brand}}</br>
@@ -21,6 +20,5 @@
         Where to Buy: {% for p in r.where_to_buy %}
                         {{ p }}
                       {% endfor %}
-        <a href="{{url_for('edit_review', review_id=r._id)}}">Edit Review</a>
-    {% endfor %}
+
     {% endblock %}
