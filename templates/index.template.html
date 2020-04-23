@@ -16,11 +16,7 @@
                     {% endfor %}<br/>
         Ratings: {{ r.rating }}<br/>
         Review: {{ r.review }}<br/>
-        What I Like: {{ r.like }}<br/>
-        What I Don't Like: {{ r.dislike }}<br/>
-        Where to Buy: {% for p in r.where_to_buy %}
-                        {{ p }}
-                      {% endfor %}
+       
         <a href="{{url_for('edit_review', review_id=r._id)}}">Edit Review</a>
     {% endfor %}
     {% endblock %}

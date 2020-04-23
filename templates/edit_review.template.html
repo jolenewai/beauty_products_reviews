@@ -6,7 +6,6 @@
     {% block content %}
         <form method="POST">
             <label>Title:</label> <input type="text" name="title" value="{{r.title}}" /><br/>
-            <label>Posted By:</label> <input type="text" name="name" value="{{u.name}}" /><br/>
             <label>Posted On:</label> <input type="text" name="posted" value="{{r.posted}}"/><br/>
             <label>Product Name:</label> <input type="text" name="product_name" value="{{r.product_name}}"/><br/>
             <label>Brand:</label> <input type="text" name="product_brand" value="{{r.product_brand}}"/></br>
@@ -33,11 +32,9 @@
                 {% endfor %}
             </select>
             <label>Review:</label> <input type="text" name="review" value="{{ r.review }}" /> <br/>
-            <label>What I Like:</label> <input type="text" name="like" value="{{ r.like }}" /><br/>
-            <label>What I Don't Like:</label> <input type="text" name="dislike" value="{{ r.dislike }}" /><br/>
-            <label>Where to Buy:</label> 
-            {% for p in r.where_to_buy %}
-            <input type="text" name="where_to_buy" value="{{ p }}" />
             {% endfor %}
 
+            <input type="submit" value="Update My Review">
+            <a href="{{url_for('index')}}">Cancel</a>
+        </form>
     {% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'main.template.html' %}
+
+    {% block title %} Add A Beauty Product Review {% endblock %}     
+
+    
+    {% block content %}
+        <form method="POST">
+            
+            <!-- Add Review Form Section One -- Product Information -->
+            <label>Title:</label> <input type="text" name="title" /><br/>
+            <label>Product Name:</label> <input type="text" name="product_name" /><br/>
+            <label>Brand:</label> <input type="text" name="product_brand" /></br>
+            <label>Country of Origin:</label> <input type="text" name="country_of_origin" /><br/>
+            <label>Categories:</label> 
+
+                    {% for c in cat %}
+                        <input type="checkbox" name="categories" value="{{c._id}}" >{{c.name}}</input> <br/>
+                    {% endfor %}
+
+            <!-- Add Review Form Section Two -- Review  -->
+            <label>Ratings:</label> 
+            <select name="rating"> 
+                {% for rating in ratings %}
+                <option value="{{rating}}">{{rating}}</option>
+                {% endfor %}
+            </select>
+            <label>Review:</label> <input type="text" name="review" /> <br/>
+
+            <input type="submit" value="Add Review" /> 
+            <a href="{{url_for('index')}}"></a>
+
+        </form>
+    {% endblock %}

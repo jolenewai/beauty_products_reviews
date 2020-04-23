@@ -31,8 +31,7 @@ def add_review():
 @app.route('add_review', methods=['POST'])
 def process_add_review():
     return redirect(url_for('index'))
-
-
+    
 
 @app.route('/edit_review/<review_id>')
 def edit_review(review_id):
@@ -45,11 +44,9 @@ def edit_review(review_id):
     user = client[DB_NAME].users.find({
         '_id': review['user_id']
     })
-
     categories = client[DB_NAME].categories.find()
-
-
     return render_template('edit_review.template.html', r=review, u=user, cat=categories, ratings=ratings)
+    
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':
