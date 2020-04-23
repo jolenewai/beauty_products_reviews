@@ -2,8 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for
 import os
 import pymongo
 import data
+import datetime
 from dotenv import load_dotenv
 from bson.objectid import ObjectId
+
 
 load_dotenv()
 
@@ -25,13 +27,30 @@ def index():
 
 @app.route('/add_review')
 def add_review():
-    return render_template('add_review.template.html')
+    client = data.get_client()
+
+    categories = client[DB_NAME].categories.find()
+
+    return render_template('add_review.template.html',cat=categories, ratings=ratings)
 
 
-@app.route('add_review', methods=['POST'])
+@app.route('/add_review', methods=['POST'])
 def process_add_review():
+
+    client = data.get_client()
+    client[DB_NAME].user_reviews.insert_one({
+        'title':request.form.get('title'),
+        'posted': datetime.datetime.now(),
+        'user_id':'',
+        'product_name':request.form.get('product_name'),
+        'product_brand':request.form.get('brand'),
+        'categories':'',
+        'rating': request.form.get('rating'),
+        'review':request.form.get('review')
+    })
+
     return redirect(url_for('index'))
-    
+
 
 @app.route('/edit_review/<review_id>')
 def edit_review(review_id):
