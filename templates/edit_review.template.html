@@ -4,21 +4,40 @@
 
     
     {% block content %}
-        Title: {{r.title}}<br/>
-        Posted By: {{u.name}}<br/>
-        Posted On: {{r.posted}}<br/>
-        Product Name: {{r.product_name}}<br/>
-        Brand: {{r.product_brand}}</br>
-        Country of Origin: {{r.country_of_origin}}<br/>
-        Categories: {% for category in r.categories %}
-                        {{category.name}}
-                    {% endfor %}<br/>
-        Ratings: {{ r.rating }}<br/>
-        Review: {{ r.review }}<br/>
-        What I Like: {{ r.like }}<br/>
-        What I Don't Like: {{ r.dislike }}<br/>
-        Where to Buy: {% for p in r.where_to_buy %}
-                        {{ p }}
-                      {% endfor %}
+        <form method="POST">
+            <label>Title:</label> <input type="text" name="title" value="{{r.title}}" /><br/>
+            <label>Posted By:</label> <input type="text" name="name" value="{{u.name}}" /><br/>
+            <label>Posted On:</label> <input type="text" name="posted" value="{{r.posted}}"/><br/>
+            <label>Product Name:</label> <input type="text" name="product_name" value="{{r.product_name}}"/><br/>
+            <label>Brand:</label> <input type="text" name="product_brand" value="{{r.product_brand}}"/></br>
+            <label>Country of Origin:</label> <input type="text" name="country_of_origin" value="{{r.country_of_origin}}" /><br/>
+            <label>Categories:</label> 
+
+                    {% for c in cat %}
+                    
+                        <input type="checkbox" name="categories" value="{{c._id}}" 
+                           {% for category in r.categories %}
+                                {% if c._id == category._id %}
+                                    checked
+                                {% endif %}
+                            {% endfor %} 
+                         >{{c.name}}</input> <br/>
+                         
+                    {% endfor %}
+                    
+
+            <label>Ratings:</label> 
+            <select name="rating"> 
+                {% for rating in ratings %}
+                <option value="{{rating}}" {% if r.rating == rating %}selected{% endif %}>{{rating}}</option>
+                {% endfor %}
+            </select>
+            <label>Review:</label> <input type="text" name="review" value="{{ r.review }}" /> <br/>
+            <label>What I Like:</label> <input type="text" name="like" value="{{ r.like }}" /><br/>
+            <label>What I Don't Like:</label> <input type="text" name="dislike" value="{{ r.dislike }}" /><br/>
+            <label>Where to Buy:</label> 
+            {% for p in r.where_to_buy %}
+            <input type="text" name="where_to_buy" value="{{ p }}" />
+            {% endfor %}
 
     {% endblock %}
