@@ -30,6 +30,7 @@ def add_review():
     client = data.get_client()
 
     categories = client[DB_NAME].categories.find()
+    
 
     return render_template('add_review.template.html',cat=categories, ratings=ratings)
 
@@ -38,16 +39,42 @@ def add_review():
 def process_add_review():
 
     client = data.get_client()
+    selected_categories = request.form.getlist('categories')
+    cat_to_add = []
+
+    user_email = request.form.get('email')
+
+    user = client['DB_NAME'].users.find_one({
+        'email':user_email
+    })
+
+    if user:
+        user_id = user['_id']
+    else
+        print("user not found")
+
+    for sc in selected_categories:
+        current_cat = client[DB_NAME].categories.find_one({
+            '_id':ObjectId(sc)
+        })
+
+        cat_to_add.append({
+            'category_id':ObjectId(current_cat['_id']),
+            'name':current_cat['name']
+        })
+
     client[DB_NAME].user_reviews.insert_one({
         'title':request.form.get('title'),
-        'posted': datetime.datetime.now(),
+        'posted': datetime.datetime.now().isoformat(),
         'user_id':'',
         'product_name':request.form.get('product_name'),
         'product_brand':request.form.get('brand'),
-        'categories':'',
+        'country_of_origin': request.form.get('product_name'),
+        'categories':cat_to_add,
         'rating': request.form.get('rating'),
         'review':request.form.get('review')
     })
+
 
     return redirect(url_for('index'))
 
