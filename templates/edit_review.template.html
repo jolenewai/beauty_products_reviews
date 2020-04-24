@@ -10,25 +10,23 @@
             <label>Product Name:</label> <input type="text" name="product_name" value="{{r.product_name}}"/><br/>
             <label>Brand:</label> <input type="text" name="product_brand" value="{{r.product_brand}}"/></br>
             <label>Country of Origin:</label> <input type="text" name="country_of_origin" value="{{r.country_of_origin}}" /><br/>
-            <label>Categories:</label> 
+            <label>Categories:</label> <br/>
 
                     {% for c in cat %}
                     
                         <input type="checkbox" name="categories" value="{{c._id}}" 
-                           {% for category in r.categories if c._id == category._id %}
+                           {% for category in r.categories if category.category_id == c._id %}
                                     checked
-                            {% endfor %} 
-                         >{{c.name}}</input> <br/>
+                            {% endfor %} >{{c.name}}</input> <br/>
                          
                     {% endfor %}
-                    
 
             <label>Ratings:</label> 
             <select name="rating"> 
                 {% for rating in ratings %}
                 <option value="{{rating}}" {% if r.rating == rating %}selected{% endif %}>{{rating}}</option>
                 {% endfor %}
-            </select>
+            </select><br/>
             <label>Review:</label> <input type="text" name="review" value="{{ r.review }}" /> <br/>
 
             <input type="submit" value="Update My Review">
