@@ -5,6 +5,7 @@ import data
 import datetime
 from dotenv import load_dotenv
 from bson.objectid import ObjectId
+from bson import Regex
 
 
 load_dotenv()
@@ -22,7 +23,11 @@ def index():
     client = data.get_client()
     reviews = client[DB_NAME].user_reviews.find()
     users = client[DB_NAME].users.find()
-    return render_template('index.template.html', reviews=reviews, users=users)
+    user_list = []
+    for user in users:
+        user_list.append(user)
+
+    return render_template('index.template.html', reviews=reviews, users=user_list)
 
 
 @app.route('/add_review')
@@ -30,9 +35,13 @@ def add_review():
     client = data.get_client()
 
     categories = client[DB_NAME].categories.find()
+    cat_list = []
+
+    for cat in categories:
+        cat_list.append(cat)
     
 
-    return render_template('add_review.template.html',cat=categories, ratings=ratings)
+    return render_template('add_review.template.html',cat=cat_list, ratings=ratings)
 
 
 @app.route('/add_review', methods=['POST'])
@@ -42,15 +51,15 @@ def process_add_review():
     selected_categories = request.form.getlist('categories')
     cat_to_add = []
 
-    user_email = request.form.get('email')
+    user_email = request.form.get('email').strip()
 
-    user = client['DB_NAME'].users.find_one({
-        'email':user_email
+    user = client[DB_NAME].users.find_one({
+        'email': user_email
     })
 
     if user:
         user_id = user['_id']
-    else
+    else:
         print("user not found")
 
     for sc in selected_categories:
@@ -66,10 +75,10 @@ def process_add_review():
     client[DB_NAME].user_reviews.insert_one({
         'title':request.form.get('title'),
         'posted': datetime.datetime.now().isoformat(),
-        'user_id':'',
+        'user_id': ObjectId(user_id),
         'product_name':request.form.get('product_name'),
         'product_brand':request.form.get('brand'),
-        'country_of_origin': request.form.get('product_name'),
+        'country_of_origin': request.form.get('country_of_origin'),
         'categories':cat_to_add,
         'rating': request.form.get('rating'),
         'review':request.form.get('review')

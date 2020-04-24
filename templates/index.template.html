@@ -7,10 +7,10 @@
     <div class="container">
     <div class="row">
 
-    {% for r in reviews%}
+    {% for r in reviews %}
         <div class="col">
         <h4>{{r.title}}</h4>
-        Posted By: {% for u in users %} {% if r.user_id==u._id %}{{u.name}}{% endif %}{% endfor%}<br/>
+        Posted By: {% for u in users if r.user_id==u._id %}{{u.name}}{% endfor%}<br/>
         Posted On: {{r.posted}}<br/>
         Product Name: {{r.product_name}}<br/>
         Brand: {{r.product_brand}}</br>

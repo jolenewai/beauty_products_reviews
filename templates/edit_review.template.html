@@ -15,10 +15,8 @@
                     {% for c in cat %}
                     
                         <input type="checkbox" name="categories" value="{{c._id}}" 
-                           {% for category in r.categories %}
-                                {% if c._id == category._id %}
+                           {% for category in r.categories if c._id == category._id %}
                                     checked
-                                {% endif %}
                             {% endfor %} 
                          >{{c.name}}</input> <br/>
                          
@@ -32,7 +30,6 @@
                 {% endfor %}
             </select>
             <label>Review:</label> <input type="text" name="review" value="{{ r.review }}" /> <br/>
-            {% endfor %}
 
             <input type="submit" value="Update My Review">
             <a href="{{url_for('index')}}">Cancel</a>
