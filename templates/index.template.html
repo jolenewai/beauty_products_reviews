@@ -11,16 +11,19 @@
     <title>Pretty Good - 100% Consumers' Reviews on Beauty Products</title>
 </head>
 <body>
-    <div id="home" class="container-fluid border border-primary">
-        <div class="row align-items-center">
-            <div class="col mx-auto">
-            <h1>PRETTY GOOD</h1>
-            100% Consumers’ Reviews on beauty products
+    <div id="home" class="m-0 p-0 mx-auto mh-100 vh-100 h-100">
+        <div class="row align-items-center h-100 mh-100 mr-0">
+            <div class="col mx-auto text-center pr-0">
+                <h1 class="mb-0">PRETTY GOOD</h1>
+                <p class="mt-0">100% Consumers’ Reviews on Beauty Products</p>
+                <div class="mt-3 pb-3 pt-3">
+                    <a class="p-4 link-border btn" href="{{url_for('read_reviews')}}">Read Reviews</a> <a class="ml-2 p-4 link-border btn" href="{{url_for('add_review')}}">Write A Review</a>
+                </div>
+                <a class="small-link" href="{{url_for('index')}}">Login</a> / <a class="small-link" href="{{url_for('index')}}">Register</a>
             </div>
         </div>
     </div>
-    <!-- Cloudinary Image Uploader -->
-    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"> </script>
+    
     <!-- JQUERY Minified -->
     <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->

@@ -15,7 +15,6 @@ body {
     background-repeat: no-repeat, no-repeat;
     background-size: cover, 70%;
     background-attachment: fixed, fixed;
-    height:100%;
     font-family: 'Nunito Sans', sans-serif;
 }
 
@@ -26,6 +25,54 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* home container */
+
 #home {
-    height:100%;
+    font-family: 'Amatic SC', cursive;
+    weight: 400;
+}
+
+#home h1 {
+    font-size: 6.6em
+}
+
+#home p{
+    font-size: 3.2em;
+}
+
+#home a{
+    font-size: 1.06em;
+}
+
+#home .btn {
+    font-size: 2.4em;
+}
+
+.small-link {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight:300;
+}
+
+a:visited, a:link{
+    color: #676767;
+}
+
+a:hover{
+    color:#FF8080;
+    text-decoration: none;
+}
+
+#home .btn a:visited, #home .btn a:link{
+    color: #676767;
+}
+
+#home .btn:hover{
+    background-color:#FF8080 !important;
+    color:#FFF !important;
+    text-decoration: none;
+}
+
+.link-border{
+    border-color: #FF8080 !important;
+    border-width: 2px !important;
+    
 }
