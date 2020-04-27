@@ -1,13 +1,19 @@
 {% extends 'main.template.html' %}
 
+    {% block externalscript %}
+
+    <script>UPLOADCARE_PUBLIC_KEY = "{{public_key}}";</script>
+    <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
+
+    {% endblock %}
+
     {% block title %} Add A Beauty Product Review {% endblock %}     
 
-    
     {% block content %}
 
         <form method="POST">
             <!-- Get User Information -->
-            <label>User Email</label><input type="email" name="email" /><br/>
+            <input type="hidden" role="uploadcare-uploader" name="product_image" />
 
             <!-- Add Review Form Section One -- Product Information -->
             <label>Title:</label> <input type="text" name="title" /><br/>
@@ -15,7 +21,7 @@
             <label>Brand:</label> <input type="text" name="product_brand" /></br>
             <label>Country of Origin:</label> <input type="text" name="country_of_origin" /><br/>
             <label>Categories:</label> 
-            
+
                     <!-- Get Categories from Categories table-->
                     {% for c in cat %}
                         <input type="checkbox" name="categories" value="{{c._id}}" >{{c.name}}</input> <br/>
@@ -34,4 +40,7 @@
             <a href="{{url_for('index')}}"></a>
 
         </form>
+
+
+
     {% endblock %}
