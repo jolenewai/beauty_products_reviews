@@ -16,6 +16,8 @@ body {
     background-size: cover, 70%;
     background-attachment: fixed, fixed;
     font-family: 'Nunito Sans', sans-serif;
+    color: #676767;
+
 }
 
 /* define font style for headers */
@@ -61,11 +63,11 @@ a:hover{
     text-decoration: none;
 }
 
-#home .btn a:visited, #home .btn a:link{
+.btn a:visited, #home .btn a:link{
     color: #676767;
 }
 
-#home .btn:hover{
+.btn:hover{
     background-color:#FF8080 !important;
     color:#FFF !important;
     text-decoration: none;
@@ -76,3 +78,5 @@ a:hover{
     border-width: 2px !important;
     
 }
+
+
