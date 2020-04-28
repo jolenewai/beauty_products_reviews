@@ -1,0 +1,14 @@
+{% extends 'main.template.html' %}
+
+{% block title %}User Login{% endblock %}
+
+{% block content %}
+
+    <form method="POST">
+        <label>Email: </label> <input type="text" name="email" />
+        <label>Password: </label> <input type="password" name="password" />
+        <input type="hidden" value="" />
+        <input type="submit" value="Login"> <a href="">Cancel</a>
+    </form>
+
+{% endblock %}

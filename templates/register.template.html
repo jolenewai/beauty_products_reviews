@@ -1,0 +1,17 @@
+{% extends 'main.template.html' %}
+
+{% block title %} User Registration {% endblock %}
+
+{% block content %}
+
+    <form method="POST">
+        <label>Email Address: </label> <input type="email" name="email" placeholder="eg. abc@your-email-domain.com" />
+        <label>Display Name: </label> <input type="text" name="name" placeholder="Name to be displayed for your review" />
+        <label>Password: </label> <input type="password" name="password" placeholder="Password" />
+        <label>Age: </label> <input type="number" name="age" placeholder="e.g. 25"/>
+        <label>Gender: </label><select name="gender"><option value="F">Female</option><option value="M">Male</option><option value="S">Not Specified</option>
+        <label>Occupation: </label> <input type="text" name="occupation" placeholder="Your Occupation" />
+        <input type="submit" value="Register" /> <a href="{{url_for('index')}}">Cancel</a>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'main.template.html' %}
+
+    {% block externalscript %}
+
+    <script>UPLOADCARE_PUBLIC_KEY = "{{public_key}}";</script>
+    <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
+
+    {% endblock %}
+
+    {% block title %} Delete Review {% endblock %}     
+
+    {% block content %}
+
+        <form method="POST">
+            Are you sure you want to delete <strong>{{r.title}}</strong> ?
+
+            <input type="submit" value="Delete Review" /> 
+            <a href="{{url_for('read_reviews')}}">Cancel</a>
+
+        </form>
+
+
+    {% endblock %}
