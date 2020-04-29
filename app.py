@@ -57,13 +57,29 @@ def index():
 @app.route('/read_reviews')
 def read_reviews():
     client = data.get_client()
+    
     reviews = client[DB_NAME].user_reviews.find()
+
     users = client[DB_NAME].users.find()
+    categories = client[DB_NAME].categories.find()
+
+    skincare_reviews = client[DB_NAME].user_reviews.find(
+        {
+             'categories.name': 'Skin Care'
+        }
+    ).limit(3)
+
+    cosmetic_reviews = client[DB_NAME].user_reviews.find(
+        {
+            'categories.name': 'Cosmetic'
+        }
+    ).limit(3)
+
     user_list = []
     for user in users:
         user_list.append(user)
 
-    return render_template('read_reviews.template.html', reviews=reviews, users=user_list)
+    return render_template('read_reviews.template.html', reviews=reviews, cat=categories, users=user_list, skincare=skincare_reviews, cosmetics=cosmetic_reviews)
 
     
 @app.route('/add_review')
@@ -201,7 +217,12 @@ def delete_review(review_id):
 
 @app.route('/register_user')
 def add_user():
-    return render_template('register.template.html')
+
+    client = data.get_client()
+
+    categories = client[DB_NAME].categories.find()
+
+    return render_template('register.template.html', cat=categories)
 
 
 @app.route('/register_user', methods=['POST'])

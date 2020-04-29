@@ -23,14 +23,14 @@ body {
 /* define font style for headers */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Amatic SC', cursive;
-    weight: 700;
+    font-weight: 700;
 }
 
 /* home container */
 
 #home {
     font-family: 'Amatic SC', cursive;
-    weight: 400;
+    font-weight: 400;
 }
 
 #home h1 {
@@ -63,7 +63,7 @@ a:hover{
     text-decoration: none;
 }
 
-.btn a:visited, #home .btn a:link{
+.btn a:visited, .btn a:link{
     color: #676767;
 }
 

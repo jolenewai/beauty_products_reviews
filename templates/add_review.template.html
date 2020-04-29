@@ -13,7 +13,6 @@
 
         <form method="POST">
             <!-- Get User Information -->
-            <input type="hidden" role="uploadcare-uploader" name="product_image" />
 
             <!-- Add Review Form Section One -- Product Information -->
             <label>Title:</label> <input type="text" name="title" /><br/>
@@ -35,9 +34,12 @@
                 {% endfor %}
             </select><br/>
             <label>Review:</label> <input type="text" name="review" /> <br/>
+            <input type="hidden" role="uploadcare-uploader" name="product_image" />
 
             <input type="submit" value="Add Review" /> 
             <a href="{{url_for('index')}}"></a>
+
+
 
         </form>
 

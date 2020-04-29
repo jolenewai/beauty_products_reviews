@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Nunito+Sans:wght@300;400;600&display=swap');
+
+body {
+        
+    background-color: #FFF9F9;
+    background-image: url("/static/images/second_background.png");
+    background-attachment: fixed;
+    background-position: center top;
+    font-size: 1em;
+
+}
+
+/* define font style for headers */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700;
+}
+
+#website-title a{
+    font-size: 5em;
+    color: #FF8080;
+    font-family: 'Amatic SC', cursive;
+    font-weight: 400;
+    line-height: 0.9em;
+}
+
+#website-desc {
+    font-size: 2.625em;
+    color: #000;
+    font-family: 'Amatic SC', cursive;
+    font-weight: 400;    
+}
+
+.navbar {
+    font-family: 'Amatic SC', cursive; 
+    font-weight: 400;    
+}
+
+.navbar a {
+    color: #000;
+    font-size: 1.8em;
+}
+
+.navbar a:hover {
+    color: #FFF;
+    font-size: 1.8em;
+    background-color: #FF8080;
+}
+
+.navbar-toggler{
+    background-color: #FF8080;
+}
+
+.navbar-toggler .custom-icon{
+    color:#FFF;
+    background-color: #FF8080;
+}
+
+.link-border{
+    border-color: #FF8080 !important;
+    border-width: 2px !important;
+    
+}
+
+.btn a:visited, .btn a:link{
+    color: #000;
+}
+
+.btn:hover, .btn a:hover{
+    background-color:#FF8080 !important;
+    color:#FFF !important;
+    text-decoration: none;
+}
+
+.pink-bg {
+    background-color:#FF8080 !important;
+}
+
+label {
+    font-family: 'Amatic SC', cursive;
+    font-weight: 400;  
+    font-size: 1.6em !important;
+}
+
+a:visited, a:link{
+    color: #676767;
+}
+
+a:hover{
+    color:#FF8080;
+    text-decoration: none;
+}
+
+.pink-text {
+        color:#FF8080;
+
+}
