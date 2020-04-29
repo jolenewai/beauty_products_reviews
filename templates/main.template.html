@@ -4,24 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     {% block externalscript %}{% endblock %}
+    <!-- FontAwesome kit code -->
+    <script src="https://kit.fontawesome.com/d302b3e2ff.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/static/css/main.css" />
+
     <title>Pretty Good - 100% Consumers' Reviews on Beauty Products</title>
 </head>
 <body>
+
     <div class="container">
-    <h1>
-        {% block title %} {% endblock %}   
-    </h1>
+        <div class="row">
+            <div class="col text-center">
+                <div id="website-title" class="mt-5"><a class="text-decoration-none" href="/">PRETTY GOOD</a></div>
+                <div id="website-desc" class="m-0 pt-0">100% Consumers’ Reviews on Beauty Products</div>
+            </div> 
+        </div>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group mb-2 mx-auto text-shadow">
+                    <input type="text" class="form-control rounded-left border-white" id="search"
+                        placeholder="Search"  aria-label="Search">
+                    <div class="input-group-append">
+                        <button type="submit" class="input-group-text pink-bg lighten-3 rounded-right border-white"
+                            id="btn-search-home" role="link"><i class="fas fa-search text-white"
+                                aria-hidden="true"></i></button>
+                    </div>
+                    <span class="mx-3 mt-1"> <a class="small-link" href="{{url_for('user_login')}}?redirect={{request.path}}">Login</a></span>
+                </div>
+            </form>
+
+            
+
+        <nav class="navbar navbar-expand-lg navbar-light light-bg link-border ">
+            <button class="navbar-toggler btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="text-white custom-icon"> <i class="fas fa-bars"></i></span>
+            </button>
+            
+            <div class="collapse navbar-collapse nav" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto">
+                {% for c in cat %}
+                    {% if c.name != "For Women" %} 
+                    <li class="nav-item mx-2 border link-border text-center btn p-0">
+                        <a href="#" class="nav-link px-5 py-2 text-decoration-none">{{c.name}}</a> 
+                    </li>    
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            </div>
+        </nav>
+
+    </div>
+
+    <div class="container mt-5">
+    <div class="row justify-content-center">
+            <div class="col-sm-12 col-lg-10 col-md-10 mx-auto">
+        <h1 class="text-center mb-3">{% block title %} {% endblock %} </h1>
 
     {% block content %} {% endblock %}
+            </div>
     </div>
-    <!-- Cloudinary Image Uploader -->
-    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"> </script>
-    <!-- JQUERY Minified -->
-    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
-    <!-- Bootstrap JS -->
+    </div>
+    
+    <div class="container p-5">
+        <div class="row">
+            <div class="col">
+            footer
+            </div>
+        </div>
+    </div>
+
+
+    <!-- For Boostrap -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
