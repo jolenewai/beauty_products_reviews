@@ -3,15 +3,55 @@
 {% block title %} User Registration {% endblock %}
 
 {% block content %}
+   <div id="register" class="col-8 mx-auto bg-white shadow p-5">               
+        <form method="POST">
+            <div class="form-group row justify-content-start mb-3">
+                <label class="col-form-label col-sm-3" for="InputEmail">Email Address  </label> 
+                <div class="col-sm-8 col-md-8">
+                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="email" name="email" placeholder="eg. abc@your-email-domain.com" />
+                </div>
+            </div>
+            <div class="form-group row justify-content-start mb-3">
+            <label class="col-form-label col-sm-3" for="DisplayName">Display Name </label> 
+            <div class="col-sm-8 col-md-8 ">
+                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="name" placeholder="Name to be displayed for your review" />
+            </div>
+            </div>
+            <div class="form-group row justify-content-start mb-3">
+            <label class="col-form-label col-sm-3" for="Password">Password  </label> 
+            <div class="col-sm-8 col-md-8">
+                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="password" name="password" placeholder="at least 8 characters" />
+            </div>
+            </div>
+            
+            <div class="form-group row justify-content-start mb-3">
+            <label class="col-sm-3 col-form-label" for="Occupation">Occupation </label> 
+            <div class="col-sm-8 col-md-8">
+                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="occupation" placeholder="Your Occupation" />
+            </div>
+            </div>
 
-    <form method="POST">
-        <label>Email Address: </label> <input type="email" name="email" placeholder="eg. abc@your-email-domain.com" />
-        <label>Display Name: </label> <input type="text" name="name" placeholder="Name to be displayed for your review" />
-        <label>Password: </label> <input type="password" name="password" placeholder="Password" />
-        <label>Age: </label> <input type="number" name="age" placeholder="e.g. 25"/>
-        <label>Gender: </label><select name="gender"><option value="F">Female</option><option value="M">Male</option><option value="S">Not Specified</option>
-        <label>Occupation: </label> <input type="text" name="occupation" placeholder="Your Occupation" />
-        <input type="submit" value="Register" /> <a href="{{url_for('index')}}">Cancel</a>
-    </form>
+            <div class="form-group row justify-content-start mb-3">
+            <label class="col-form-label col-sm-1" for="Age">Age  </label> 
+            <div class="col-sm-3 mx-sm-2">
+                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="age" placeholder="Your age"/>
+            </div>
+            
+            <label class="col-form-label col-sm-1 mx-2" for="Gender">Gender </label>
+            <div class="mx-sm-2 col-sm-5">
+                <select name="gender" class="custom-select">
+                    <option selected>Choose One.. </option>
+                    <option value="F">Female</option>
+                    <option value="M">Male</option>
+                    <option value="S">Not Specified</option>
+                </select>
+            </div>
+            </div>
+            <div class="row justify-content-center mt-3">
+                <button class="col-sm-3 form-control btn link-border m-2 rounded-0" type="submit" value="Register">Register</button> 
+                <a class="col-sm-3 form-control btn link-border m-2 rounded-0" href="{{url_for('index')}}">Cancel</a>
+            </div>
+        </form>
+   </div>
 
 {% endblock %}
