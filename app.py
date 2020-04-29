@@ -84,12 +84,13 @@ def read_reviews():
     
 @app.route('/add_review')
 def add_review():
+
     client = data.get_client()
     public_key = os.environ.get('UPLOADCARE_PUBLIC_KEY')
 
     categories = client[DB_NAME].categories.find()
     cat_list = []
-
+    
     for cat in categories:
         cat_list.append(cat)
 
@@ -97,14 +98,18 @@ def add_review():
 
 
 @app.route('/add_review', methods=['POST'])
+@flask_login.login_required
 def process_add_review():
 
     client = data.get_client()
     selected_categories = request.form.getlist('categories')
     cat_to_add = []
 
-    if request.form.get('email'):
-        user_email = request.form.get('email').strip()
+    current_user = flask_login.current_user
+    
+
+    if current_user.is_authenticated:
+        user_email = current_user.id
 
         user = client[DB_NAME].users.find_one({
             'email': user_email
@@ -129,7 +134,7 @@ def process_add_review():
     client[DB_NAME].user_reviews.insert_one({
         'title': request.form.get('title'),
         'posted': datetime.datetime.now().isoformat(),
-        # 'user_id': ObjectId(user_id),
+        'user_id': ObjectId(user_id),
         'product_name': request.form.get('product_name'), 
         'product_brand': request.form.get('product_brand'), 
         'country_of_origin': request.form.get('country_of_origin'),

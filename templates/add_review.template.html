@@ -10,7 +10,8 @@
     {% block title %} Add A Beauty Product Review {% endblock %}     
 
     {% block content %}
-
+        {% if current_user.is_authenticated %}
+        
         <form method="POST">
             <!-- Get User Information -->
 
@@ -38,11 +39,11 @@
 
             <input type="submit" value="Add Review" /> 
             <a href="{{url_for('index')}}"></a>
-
-
-
         </form>
 
-
+        {% else %}
+            Please login to write a review. <br/>
+            <a href="{{url_for('user_login')}}?redirect={{request.path}}">Login</a>
+        {% endif %}
 
     {% endblock %}
