@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import os
 import data
 import datetime
+import pymongo
 from passlib.hash import pbkdf2_sha256
 from dotenv import load_dotenv
 from bson.objectid import ObjectId
@@ -24,11 +25,14 @@ login_manager.init_app(app)
 class User(flask_login.UserMixin):
     pass
 
+
 def encrypt_password(password_text):
     return pbkdf2_sha256.hash(password_text)
 
+
 def verify_password(password_text, encrypted_password):
     return pbkdf2_sha256.verify(password_text, encrypted_password)
+
 
 @login_manager.user_loader
 def user_loader(email):
@@ -54,11 +58,12 @@ def user_loader(email):
 def index():
     return render_template('index.template.html')
 
+
 @app.route('/read_reviews')
 def read_reviews():
     client = data.get_client()
     
-    reviews = client[DB_NAME].user_reviews.find()
+    latest_review = client[DB_NAME].user_reviews.find().sort('_id',pymongo.DESCENDING).limit(1)
 
     users = client[DB_NAME].users.find()
     categories = client[DB_NAME].categories.find()
@@ -75,11 +80,23 @@ def read_reviews():
         }
     ).limit(3)
 
+    bodycare_reviews = client[DB_NAME].user_reviews.find(
+        {
+            'categories.name': 'Body Care'
+        }
+    ).limit(2)
+
+    haircare_reviews = client[DB_NAME].user_reviews.find(
+        {
+            'categories.name': 'Hair Care'
+        }
+    ).limit(2)
+
     user_list = []
     for user in users:
         user_list.append(user)
 
-    return render_template('read_reviews.template.html', reviews=reviews, cat=categories, users=user_list, skincare=skincare_reviews, cosmetics=cosmetic_reviews)
+    return render_template('read_reviews.template.html', review=latest_review, cat=categories, users=user_list, skincare=skincare_reviews, cosmetics=cosmetic_reviews, bodycare=bodycare_reviews, haircare=haircare_reviews)
 
     
 @app.route('/add_review')
@@ -106,20 +123,12 @@ def process_add_review():
     cat_to_add = []
 
     current_user = flask_login.current_user
-    
 
-    if current_user.is_authenticated:
-        user_email = current_user.id
+    user = client[DB_NAME].users.find_one({
+        'email': current_user.id
+    })
 
-        user = client[DB_NAME].users.find_one({
-            'email': user_email
-        })
-
-        if user:
-            user_id = user['_id']
-        else:
-            user_id = ''
-            print("user not found")
+    user_id = user['_id']       
 
     for sc in selected_categories:
         current_cat = client[DB_NAME].categories.find_one({
@@ -146,6 +155,7 @@ def process_add_review():
 
     return redirect(url_for('index'))
 
+
 @app.route('/edit_review/<review_id>')
 def edit_review(review_id):
     client = data.get_client()
@@ -160,6 +170,7 @@ def edit_review(review_id):
     categories = client[DB_NAME].categories.find()
     return render_template('edit_review.template.html', r=review, u=user, cat=categories, ratings=ratings)
     
+
 @app.route('/edit_review/<review_id>', methods=['POST'])
 def process_edit_review(review_id):
     client = data.get_client()
@@ -194,8 +205,9 @@ def process_edit_review(review_id):
             }
         }
     )
-   
+
     return redirect(url_for('read_reviews'))
+
 
 @app.route('/delete_review/<review_id>')
 def confirm_delete_review(review_id):
@@ -248,6 +260,7 @@ def process_add_user():
     })
 
     return "User Created"
+
 
 @app.route('/user_login')
 def user_login():

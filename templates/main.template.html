@@ -26,50 +26,50 @@
         </div>
 
             <form class="form-inline my-2 my-lg-0">
+               
                 <div class="input-group mb-2 mx-auto text-shadow">
-                    <input type="text" class="form-control rounded-left border-white" id="search"
+                    <input type="text" class="form-control rounded-left border-white shadow" id="search"
                         placeholder="Search"  aria-label="Search">
                     <div class="input-group-append">
                         <button type="submit" class="input-group-text pink-bg lighten-3 rounded-right border-white"
                             id="btn-search-home" role="link"><i class="fas fa-search text-white"
                                 aria-hidden="true"></i></button>
                     </div>
-                    <span class="mx-3 mt-1"> <a class="small-link" href="{{url_for('user_login')}}?redirect={{request.path}}">Login</a></span>
+                    <span class="mx-3 mt-1"> <a class="small-link px-2" href="{{url_for('user_login')}}?redirect={{request.path}}">Login</a> | 
+                    <a class="small-link px-2" href="{{url_for('add_review')}}">Add A Review </a></span>
                 </div>
-            </form>
+            </form> 
 
-            
-
-        <nav class="navbar navbar-expand-lg navbar-light light-bg link-border ">
-            <button class="navbar-toggler btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="text-white custom-icon"> <i class="fas fa-bars"></i></span>
-            </button>
-            
-            <div class="collapse navbar-collapse nav" id="navbarSupportedContent">
-                <ul class="navbar-nav mx-auto">
-                {% for c in cat %}
-                    {% if c.name != "For Women" %} 
-                    <li class="nav-item mx-2 border link-border text-center btn p-0">
-                        <a href="#" class="nav-link px-5 py-2 text-decoration-none">{{c.name}}</a> 
-                    </li>    
-                    {% endif %}
-                {% endfor %}
-                </ul>
-            </div>
-        </nav>
+            <nav class="navbar navbar-expand-lg navbar-light light-bg link-border ">
+                <button class="navbar-toggler btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="text-white custom-icon"> <i class="fas fa-bars"></i></span>
+                </button>
+                
+                <div class="collapse navbar-collapse nav" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto">
+                    {% for c in cat %}
+                        {% if c.name != "For Women" %} 
+                        <li class="nav-item mx-2 border link-border text-center btn p-0">
+                            <a href="#" class="nav-link px-5 py-2 text-decoration-none">{{c.name}}</a> 
+                        </li>    
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+                </div>
+            </nav>
 
     </div>
 
-    <div class="container mt-5">
-    <div class="row justify-content-center">
-            <div class="col-sm-12 col-lg-10 col-md-10 mx-auto">
+    <div class="container-flex mt-5">
+    <div class="row justify-content-center mx-0 px-0">
+            <div class="col-sm-12 col-lg-10 col-md-10 mx-auto px-0">
         <h1 class="text-center mb-3">{% block title %} {% endblock %} </h1>
-
-    {% block content %} {% endblock %}
-            </div>
+             </div>
     </div>
     </div>
     
+    {% block content %} {% endblock %}
+   
     <div class="container p-5">
         <div class="row">
             <div class="col">

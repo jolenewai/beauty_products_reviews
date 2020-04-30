@@ -2,28 +2,71 @@
 
     {% block title %} Beauty Sharings {% endblock %}     
 
-
     {% block content %}
-
     <div class="container">
-    <h2 class="text-center pink-text">SKIN CARE</h2>
-    <div class="card-group">
-        {% for s in skincare %}
-        <div class="card">
-            <img src="{{s.image}}}" class="card-img-top" alt="{{s.product_name}}">
-            <div class="card-body">
-            <h5 class="card-title">{{s.title}}</h5>
-            <p class="card-text">{{s.product_name}}<br/>
-                {% set rating = s.rating | int %}
-                {% for i in range(0,rating) %}
-                    <span class="pink-text"> <i class="fas fa-star"></i></span>
-                {% endfor %}
-            </p>
-            <p class="card-text"><small class="text-muted">Posted by {% for u in users if s.user_id==u._id %}{{u.name}}{% endfor%} on {{s.posted}}</small></p>
+    <div class="row justify-content-around">
+
+        <div class="col-md-10">
+        {% for r in review %}
+        <div class="card mb-3">
+            <div class="row no-gutters justify-content-around">
+                <div class="col-md-5">
+                <img src="{{r.image}}" class="card-img" alt="{{r.title}}">
+                </div>
+                <div class="col-md-6">
+                <div class="card-body">
+                    <h5 class="card-title">{{r.title}}</h5>
+                    <p class="card-text">{{r.product_name}}<br/>
+                    {% set rating = r.rating | int %}
+                    {% for i in range(0,rating) %}
+                        <span class="pink-text"> <i class="fas fa-star"></i></span>
+                    {% endfor %}<br/>
+                    {{r.product_brand}} from {{r.country_of_origin}}
+                    </p>
+                    <p class="card-text">
+                    Review:</br>
+                    {{ r.review }}
+                    </p>
+                    <p class="card-text"><small class="text-muted">Posted by {% for u in users if r.user_id==u._id %}{{u.name}}{% endfor%} on {{r.posted}}</small></p>
+                </div>
+                </div>
             </div>
         </div>
         {% endfor %}
+
+        </div>
+
+        </div>
     </div>
+    </div>
+
+    <div class="container-flex bg-light my-3 py-5 mx-0 px-0">
+        <div class="row justify-content-center mx-0 px-0">
+            <div class="col-md-10 mx-0 px-0">
+            <h2 class="text-center pink-text">SKIN CARE</h2>
+            <div class="card-group">
+                {% for s in skincare %}
+                <div class="card">
+                    <img src="{{s.image}}}" class="card-img-top" alt="{{s.product_name}}">
+                    <div class="card-body">
+                    <h5 class="card-title">{{s.title}}</h5>
+                    <p class="card-text">{{s.product_name}}<br/>
+                        {% set rating = s.rating | int %}
+                        {% for i in range(0,rating) %}
+                            <span class="pink-text"> <i class="fas fa-star"></i></span>
+                        {% endfor %}
+                    </p>
+                    <p class="card-text"><small class="text-muted">Posted by {% for u in users if s.user_id==u._id %}{{u.name}}{% endfor%} on {{s.posted}}</small></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            </div>
+            </div>
+    </div>
+  <div class="container-flex my-3 py-5 mx-0 px-0">
+        <div class="row justify-content-center mx-0 px-0">
+            <div class="col-md-10 mx-0 px-0">
     <h2 class="text-center pink-text">COSMETICS</h2>
     <div class="card-group">
         {% for c in cosmetics %}
@@ -43,27 +86,52 @@
         {% endfor %}
     </div>
     </div>
-    <div class="container">
-    <div class="row">
+    </div>
+    </div>
+    <div class="container-flex bg-light my-3 py-5 mx-0 px-0">
+        <div class="row justify-content-center mx-0 px-0">
+            <div class="col-md-5 mx-0 px-0">
+            <h2 class="text-center pink-text">BODY CARE</h2>
+            <div class="card-group">
+                {% for b in bodycare %}
+                <div class="card">
+                    <img src="{{b.image}}}" class="card-img-top" alt="{{b.product_name}}">
+                    <div class="card-body">
+                    <h5 class="card-title">{{b.title}}</h5>
+                    <p class="card-text">{{b.product_name}}<br/>
+                        {% set rating = b.rating | int %}
+                        {% for i in range(0,rating) %}
+                            <span class="pink-text"> <i class="fas fa-star"></i></span>
+                        {% endfor %}
+                    </p>
+                    <p class="card-text"><small class="text-muted">Posted by {% for u in users if b.user_id==u._id %}{{u.name}}{% endfor%} on {{b.posted}}</small></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            </div>
 
-    {% for r in reviews %}
-        <div class="col">
-        <h4>{{r.title}}</h4>
-        Posted By: {% for u in users if r.user_id==u._id %}{{u.name}}{% endfor%}<br/>
-        Posted On: {{r.posted}}<br/>
-        Product Name: {{r.product_name}}<br/>
-        Brand: {{r.product_brand}}</br>
-        Country of Origin: {{r.country_of_origin}}<br/>
-        Categories: {% for category in r.categories %}
-                        {{category.name}}
-                    {% endfor %}<br/>
-        Ratings: {{ r.rating }}<br/>
-        Review: {{ r.review }}<br/>
-       
-        <a href="{{url_for('edit_review', review_id=r._id)}}">Edit Review</a>
-        <a href="{{url_for('delete_review', review_id=r._id)}}">Delete</a>
-        </div>
-    {% endfor %}
-        </div>
+            <div class="col-md-5 mx-0 px-0">
+            <h2 class="text-center pink-text">HAIR CARE</h2>
+            <div class="card-group">
+                {% for h in haircare %}
+                <div class="card">
+                    <img src="{{s.image}}}" class="card-img-top" alt="{{s.product_name}}">
+                    <div class="card-body">
+                    <h5 class="card-title">{{h.title}}</h5>
+                    <p class="card-text">{{h.product_name}}<br/>
+                        {% set rating = h.rating | int %}
+                        {% for i in range(0,rating) %}
+                            <span class="pink-text"> <i class="fas fa-star"></i></span>
+                        {% endfor %}
+                    </p>
+                    <p class="card-text"><small class="text-muted">Posted by {% for u in users if h.user_id==u._id %}{{u.name}}{% endfor%} on {{h.posted}}</small></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            </div>
+
+            </div>
     </div>
     {% endblock %}
