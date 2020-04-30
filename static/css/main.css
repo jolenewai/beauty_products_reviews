@@ -76,6 +76,10 @@ h1, h2, h3, h4, h5, h6 {
     background-color:#FF8080 !important;
 }
 
+.lightpink-bg{
+    background-color:#ffdede !important;
+}
+
 label {
     font-family: 'Amatic SC', cursive;
     font-weight: 400;  

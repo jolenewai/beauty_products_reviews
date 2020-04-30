@@ -50,7 +50,7 @@
                     {% for c in cat %}
                         {% if c.name != "For Women" %} 
                         <li class="nav-item mx-2 border link-border text-center btn p-0 rounded-0">
-                            <a href="#" class="nav-link px-5 py-2 text-decoration-none">{{c.name}}</a> 
+                            <a href="{{url_for('read_reviews_by_category', cat_id=c._id)}}" class="nav-link px-5 py-2 text-decoration-none">{{c.name}}</a> 
                         </li>    
                         {% endif %}
                     {% endfor %}

@@ -1,0 +1,31 @@
+{% extends 'main.template.html' %}
+
+
+{% block title %}Reviews for {{current_cat.name}}{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row justify-content-around">
+            <div class="card-columns">
+                {% for r in reviews %}
+                <div class="card">
+                    <img src="{{r.image}}" class="card-img-top" alt="{{r.product_name}}">
+                    <div class="card-body">
+                    <h5 class="card-title">{{r.title}}</h5>
+                    <p class="card-text">{{r.product_name}}<br/>
+                        {% set rating = r.rating | int %}
+                        {% for i in range(0,rating) %}
+                            <span class="pink-text"> <i class="fas fa-star"></i></span>
+                        {% endfor %}
+                    </p>
+                    <p class="card-text"><small class="text-muted">Posted by {% for u in users if r.user_id==u._id %}{{u.name}}{% endfor%} on {{r.posted}}</small></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

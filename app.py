@@ -99,6 +99,26 @@ def read_reviews():
     return render_template('read_reviews.template.html', review=latest_review, cat=categories, users=user_list, skincare=skincare_reviews, cosmetics=cosmetic_reviews, bodycare=bodycare_reviews, haircare=haircare_reviews)
 
     
+@app.route('/read_reviews/<cat_id>')
+def read_reviews_by_category(cat_id):
+
+    client = data.get_client()
+    
+    reviews = client[DB_NAME].user_reviews.find(
+        {
+            'categories.category_id':ObjectId(cat_id)
+        }
+    )
+
+    current_cat = client[DB_NAME].categories.find_one({
+        '_id': ObjectId(cat_id)
+    },{'name':1})
+
+    all_cat = client[DB_NAME].categories.find()
+
+    return render_template('read_reviews_by_cat.template.html', current_cat=current_cat, cat=all_cat, reviews=reviews)
+
+
 @app.route('/add_review')
 def add_review():
 

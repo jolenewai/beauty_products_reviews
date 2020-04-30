@@ -1,6 +1,6 @@
 {% extends 'main.template.html' %}
 
-    {% block title %} Beauty Sharings {% endblock %}     
+    {% block title %} Latest Review {% endblock %}     
 
     {% block content %}
     <div class="container">
@@ -8,14 +8,14 @@
 
         <div class="col-md-10">
         {% for r in review %}
-        <div class="card mb-3">
+        <div class="card mb-3 lightpink-bg rounded-0 border-0 py-3">
             <div class="row no-gutters justify-content-around">
                 <div class="col-md-5">
-                <img src="{{r.image}}" class="card-img" alt="{{r.title}}">
+                <img src="{{r.image}}" class="card-img rounded-0" alt="{{r.title}}">
                 </div>
                 <div class="col-md-6">
                 <div class="card-body">
-                    <h5 class="card-title">{{r.title}}</h5>
+                    <h3 class="card-title">{{r.title}}</h3>
                     <p class="card-text">{{r.product_name}}<br/>
                     {% set rating = r.rating | int %}
                     {% for i in range(0,rating) %}
@@ -23,7 +23,7 @@
                     {% endfor %}<br/>
                     {{r.product_brand}} from {{r.country_of_origin}}
                     </p>
-                    <p class="card-text">
+                    <p class="card-text text-truncate">
                     Review:</br>
                     {{ r.review }}
                     </p>
