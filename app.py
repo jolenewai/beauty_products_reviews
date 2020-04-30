@@ -278,9 +278,12 @@ def proccess_user_login():
 
     user = User()
     user.id = user_in_db['email']
+
+    redirect_url = request.args.get('redirect')
+    print (redirect)
     if verify_password(request.form.get('password'), user_in_db['password']):
         flask_login.login_user(user)
-        return "User Login Successful"
+        return redirect(redirect_url)
     else:
         return "User Login Fail"
         

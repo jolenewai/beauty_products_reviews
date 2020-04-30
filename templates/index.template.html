@@ -10,7 +10,7 @@
                     <a class="p-4 link-border btn" href="{{url_for('read_reviews')}}">Read Reviews</a> <a class="ml-2 p-4 link-border btn" href="{{url_for('add_review')}}">Write A Review</a>
                 </div>
                 <div class="text-center mt-2">
-                    <a class="small-link" href="{{url_for('user_login')}}">Login</a> / <a class="small-link" href="{{url_for('add_user')}}">Register</a>
+                    <a class="small-link" href="{{url_for('user_login')}}?redirect=/">Login</a> / <a class="small-link" href="{{url_for('add_user')}}?redirect=/user_login">Register</a>
                 </div>
             </div>
         </div>

@@ -10,39 +10,98 @@
     {% block title %} Add A Beauty Product Review {% endblock %}     
 
     {% block content %}
+    <div class="container">
+    <div class="row justify-content-around">
+
+    <div id="add-review" class="col-8 mx-auto bg-white shadow p-5">   
         {% if current_user.is_authenticated %}
+              
         
         <form method="POST">
         
             <!-- Add Review Form Section One -- Product Information -->
-            <label>Title:</label> <input type="text" name="title" /><br/>
-            <label>Product Name:</label> <input type="text" name="product_name" /><br/>
-            <label>Brand:</label> <input type="text" name="product_brand" /></br>
-            <label>Country of Origin:</label> <input type="text" name="country_of_origin" /><br/>
-            <label>Categories:</label> 
 
+            <div class="form-group row justify-content-start mb-3">
+                <label class="col-form-label col-sm-3" for="title">Title </label> 
+                <div class="col-sm-8 col-md-8">
+                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="title" id="title" />
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-start mb-3">
+                <label class="col-form-label col-sm-3" for="product_name">Product Name </label> 
+                <div class="col-sm-8 col-md-8">
+                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="product_name" id="product_name" />
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-start mb-3">
+                <label class="col-form-label col-sm-3" for="product_brand">Brand </label> 
+                <div class="col-sm-8 col-md-8">
+                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="product_brand" id="product_brand" />
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-start mb-3">
+                <label class="col-form-label col-sm-3" for="country_of_origin">Country of Origin </label> 
+                <div class="col-sm-8 col-md-8">
+                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="country_of_origin" id="country_of_origin" />
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-start mb-3">
+                <label class="col-form-label col-sm-3" for="categories">Categories </label> 
+                <div class="col-sm-8 col-md-8">
                     <!-- Get Categories from Categories table-->
                     {% for c in cat %}
-                        <input type="checkbox" name="categories" value="{{c._id}}" >{{c.name}}</input> <br/>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="categories" id="{{c._id}}" value="{{c._id}}">
+                            <label class="form-check-label" for="{{c._id}}">{{c.name}}</label>
+                        </div>
                     {% endfor %}
+                </div>
+            </div>
 
             <!-- Add Review Form Section Two -- Review  -->
-            <label>Ratings:</label> 
-            <select name="rating"> 
-                {% for rating in ratings %}
-                <option value="{{rating}}">{{rating}}</option>
-                {% endfor %}
-            </select><br/>
-            <label>Review:</label> <input type="text" name="review" /> <br/>
-            <input type="hidden" role="uploadcare-uploader" name="product_image" />
 
-            <input type="submit" value="Add Review" /> 
-            <a href="{{url_for('index')}}"></a>
+            <div class="form-group row justify-content-start mb-3">
+                <label class="col-form-label col-sm-3" for="categories">Rating </label> 
+                <div class="col-sm-8 col-md-8">
+                    <select name="rating" class="custom-select"> 
+                        {% for rating in range(1,6) %}
+                        <option value="{{rating}}">{{rating}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+                    
+            <div class="form-group row justify-content-start mb-3">
+                <label class="col-form-label col-sm-3" for="categories">Review </label> 
+                <div class="col-sm-8 col-md-8">
+                     <textarea name="review" class="form-control" rows="4"></textarea>
+
+                </div>
+            </div>
+    
+            <div class="form-group row justify-content-start mb-3">
+                <label class="col-form-label col-sm-3" for="categories">Upload an Image </label> 
+                <div class="col-sm-8 col-md-8">
+                   <input type="hidden" role="uploadcare-uploader" name="product_image" />
+                </div>
+            </div>
+            
+            <div class="row justify-content-center mt-3">
+                <button class="col-sm-3 form-control btn link-border m-2 rounded-0" type="submit" value="Add Review">Add Review</button> 
+                <a class="col-sm-3 form-control btn link-border m-2 rounded-0" href="{{url_for('index')}}">Cancel</a>
+            </div>
+            
         </form>
 
         {% else %}
             Please login to write a review. <br/>
             <a href="{{url_for('user_login')}}?redirect={{request.path}}">Login</a>
         {% endif %}
-
+    </div>
+    </div>
+    </div>
     {% endblock %}
