@@ -25,17 +25,22 @@
             </div> 
         </div>
 
-            <form class="form-inline my-2 my-lg-0">
+            <form class="form-inline my-2 my-lg-0" action="{{url_for('search')}}" method="POST">
                
                 <div class="input-group mb-2 mx-auto text-shadow">
-                    <input type="text" class="form-control rounded-left border-white shadow" id="search"
+                    <input type="text" class="form-control rounded-left border-white shadow" id="search" name="search"
                         placeholder="Search"  aria-label="Search">
                     <div class="input-group-append">
                         <button type="submit" class="input-group-text pink-bg lighten-3 rounded-right border-white"
                             id="btn-search-home" role="link"><i class="fas fa-search text-white"
                                 aria-hidden="true"></i></button>
                     </div>
-                    <span class="mx-3 mt-1"> <a class="small-link px-2" href="{{url_for('user_login')}}?redirect={{request.path}}">Login</a> | 
+                    <span class="mx-3 mt-1"> 
+                    {% if current_user.is_authenticated %}
+                        <a class="small-link px-2" href="{{url_for('logout')}}?redirect={{request.path}}">Logout</a>
+                    {% else %}
+                        <a class="small-link px-2" href="{{url_for('user_login')}}?redirect={{request.path}}">Login</a>
+                    {% endif %}  | 
                     <a class="small-link px-2" href="{{url_for('add_review')}}">Add A Review </a></span>
                 </div>
             </form> 

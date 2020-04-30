@@ -1,7 +1,7 @@
 {% extends 'main.template.html' %}
 
 
-{% block title %}Reviews for {{current_cat.name}}{% endblock %}
+{% block title %}Search Results for {{ search_str }}{% endblock %}
 
 {% block content %}
 
@@ -10,7 +10,7 @@
             <div class="col-md-10">
 
                 <div class="card-columns">
-                    {% for r in reviews %}
+                    {% for r in results %}
                     <div class="card">
                         <img src="{{r.image}}" class="card-img-top" alt="{{r.product_name}}">
                         <div class="card-body">

@@ -281,6 +281,20 @@ def process_add_user():
 
     return "User Created"
 
+@app.route('/search', methods=['POST'])
+def search():
+    
+    client = data.get_client()
+    search_str = request.form.get('search')
+    results = client[DB_NAME].user_reviews.find({
+      
+      'product_name': {'$regex': search_str,
+                        '$options': 'i'
+        }
+      
+    })
+
+    return render_template('search_result.template.html',results=results, search_str=search_str)
 
 @app.route('/user_login')
 def user_login():
@@ -317,7 +331,8 @@ def private_section():
 @app.route('/logout')
 def logout():
     flask_login.logout_user()
-    return "Logged out"
+    redirect_url = request.args.get('redirect')
+    return redirect(redirect_url)
 
 
 # "magic code" -- boilerplate
