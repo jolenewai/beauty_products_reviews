@@ -7,7 +7,8 @@ body {
     background-attachment: fixed;
     background-position: center top;
     font-size: 1em;
-
+    font-family: 'Amatic SC', cursive;
+    font-weight: 400;
 }
 
 /* define font style for headers */
@@ -109,4 +110,37 @@ a:hover{
 .uploadcare--widget__button_type_open:hover {
   background-color: #FF8080;
   border: 2px solid #FF8080;
+}
+
+#edit-profile {
+    background-image: url('/static/images/user.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 75px;
+    width: 75px;
+    padding:5px;
+    align-self: center;
+    display:inline-flex;
+}
+
+#write-review {
+    background-image: url('/static/images/write.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 75px;
+    width: 75px;
+    padding:5px;
+    align-self: center;
+    display:inline-flex;
+}
+
+#my-reviews {
+    background-image: url('/static/images/reviews.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 75px;
+    width: 75px;
+    padding:5px;
+    align-self: center;
+    display:inline-flex;
 }

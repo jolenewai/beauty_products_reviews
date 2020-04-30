@@ -131,7 +131,16 @@ def add_review():
     for cat in categories:
         cat_list.append(cat)
 
-    return render_template('add_review.template.html',cat=cat_list, ratings=ratings, public_key=public_key)
+    current_user = flask_login.current_user
+
+    if current_user:
+        user = client[DB_NAME].users.find_one({
+            'email': current_user.id
+        })
+    else:
+        user = None
+
+    return render_template('add_review.template.html',cat=cat_list, ratings=ratings, public_key=public_key, user=user)
 
 
 @app.route('/add_review', methods=['POST'])

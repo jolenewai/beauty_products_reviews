@@ -64,10 +64,30 @@
             </nav>
 
     </div>
-
+    {% if current_user.is_authenticated %}
+    <div class="container my-3">
+        <h1 class="text-center pink-text mb-3">Hello, {{user.name}}</h1>
+       
+        <div class="row justify-content-center mx-0 px-0">
+            <div class="col-sm-2 text-center">
+                <div id="edit-profile" class="mb-2 border rounded-circle"></div>
+                <div>Edit Profile</div>
+            </div>
+            <div class="col-sm-2 text-center">
+                <div id="write-review" class="mb-2 border rounded-circle"></div>
+                <div>Write A Review</div>
+            </div>
+            <div class="col-sm-2 text-center">
+                <div id="my-reviews"  class="mb-2 border rounded-circle"></div>
+                <div>Reviews</div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
     <div class="container-flex mt-5">
     <div class="row justify-content-center mx-0 px-0">
             <div class="col-sm-12 col-lg-10 col-md-10 mx-auto px-0">
+            
         <h1 class="text-center mb-3">{% block title %} {% endblock %} </h1>
              </div>
     </div>
