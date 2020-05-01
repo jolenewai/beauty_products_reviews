@@ -78,11 +78,11 @@
             </div>
             <div class="col-sm-2 text-center">
                 <div id="write-review" class="mb-2 border border-dark rounded-circle"></div>
-                <div><a href="url_for('add_review', user_id=user._id)">Write A Review</a></div>
+                <div><a href="{{url_for('add_review', user_id=user._id)}}">Write A Review</a></div>
             </div>
             <div class="col-sm-2 text-center">
                 <div id="my-reviews"  class="mb-2 border border-dark rounded-circle"></div>
-                <div><a href="url_for('user_reviews',user_id=user._id)">My Reviews</a></div>
+                <div><a href="{{url_for('view_my_reviews',user_id=user._id)}}">My Reviews</a></div>
             </div>
         </div>
     </div>

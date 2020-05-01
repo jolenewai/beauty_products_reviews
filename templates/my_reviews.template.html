@@ -1,8 +1,31 @@
-{% extends 'main.template.html %}
+{% extends 'main.template.html' %}
 
 {% block title %} My Reviews {% endblock %}
 
 {% block content %}
-    
+
+<div class="container-flex my-3 py-5 mx-0 px-0">
+    <div class="row justify-content-center mx-0 px-0">
+        <div class="col-md-10 mx-0 px-0 bg-white">
+        {% for r in reviews %}
+
+            <div class="my-reviews media justify-content-center py-3">
+                <img src="{{r.image}}}" class="mr-3" alt="{{r.product_name}}" width="100">
+                <div class="media-body col-md-6">
+                    <h4 class="mt-0">{{r.title}}</h4>
+                    <h5>{{r.product_name}}</h5>
+                    <p>{{r.review}}</p>
+                    <p class="card-text"><small class="text-muted">Posted on {{r.posted}}</small></p>
+                </div>
+                <div class="col-sm-2">
+                    <a class="form-control btn link-border m-2 rounded-0" href="{{url_for('edit_review', review_id=r._id)}}">Edit Review</a>
+                    <a class="form-control btn link-border m-2 rounded-0" href="{{url_for('delete_review', review_id=r._id)}}">Delete Review</a>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
     
 {% endblock %}

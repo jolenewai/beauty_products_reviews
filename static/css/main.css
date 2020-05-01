@@ -149,3 +149,9 @@ a:hover{
     align-self: center;
     display:inline-flex;
 }
+
+.my-reviews p {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight:300;
+    font-size: 0.63em;
+}

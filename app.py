@@ -195,8 +195,39 @@ def process_add_review():
 
     return redirect(url_for('index'))
 
+@app.route('/my_reviews/<user_id>')
+@flask_login.login_required
+def view_my_reviews(user_id):
+
+    client = data.get_client()
+
+    my_reviews = client[DB_NAME].user_reviews.find(
+        {
+            'user_id': ObjectId(user_id)
+        }
+    )
+
+    user = client[DB_NAME].users.find({
+        '_id': ObjectId(user_id)
+    })
+
+    if flask_login.current_user.is_authenticated:
+        current_user = flask_login.current_user
+
+        if current_user:
+            user = client[DB_NAME].users.find_one({
+                'email': current_user.id
+            })
+        else:
+            user = None
+    else:
+        return redirect('/user_login?redirect=/read_reviews')
+
+
+    return render_template('my_reviews.template.html', reviews=my_reviews, user=user)
 
 @app.route('/edit_review/<review_id>')
+@flask_login.login_required
 def edit_review(review_id):
     client = data.get_client()
 
@@ -207,11 +238,14 @@ def edit_review(review_id):
     user = client[DB_NAME].users.find({
         '_id': review['user_id']
     })
+    
     categories = client[DB_NAME].categories.find()
+
     return render_template('edit_review.template.html', r=review, u=user, cat=categories, ratings=ratings)
     
 
 @app.route('/edit_review/<review_id>', methods=['POST'])
+@flask_login.login_required
 def process_edit_review(review_id):
     client = data.get_client()
 

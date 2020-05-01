@@ -4,32 +4,87 @@
 
     
     {% block content %}
+
+    <div class="container">
+    <div class="row justify-content-around">
+
+        <div id="update-review" class="col-8 mx-auto bg-white shadow p-5">  
+
         <form method="POST">
-            <label>Title:</label> <input type="text" name="title" value="{{r.title}}" /><br/>
-            <label>Posted On:</label> <input type="text" name="posted" value="{{r.posted}}"/><br/>
-            <label>Product Name:</label> <input type="text" name="product_name" value="{{r.product_name}}"/><br/>
-            <label>Brand:</label> <input type="text" name="product_brand" value="{{r.product_brand}}"/></br>
-            <label>Country of Origin:</label> <input type="text" name="country_of_origin" value="{{r.country_of_origin}}" /><br/>
-            <label>Categories:</label> <br/>
 
+            <div class="form-group row justify-content-start mb-3">
+                <label class="col-form-label col-sm-3" for="title">Title </label> 
+                <div class="col-sm-8 col-md-8">
+                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="title" id="title" value="{{r.title}}" />
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-start mb-3">
+                <label class="col-form-label col-sm-3" for="product_name">Product Name </label> 
+                <div class="col-sm-8 col-md-8">
+                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="product_name" id="product_name" value="{{r.product_name}}"/>
+                </div>
+            </div>
+            
+             <div class="form-group row justify-content-start mb-3">
+                <label class="col-form-label col-sm-3" for="product_brand">Brand </label> 
+                <div class="col-sm-8 col-md-8">
+                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="product_brand" id="product_brand" value="{{r.product_brand}}" />
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-start mb-3">
+                <label class="col-form-label col-sm-3" for="country_of_origin">Country of Origin </label> 
+                <div class="col-sm-7 col-md-7">
+                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="country_of_origin" id="country_of_origin" value="{{r.country_of_origin}}" />
+                </div>
+            </div>
+
+            {% set _stub = cat.rewind() %}
+
+            <div class="form-group row justify-content-start mb-3">
+                <label class="col-form-label col-sm-3" for="categories">Categories </label> 
+                <div class="col-sm-8 col-md-8">
+                    <!-- Get Categories from Categories table-->
                     {% for c in cat %}
-                    
-                        <input type="checkbox" name="categories" value="{{c._id}}" 
-                           {% for category in r.categories if category.category_id == c._id %}
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="categories" id="{{c._id}}" value="{{c._id}}" 
+                            {% for category in r.categories if category.category_id == c._id %}
                                     checked
-                            {% endfor %} >{{c.name}}</input> <br/>
-                         
+                            {% endfor %}>
+                            <label class="form-check-label" for="{{c._id}}">{{c.name}}</label>
+                        </div>
                     {% endfor %}
+                </div>
+            </div>
 
-            <label>Ratings:</label> 
-            <select name="rating"> 
-                {% for rating in ratings %}
-                <option value="{{rating}}" {% if r.rating == rating %}selected{% endif %}>{{rating}}</option>
-                {% endfor %}
-            </select><br/>
-            <label>Review:</label> <input type="text" name="review" value="{{ r.review }}" /> <br/>
+            <div class="form-group row justify-content-start mb-3">
+                <label class="col-form-label col-sm-3" for="rating">Rating </label> 
+                <div class="col-sm-8 col-md-8">
+                    <select name="rating" class="custom-select">
+                        <option value="5" {% if r.rating == "4" %} selected {% endif %}>5 - Excellent</option>
+                        <option value="4" {% if r.rating == "4" %} selected {% endif %}>4 - Very Good</option>
+                        <option value="3" {% if r.rating == "3" %} selected {% endif %}>3 - Good</option>
+                        <option value="2" {% if r.rating == "2" %} selected {% endif %}>2 - Bad</option>
+                        <option value="1" {% if r.rating == "1" %} selected {% endif %}>1 - Very Bad</option>
+                    </select>
+                </div>
+            </div>
 
-            <input type="submit" value="Update My Review">
-            <a href="{{url_for('index')}}">Cancel</a>
+            <div class="form-group row justify-content-start mb-3">
+                <label class="col-form-label col-sm-3" for="categories">Review </label> 
+                <div class="col-sm-8 col-md-8">
+                     <textarea name="review" class="form-control" rows="4" >{{ r.review }}</textarea>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-3">
+                <button class="col-sm-3 form-control btn link-border m-2 rounded-0" type="submit" value="Add Review">Update My Review</button> 
+                <a class="col-sm-3 form-control btn link-border m-2 rounded-0" href="{{url_for('view_my_reviews',user_id=r._user_id)}}">Cancel</a>
+            </div>
         </form>
+
+        </div>
+    </div>
+    </div>
     {% endblock %}
