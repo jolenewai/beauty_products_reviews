@@ -52,6 +52,18 @@ def user_loader(email):
     else:
         return None
 
+def check_user_log_in(client):
+
+    current_user = flask_login.current_user
+
+    if current_user:
+        user = client[DB_NAME].users.find_one({
+            'email': current_user.id
+        })
+    else:
+        user = None
+
+    return user
 
 # Webpage Routes
 @app.route('/')
@@ -131,14 +143,17 @@ def add_review():
     for cat in categories:
         cat_list.append(cat)
 
-    current_user = flask_login.current_user
+    if flask_login.current_user.is_authenticated:
+        current_user = flask_login.current_user
 
-    if current_user:
-        user = client[DB_NAME].users.find_one({
-            'email': current_user.id
-        })
+        if current_user:
+            user = client[DB_NAME].users.find_one({
+                'email': current_user.id
+            })
+        else:
+            user = None
     else:
-        user = None
+        return redirect('/user_login?redirect=/add_review')
 
     return render_template('add_review.template.html',cat=cat_list, ratings=ratings, public_key=public_key, user=user)
 
@@ -151,11 +166,7 @@ def process_add_review():
     selected_categories = request.form.getlist('categories')
     cat_to_add = []
 
-    current_user = flask_login.current_user
-
-    user = client[DB_NAME].users.find_one({
-        'email': current_user.id
-    })
+    user = check_user_log_in(client)
 
     user_id = user['_id']       
 
@@ -296,14 +307,15 @@ def search():
     client = data.get_client()
     search_str = request.form.get('search')
     results = client[DB_NAME].user_reviews.find({
-      
-      'product_name': {'$regex': search_str,
-                        '$options': 'i'
+      'product_name': { 
+          '$regex': search_str,
+          '$options': 'i'
         }
-      
     })
 
-    return render_template('search_result.template.html',results=results, search_str=search_str)
+    user = check_user_log_in(client)
+
+    return render_template('search_result.template.html',results=results, search_str=search_str, user=user)
 
 @app.route('/user_login')
 def user_login():
@@ -323,7 +335,12 @@ def proccess_user_login():
     user.id = user_in_db['email']
 
     redirect_url = request.args.get('redirect')
+    
+    if redirect_url == None:
+        redirect_url = "/"
+    
     print (redirect)
+
     if verify_password(request.form.get('password'), user_in_db['password']):
         flask_login.login_user(user)
         return redirect(redirect_url)

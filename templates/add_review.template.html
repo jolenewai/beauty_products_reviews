@@ -14,7 +14,7 @@
     <div class="row justify-content-around">
 
     <div id="add-review" class="col-8 mx-auto bg-white shadow p-5">   
-        {% if current_user.is_authenticated %}
+        {% if user %}
 
         <form method="POST">
         
@@ -43,7 +43,7 @@
 
             <div class="form-group row justify-content-start mb-3">
                 <label class="col-form-label col-sm-3" for="country_of_origin">Country of Origin </label> 
-                <div class="col-sm-8 col-md-8">
+                <div class="col-sm-7 col-md-7">
                     <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="country_of_origin" id="country_of_origin" />
                 </div>
             </div>
@@ -67,9 +67,11 @@
                 <label class="col-form-label col-sm-3" for="categories">Rating </label> 
                 <div class="col-sm-8 col-md-8">
                     <select name="rating" class="custom-select"> 
-                        {% for rating in range(1,6) %}
-                        <option value="{{rating}}">{{rating}}</option>
-                        {% endfor %}
+                        <option value="5" selected>5 - Excellent</option>
+                        <option value="4">4 - Very Good</option>
+                        <option value="3">3 - Good</option>
+                        <option value="2">2 - Bad</option>
+                        <option value="1">1 - Very Bad</option>
                     </select>
                 </div>
             </div>
@@ -78,7 +80,6 @@
                 <label class="col-form-label col-sm-3" for="categories">Review </label> 
                 <div class="col-sm-8 col-md-8">
                      <textarea name="review" class="form-control" rows="4"></textarea>
-
                 </div>
             </div>
     
@@ -93,7 +94,6 @@
                 <button class="col-sm-3 form-control btn link-border m-2 rounded-0" type="submit" value="Add Review">Add Review</button> 
                 <a class="col-sm-3 form-control btn link-border m-2 rounded-0" href="{{url_for('index')}}">Cancel</a>
             </div>
-            
         </form>
 
         {% else %}
