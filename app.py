@@ -182,7 +182,7 @@ def process_add_review():
 
     client[DB_NAME].user_reviews.insert_one({
         'title': request.form.get('title'),
-        'posted': datetime.datetime.now().isoformat(),
+        'posted': datetime.datetime.now(),
         'user_id': ObjectId(user_id),
         'product_name': request.form.get('product_name'), 
         'product_brand': request.form.get('product_brand'), 
@@ -235,13 +235,13 @@ def edit_review(review_id):
         '_id': ObjectId(review_id)
     })
 
-    user = client[DB_NAME].users.find({
+    user = client[DB_NAME].users.find_one({
         '_id': review['user_id']
     })
-    
+
     categories = client[DB_NAME].categories.find()
 
-    return render_template('edit_review.template.html', r=review, u=user, cat=categories, ratings=ratings)
+    return render_template('edit_review.template.html', r=review, user=user, cat=categories, ratings=ratings)
     
 
 @app.route('/edit_review/<review_id>', methods=['POST'])
@@ -251,6 +251,8 @@ def process_edit_review(review_id):
 
     selected_categories = request.form.getlist('categories')
     cat_to_add = []
+
+    user_id = request.form.get('user_id')
 
     for sc in selected_categories:
         current_cat = client[DB_NAME].categories.find_one({
@@ -268,6 +270,7 @@ def process_edit_review(review_id):
         {
             '$set':{
             'title': request.form.get('title'),
+            'user_id': ObjectId(user_id),
             'posted': datetime.datetime.now().isoformat(),
             'product_name': request.form.get('product_name'), 
             'product_brand': request.form.get('product_brand'), 
@@ -280,7 +283,8 @@ def process_edit_review(review_id):
         }
     )
 
-    return redirect(url_for('read_reviews'))
+
+    return redirect(url_for('view_my_reviews', user_id=user_id))
 
 
 @app.route('/delete_review/<review_id>')

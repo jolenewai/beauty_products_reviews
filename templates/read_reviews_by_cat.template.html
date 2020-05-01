@@ -21,7 +21,7 @@
                                 <span class="pink-text"> <i class="fas fa-star"></i></span>
                             {% endfor %}
                         </p>
-                        <p class="card-text"><small class="text-muted">Posted by {% for u in users if r.user_id==u._id %}{{u.name}}{% endfor%} on {{r.posted}}</small></p>
+                        <p class="card-text"><small class="text-muted">Posted by {% for u in users if r.user_id==u._id %}{{u.name}}{% endfor%} on {{r.posted.strftime("%d-%m-%Y, %H:%M:%S")}}</small></p>
                         </div>
                     </div>
                     {% endfor %}

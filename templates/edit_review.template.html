@@ -11,6 +11,8 @@
         <div id="update-review" class="col-8 mx-auto bg-white shadow p-5">  
 
         <form method="POST">
+            <input type="hidden" name="user_id" value="{{r.user_id}}" />
+            <input type="hidden" name="posted" value="{{r.posted}}" />
 
             <div class="form-group row justify-content-start mb-3">
                 <label class="col-form-label col-sm-3" for="title">Title </label> 
@@ -79,7 +81,7 @@
             </div>
 
             <div class="row justify-content-center mt-3">
-                <button class="col-sm-3 form-control btn link-border m-2 rounded-0" type="submit" value="Add Review">Update My Review</button> 
+                <button class="col-sm-3 form-control btn link-border m-2 rounded-0" type="submit" value="Add Review">Update</button> 
                 <a class="col-sm-3 form-control btn link-border m-2 rounded-0" href="{{url_for('view_my_reviews',user_id=r._user_id)}}">Cancel</a>
             </div>
         </form>

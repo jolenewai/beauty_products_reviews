@@ -11,13 +11,18 @@
 
     {% block content %}
 
-        <form method="POST">
-            Are you sure you want to delete <strong>{{r.title}}</strong> ?
+        <div class="container">
+            <div class="row justify-content-around">
+                <div id="update-review" class="col-8 mx-auto bg-white shadow p-5">  
+                <form method="POST">
+                    Are you sure you want to delete <strong>{{r.title}}</strong> ?
 
-            <input type="submit" value="Delete Review" /> 
-            <a href="{{url_for('read_reviews')}}">Cancel</a>
+                    <input type="submit" value="Delete Review" /> 
+                    <a href="{{url_for('read_reviews')}}">Cancel</a>
 
-        </form>
-
+                </form>
+                </div>
+            </div>
+        </div>
 
     {% endblock %}
