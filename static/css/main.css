@@ -90,7 +90,7 @@ label {
 }
 
 input {
-    font-size:1.25em !important;
+    font-family: 'Nunito Sans', sans-serif;
 }
 
 a:visited, a:link{

@@ -107,11 +107,9 @@ def read_reviews():
     user_list = []
     for user in users:
         user_list.append(user)
-
-    user = check_user_log_in(client)
     
 
-    return render_template('read_reviews.template.html', review=latest_review, cat=categories, users=user_list, skincare=skincare_reviews, cosmetics=cosmetic_reviews, bodycare=bodycare_reviews, haircare=haircare_reviews,user=user)
+    return render_template('read_reviews.template.html', review=latest_review, cat=categories, users=user_list, skincare=skincare_reviews, cosmetics=cosmetic_reviews, bodycare=bodycare_reviews, haircare=haircare_reviews)
 
     
 @app.route('/read_reviews/<cat_id>')
@@ -135,6 +133,7 @@ def read_reviews_by_category(cat_id):
 
 
 @app.route('/add_review')
+@flask_login.login_required
 def add_review():
 
     client = data.get_client()
@@ -200,6 +199,7 @@ def process_add_review():
 
 
 @app.route('/edit_profile/<user_id>')
+@flask_login.login_required
 def edit_profile(user_id):
     
     client = data.get_client()
@@ -210,6 +210,7 @@ def edit_profile(user_id):
 
 
 @app.route('/edit_profile/<user_id>', methods=['POST'])
+@flask_login.login_required
 def process_edit_profile(user_id):
     client = data.get_client()
 

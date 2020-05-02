@@ -39,9 +39,9 @@
                     {% if current_user.is_authenticated %}
                         <a class="small-link px-2" href="{{url_for('logout')}}?redirect={{request.path}}">Logout</a>
                     {% else %}
-                        <a class="small-link px-2" href="{{url_for('user_login')}}?redirect={{request.path}}">Login</a>
-                    {% endif %}  | 
-                    <a class="small-link px-2" href="{{url_for('add_review')}}">Add A Review </a></span>
+                        <a class="small-link px-2" href="{{url_for('user_login')}}?redirect={{request.path}}">Login</a>  | 
+                        <a class="small-link px-2" href="{{url_for('add_review')}}">Add A Review </a></span>
+                    {% endif %} 
                 </div>
             </form> 
 
@@ -53,7 +53,7 @@
                 <div class="collapse navbar-collapse nav" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto my-2">
                     <li class="nav-item mx-2 border link-border text-center btn p-0 rounded-0">
-                        <a href="{{url_for('read_reviews')}}" class="nav-link px-4 py-2 text-decoration-none">All</a>
+                        <a href="{{url_for('read_reviews')}}" class="nav-link px-5 py-2 text-decoration-none">All</a>
                     </li>
                     {% for c in cat %}
                         {% if c.name != "For Women" %} 
@@ -67,26 +67,7 @@
             </nav>
 
     </div>
-    {% if user %}
-    <div class="container my-3">
-        <h1 class="text-center pink-text mb-3">Hello, {{user.name}}</h1>
-       
-        <div class="row justify-content-center mx-0 px-0">
-            <div class="col-sm-2 text-center">
-                <div id="edit-profile" class="mb-1 border border-dark rounded-circle"></div>
-                <div><a href="{{url_for('edit_profile', user_id=user._id)}}">Edit Profile</a></div>
-            </div>
-            <div class="col-sm-2 text-center">
-                <div id="write-review" class="mb-1 border border-dark rounded-circle"></div>
-                <div><a href="{{url_for('add_review', user_id=user._id)}}">Write A Review</a></div>
-            </div>
-            <div class="col-sm-2 text-center">
-                <div id="my-reviews"  class="mb-1 border border-dark rounded-circle"></div>
-                <div><a href="{{url_for('view_my_reviews',user_id=user._id)}}">My Reviews</a></div>
-            </div>
-        </div>
-    </div>
-    {% endif %}
+    {% block login_user %} {% endblock %}
     <div class="container-flex mt-5">
     <div class="row justify-content-center mx-0 px-0">
             <div class="col-sm-12 col-lg-10 col-md-10 mx-auto px-0">
