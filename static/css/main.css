@@ -26,7 +26,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #website-desc {
-    font-size: 1.9em;
+    font-size: 1.5em;
     color: #000;
     font-family: 'Amatic SC', cursive;
     font-weight: 400;    
@@ -117,41 +117,44 @@ a:hover{
     border: 2px solid #FF8080;
 }
 
-#edit-profile {
-    background-image: url('/static/images/user.svg');
+#edit-profile,
+#write-review,
+#my-reviews {
+
     background-repeat: no-repeat;
     background-position: center;
-    height: 3.4em;
-    width: 3.4em;
-    padding:5px;
+    height: 3em;
+    width: 3em;
+    padding:0.22em;
     align-self: center;
     display:inline-flex;
+
+}
+
+#edit-profile {
+    background-image: url('/static/images/user.svg');
 }
 
 #write-review {
     background-image: url('/static/images/write.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 3.4em;
-    width: 3.4em;
-    padding:5px;
-    align-self: center;
-    display:inline-flex;
 }
 
 #my-reviews {
     background-image: url('/static/images/reviews.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 3.4em;
-    width: 3.4em;
-    padding:5px;
-    align-self: center;
-    display:inline-flex;
 }
 
-.my-reviews p {
+.my-reviews p, .card-text {
     font-family: 'Nunito Sans', sans-serif;
     font-weight:300;
     font-size: 0.63em;
+}
+
+
+.card-text strong, .my-reviews p strong {
+    font-weight:600;
+    font-size: 1.05em;
+}
+
+.stars {
+    font-size:0.85em;
 }
