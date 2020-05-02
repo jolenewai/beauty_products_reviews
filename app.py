@@ -107,9 +107,19 @@ def read_reviews():
     user_list = []
     for user in users:
         user_list.append(user)
+
+    if flask_login.current_user.is_authenticated:
+        current_user = flask_login.current_user
+
+        if current_user:
+            user = client[DB_NAME].users.find_one({
+                'email': current_user.id
+            })
+        else:
+            user = None
     
 
-    return render_template('read_reviews.template.html', review=latest_review, cat=categories, users=user_list, skincare=skincare_reviews, cosmetics=cosmetic_reviews, bodycare=bodycare_reviews, haircare=haircare_reviews)
+    return render_template('read_reviews.template.html', review=latest_review, cat=categories, users=user_list, skincare=skincare_reviews, cosmetics=cosmetic_reviews, bodycare=bodycare_reviews, haircare=haircare_reviews, user=user)
 
     
 @app.route('/read_reviews/<cat_id>')
@@ -129,7 +139,17 @@ def read_reviews_by_category(cat_id):
 
     all_cat = client[DB_NAME].categories.find()
 
-    return render_template('read_reviews_by_cat.template.html', current_cat=current_cat, cat=all_cat, reviews=reviews)
+    if flask_login.current_user.is_authenticated:
+        current_user = flask_login.current_user
+
+        if current_user:
+            user = client[DB_NAME].users.find_one({
+                'email': current_user.id
+            })
+        else:
+            user = None
+
+    return render_template('read_reviews_by_cat.template.html', current_cat=current_cat, cat=all_cat, reviews=reviews, user=user)
 
 
 @app.route('/add_review')
@@ -403,9 +423,11 @@ def search():
         }
     })
 
+    categories = client[DB_NAME].categories.find()
+
     user = check_user_log_in(client)
 
-    return render_template('search_result.template.html',results=results, search_str=search_str, user=user)
+    return render_template('search_result.template.html',results=results, search_str=search_str, user=user, cat=categories)
 
 @app.route('/user_login')
 def user_login():
