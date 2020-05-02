@@ -97,8 +97,10 @@
         </form>
 
         {% else %}
-            Please login to write a review. <br/>
-            <a href="{{url_for('user_login')}}?redirect={{request.path}}">Login</a>
+            <p class="text-center">
+                Please login to write a review. <br/>
+                <a href="{{url_for('user_login')}}?redirect={{request.path}}">Login</a>
+            </p>
         {% endif %}
     </div>
     </div>

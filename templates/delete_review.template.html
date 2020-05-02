@@ -15,10 +15,12 @@
             <div class="row justify-content-around">
                 <div id="update-review" class="col-8 mx-auto bg-white shadow p-5">  
                 <form method="POST">
-                    Are you sure you want to delete <strong>{{r.title}}</strong> ?
+                    <h5>Are you sure you want to delete <strong>{{r.title}}</strong> ?</h5>
 
-                    <input type="submit" value="Delete Review" /> 
-                    <a href="{{url_for('read_reviews')}}">Cancel</a>
+                    <div class="row justify-content-center mt-3">
+                        <button class="col-sm-3 form-control btn link-border m-2 rounded-0" type="submit" value="Delete Review">Delete Review</button> 
+                        <a class="col-sm-3 form-control btn link-border m-2 rounded-0" href="{{url_for('my_reviews', user_id=user._id)}}">Cancel</a>
+                    </div>
 
                 </form>
                 </div>

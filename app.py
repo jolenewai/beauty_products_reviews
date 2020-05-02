@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 import os
 import data
 import datetime
@@ -75,7 +75,7 @@ def index():
 def read_reviews():
     client = data.get_client()
     
-    latest_review = client[DB_NAME].user_reviews.find().sort('_id',pymongo.DESCENDING).limit(1)
+    latest_review = client[DB_NAME].user_reviews.find().sort('posted',pymongo.DESCENDING).limit(1)
 
     users = client[DB_NAME].users.find()
     categories = client[DB_NAME].categories.find()
@@ -84,31 +84,34 @@ def read_reviews():
         {
              'categories.name': 'Skin Care'
         }
-    ).limit(3)
+    ).sort('posted',pymongo.DESCENDING).limit(3)
 
     cosmetic_reviews = client[DB_NAME].user_reviews.find(
         {
             'categories.name': 'Cosmetic'
         }
-    ).limit(3)
+    ).sort('posted',pymongo.DESCENDING).limit(3)
 
     bodycare_reviews = client[DB_NAME].user_reviews.find(
         {
             'categories.name': 'Body Care'
         }
-    ).limit(2)
+    ).sort('posted',pymongo.DESCENDING).limit(2)
 
     haircare_reviews = client[DB_NAME].user_reviews.find(
         {
             'categories.name': 'Hair Care'
         }
-    ).limit(2)
+    ).sort('posted',pymongo.DESCENDING).limit(2)
 
     user_list = []
     for user in users:
         user_list.append(user)
 
-    return render_template('read_reviews.template.html', review=latest_review, cat=categories, users=user_list, skincare=skincare_reviews, cosmetics=cosmetic_reviews, bodycare=bodycare_reviews, haircare=haircare_reviews)
+    user = check_user_log_in(client)
+    
+
+    return render_template('read_reviews.template.html', review=latest_review, cat=categories, users=user_list, skincare=skincare_reviews, cosmetics=cosmetic_reviews, bodycare=bodycare_reviews, haircare=haircare_reviews,user=user)
 
     
 @app.route('/read_reviews/<cat_id>')
@@ -195,6 +198,46 @@ def process_add_review():
 
     return redirect(url_for('index'))
 
+
+@app.route('/edit_profile/<user_id>')
+def edit_profile(user_id):
+    
+    client = data.get_client()
+
+    user = check_user_log_in(client)
+
+    return render_template('edit_profile.template.html', user=user)
+
+
+@app.route('/edit_profile/<user_id>', methods=['POST'])
+def process_edit_profile(user_id):
+    client = data.get_client()
+
+    user = check_user_log_in(client)
+    client[DB_NAME].users.update_one({
+        '_id': ObjectId(user_id)
+        },
+        {
+            '$set':{
+                'email':request.form.get('email'),
+                'name': request.form.get('name'),
+                'password': user['password'],
+                'age': request.form.get('age'),
+                'gender': request.form.get('gender'),
+                'occupation': request.form.get('occupation')
+            }
+        }
+    )
+
+    user = client[DB_NAME].users.find_one({
+            '_id': ObjectId(user_id)
+    })  
+
+    msg = "Profile Updated"
+
+    return render_template('edit_profile.template.html', user=user, msg=msg)
+
+
 @app.route('/my_reviews/<user_id>')
 @flask_login.login_required
 def view_my_reviews(user_id):
@@ -206,6 +249,8 @@ def view_my_reviews(user_id):
             'user_id': ObjectId(user_id)
         }
     )
+
+    categories = client[DB_NAME].categories.find()
 
     user = client[DB_NAME].users.find({
         '_id': ObjectId(user_id)
@@ -223,8 +268,8 @@ def view_my_reviews(user_id):
     else:
         return redirect('/user_login?redirect=/read_reviews')
 
+    return render_template('my_reviews.template.html', reviews=my_reviews, user=user, cat=categories)
 
-    return render_template('my_reviews.template.html', reviews=my_reviews, user=user)
 
 @app.route('/edit_review/<review_id>')
 @flask_login.login_required
@@ -296,7 +341,10 @@ def confirm_delete_review(review_id):
         '_id': ObjectId(review_id)
     })
 
-    return render_template('delete_review.template.html', r=review)
+    user = check_user_log_in(client)
+
+
+    return render_template('delete_review.template.html', r=review, user=user)
 
 
 @app.route('/delete_review/<review_id>', methods=['POST'])
@@ -307,7 +355,10 @@ def delete_review(review_id):
         '_id': ObjectId(review_id)
     })
 
-    return redirect(url_for('read_reviews'))
+    user = check_user_log_in(client)
+
+
+    return redirect(url_for('view_my_reviews', user=user))
 
 
 @app.route('/register_user')
@@ -383,7 +434,8 @@ def proccess_user_login():
         flask_login.login_user(user)
         return redirect(redirect_url)
     else:
-        return "User Login Fail"
+        flash('Login Failed. Invalid Email or Password')
+        return render_template('user_login.template.html')
         
 
 @app.route('/protected')

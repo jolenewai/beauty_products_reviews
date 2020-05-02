@@ -4,16 +4,22 @@
 
 {% block content %}
 
-<div class="container-flex my-3 py-5 mx-0 px-0">
+<div class="container-flex mx-0 px-0">
     <div class="row justify-content-center mx-0 px-0">
-        <div class="col-md-10 mx-0 px-0 bg-white">
+        <div class="col-md-10 mx-0 px-0">
         {% for r in reviews %}
 
-            <div class="my-reviews media justify-content-center py-3">
+            <div class="my-reviews media justify-content-center mb-3 py-3 bg-white shadow">
+                {% if r.image %}
                 <img src="{{r.image}}}" class="mr-3" alt="{{r.product_name}}" width="100">
+                {% endif %}
                 <div class="media-body col-md-6">
                     <h4 class="mt-0">{{r.title}}</h4>
-                    <h5>{{r.product_name}}</h5>
+                    <p><strong>{{r.product_name}}</strong><br/>
+                    {% set rating = r.rating | int %}
+                    {% for i in range(0,rating) %}
+                        <span class="pink-text stars"> <i class="fas fa-star"></i></span>
+                    {% endfor %}</p>
                     <p>{{r.review}}</p>
                     <p class="card-text"><small class="text-muted">Posted on {{r.posted.strftime("%d-%m-%Y, %H:%M:%S")}}</small></p>
                 </div>
