@@ -43,7 +43,7 @@
 
     <div class="container-flex my-3 py-5 mx-0 px-0">
         <div class="row justify-content-center mx-0 px-0">
-            <div class="col-md-10 mx-0 px-0">
+            <div class="col-md-9 mx-0 px-0">
             <h2 class="text-center pink-text">SKIN CARE</h2>
             <div class="card-group">
                 {% for s in skincare %}
@@ -71,7 +71,7 @@
     </div>
   <div class="container-flex lightpink-bg my-3 py-5 mx-0 px-0">
         <div class="row justify-content-center mx-0 px-0">
-            <div class="col-md-10 mx-0 px-0">
+            <div class="col-md-9 mx-0 px-0">
     <h2 class="text-center pink-text">COSMETICS</h2>
     <div class="card-group">
         {% for c in cosmetics %}
@@ -97,12 +97,12 @@
     </div>
     <div class="container-flex my-3 py-5 mx-0 px-0">
         <div class="row justify-content-center mx-0 px-0">
-            <div class="col-md-5 mx-0 px-0">
+            <div class="col-md-5 mx-1 px-0">
             <h2 class="pink-text">BODY CARE</h2>
             <div class="card-group">
                 {% for b in bodycare %}
                 <div class="card">
-                    <img src="{{b.image}}}" class="card-img-top" alt="{{b.product_name}}">
+                    <img src="{{b.image}}}" class="card-img-top" alt="{{b.product_name}}" height="295"> 
                     <div class="card-body">
                     <h5 class="card-title">{{b.title}}</h5>
                     <p class="card-text">{{b.product_name}}<br/>
@@ -120,12 +120,12 @@
 
             </div>
 
-            <div class="col-md-5 mx-0 px-0">
-            <h2 class="text-center pink-text">HAIR CARE</h2>
+            <div class="col-md-5 mx-1 px-0">
+            <h2 class="pink-text">HAIR CARE</h2>
             <div class="card-group">
                 {% for h in haircare %}
                 <div class="card">
-                    <img src="{{s.image}}}" class="card-img-top" alt="{{s.product_name}}">
+                    <img src="{{h.image}}}" class="card-img-top" alt="{{h.product_name}}" height="295">
                     <div class="card-body">
                     <h5 class="card-title">{{h.title}}</h5>
                     <p class="card-text">{{h.product_name}}<br/>
