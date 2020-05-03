@@ -379,7 +379,7 @@ def delete_review(review_id):
     user = check_user_log_in(client)
 
 
-    return redirect(url_for('view_my_reviews', user=user))
+    return redirect(url_for('view_my_reviews', user_id=user._id))
 
 
 @app.route('/register_user')
@@ -388,8 +388,17 @@ def add_user():
     client = data.get_client()
 
     categories = client[DB_NAME].categories.find()
+    if flask_login.current_user.is_authenticated:
+        current_user = flask_login.current_user
 
-    return render_template('register.template.html', cat=categories)
+        if current_user:
+            user = client[DB_NAME].users.find_one({
+                'email': current_user.id
+            })
+        else:
+            user = None
+
+    return render_template('register.template.html', cat=categories, user=user)
 
 
 @app.route('/register_user', methods=['POST'])
@@ -409,7 +418,13 @@ def process_add_user():
         'occupation': request.form.get('occupation')
     })
 
-    return "User Created"
+    redirect_url = request.args.get('redirect')
+    
+    if redirect_url == None:
+        redirect_url = "/"
+
+    return redirect(redirect_url)
+
 
 @app.route('/search', methods=['POST'])
 def search():
@@ -429,6 +444,7 @@ def search():
 
     return render_template('search_result.template.html',results=results, search_str=search_str, user=user, cat=categories)
 
+
 @app.route('/user_login')
 def user_login():
     return render_template('user_login.template.html')
@@ -443,6 +459,7 @@ def proccess_user_login():
         'email': request.form.get('email')
     })
 
+    print(user_in_db)
     user = User()
     user.id = user_in_db['email']
 
@@ -451,8 +468,6 @@ def proccess_user_login():
     if redirect_url == None:
         redirect_url = "/"
     
-    print (redirect)
-
     if verify_password(request.form.get('password'), user_in_db['password']):
         flask_login.login_user(user)
         return redirect(redirect_url)
