@@ -11,6 +11,14 @@ body {
     font-weight: 400;
 }
 
+.navbar-custom {
+        background-color: transparent;
+    }
+
+.navbar-close {
+    visibility: hidden;
+}
+
 /* define font style for headers */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Amatic SC', cursive;
@@ -149,7 +157,6 @@ a:hover{
     font-size: 0.63em;
 }
 
-
 .card-text strong, .my-reviews p strong {
     font-weight:600;
     font-size: 1.05em;
@@ -158,3 +165,53 @@ a:hover{
 .stars {
     font-size:0.85em;
 }
+
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    
+    .navbar-custom {
+        background-color:#FF8080;
+        width: 100%;
+        z-index: 999;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 20px;
+    }
+
+    .navbar-toggler{
+        position: fixed;
+        top: 25px;
+        left: 15px;
+        z-index: 20;
+    }
+
+    .navbar-close {
+        z-index: 1000;
+        position: fixed;
+        top: 20px;
+        visibility: visible;
+    }
+
+    .navbar a {
+        color: #FFF;
+    }
+
+    .btn a:visited, .btn a:link{
+        color: #FFF;
+    }
+
+
+    #website-title a{
+        font-size: 2.5em;
+        line-height: 0.9em;
+    }
+
+    #website-desc {
+        font-size: 1.15em;
+        color: #000;
+        font-family: 'Amatic SC', cursive;
+        font-weight: 400;    
+    }
+ }

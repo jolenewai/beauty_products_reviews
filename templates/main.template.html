@@ -19,15 +19,15 @@
 
     <div class="container">
         <div class="row">
-            <div class="col text-center">
-                <div id="website-title" class="mt-5"><a class="text-decoration-none" href="/">PRETTY GOOD</a></div>
+            <div class="col mt-4 mt-sm-4 mt-lg-5 text-center">
+                <div id="website-title"><a class="text-decoration-none" href="/">PRETTY GOOD</a></div>
                 <div id="website-desc" class="m-0 pt-0">100% Consumers’ Reviews on Beauty Products</div>
             </div> 
         </div>
 
             <form class="form-inline my-2 my-lg-0" action="{{url_for('search')}}" method="POST">
                
-                <div class="input-group mb-2 mx-auto text-shadow">
+                <div class="input-group mb-2 mx-auto text-shadow col-10 col-sm-6 col-md-10">
                     <input type="text" class="form-control rounded-left border-white shadow" id="search" name="search"
                         placeholder="Search" aria-label="Search">
                     <div class="input-group-append">
@@ -47,12 +47,17 @@
                 </div>
             </form> 
 
-            <nav class="navbar navbar-expand-lg navbar-light light-bg link-border ">
-                <button class="navbar-toggler btn " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <nav class="navbar navbar-expand-lg link-border ">
+                <button class="navbar-toggler btn rounded-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="text-white custom-icon"> <i class="fas fa-bars"></i></span>
                 </button>
+
                 
-                <div class="collapse navbar-collapse nav" id="navbarSupportedContent">
+                
+                <div class="collapse navbar-collapse nav navbar-custom" id="navbarSupportedContent">
+                    <button class="navbar-close btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="text-white custom-icon"><i class="fas fa-times"></i></span>
+                    </button>
                     <ul class="navbar-nav mx-auto my-2">
                     <li class="nav-item mx-2 border link-border text-center btn p-0 rounded-0">
                         <a href="{{url_for('read_reviews')}}" class="nav-link px-5 py-2 text-decoration-none">All</a>
@@ -70,7 +75,7 @@
 
     </div>
     {% block login_user %} {% endblock %}
-    <div class="container-flex mt-5">
+    <div class="container-flex mt-2 mt-sm-5">
     <div class="row justify-content-center mx-0 px-0">
             <div class="col-sm-12 col-lg-10 col-md-10 mx-auto px-0">
             
