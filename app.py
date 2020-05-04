@@ -18,9 +18,11 @@ ratings = [1,2,3,4,5]
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY')
 
+
 #create the login manager
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
+
 
 #create the user class
 class User(flask_login.UserMixin):
@@ -37,7 +39,7 @@ def verify_password(password_text, encrypted_password):
 
 @login_manager.user_loader
 def user_loader(email):
-    
+
     client = data.get_client()
 
     # attempt to get the user
@@ -50,6 +52,7 @@ def user_loader(email):
         return user
     else:
         return None
+
 
 def check_user_log_in(client):
 
@@ -71,35 +74,35 @@ def index():
 @app.route('/read_reviews')
 def read_reviews():
     client = data.get_client()
-    
-    latest_review = client[DB_NAME].user_reviews.find().sort('posted',pymongo.DESCENDING).limit(1)
 
-    users = client[DB_NAME].users.find()
+    latest_review = client[DB_NAME].user_reviews.find().sort('posted', pymongo.DESCENDING).limit(1)
+
+    users = dao.get_all_users(client)
     categories = dao.get_all_categories(client)
 
     skincare_reviews = client[DB_NAME].user_reviews.find(
         {
              'categories.name': 'Skin Care'
         }
-    ).sort('posted',pymongo.DESCENDING).limit(3)
+    ).sort('posted', pymongo.DESCENDING).limit(3)
 
     cosmetic_reviews = client[DB_NAME].user_reviews.find(
         {
             'categories.name': 'Cosmetic'
         }
-    ).sort('posted',pymongo.DESCENDING).limit(3)
+    ).sort('posted', pymongo.DESCENDING).limit(3)
 
     bodycare_reviews = client[DB_NAME].user_reviews.find(
         {
             'categories.name': 'Body Care'
         }
-    ).sort('posted',pymongo.DESCENDING).limit(2)
+    ).sort('posted', pymongo.DESCENDING).limit(2)
 
     haircare_reviews = client[DB_NAME].user_reviews.find(
         {
             'categories.name': 'Hair Care'
         }
-    ).sort('posted',pymongo.DESCENDING).limit(2)
+    ).sort('posted', pymongo.DESCENDING).limit(2)
 
     user_list = []
     for user in users:
@@ -109,16 +112,14 @@ def read_reviews():
         current_user = flask_login.current_user
 
         if current_user:
-            user = client[DB_NAME].users.find_one({
-                'email': current_user.id
-            })
+            user = dao.get_user_by_email(client, current_user.id)
         else:
             user = None
-    
+
 
     return render_template('read_reviews.template.html', review=latest_review, cat=categories, users=user_list, skincare=skincare_reviews, cosmetics=cosmetic_reviews, bodycare=bodycare_reviews, haircare=haircare_reviews, user=user)
 
-    
+
 @app.route('/read_reviews/<cat_id>')
 def read_reviews_by_category(cat_id):
 
@@ -132,9 +133,7 @@ def read_reviews_by_category(cat_id):
         current_user = flask_login.current_user
 
         if current_user:
-            user = client[DB_NAME].users.find_one({
-                'email': current_user.id
-            })
+            user = dao.get_user_by_email(client, current_user.id)
         else:
             user = None
 
@@ -150,7 +149,7 @@ def add_review():
 
     categories = dao.get_all_categories(client)
     cat_list = []
-    
+
     for cat in categories:
         cat_list.append(cat)
 
@@ -158,9 +157,7 @@ def add_review():
         current_user = flask_login.current_user
 
         if current_user:
-            user = client[DB_NAME].users.find_one({
-                'email': current_user.id
-            })
+            user = dao.get_user_by_email(client, current_user.id)
         else:
             user = None
     else:
@@ -179,22 +176,22 @@ def process_add_review():
 
     user = check_user_log_in(client)
 
-    user_id = user['_id']       
+    user_id = user['_id']
 
     for sc in selected_categories:
         current_cat = dao.get_category_by_id(client, sc)
 
         cat_to_add.append({
-            'category_id':ObjectId(current_cat['_id']),
-            'name':current_cat['name']
+            'category_id': ObjectId(current_cat['_id']),
+            'name': current_cat['name']
         })
 
     client[DB_NAME].user_reviews.insert_one({
         'title': request.form.get('title'),
         'posted': datetime.datetime.now(),
         'user_id': ObjectId(user_id),
-        'product_name': request.form.get('product_name'), 
-        'product_brand': request.form.get('product_brand'), 
+        'product_name': request.form.get('product_name'),
+        'product_brand': request.form.get('product_brand'),
         'country_of_origin': request.form.get('country_of_origin'),
         'categories': cat_to_add,
         'rating': request.form.get('rating'),
@@ -208,12 +205,13 @@ def process_add_review():
 @app.route('/edit_profile/<user_id>')
 @flask_login.login_required
 def edit_profile(user_id):
-    
+
     client = data.get_client()
 
     user = check_user_log_in(client)
+    categories = dao.get_all_categories(client)
 
-    return render_template('edit_profile.template.html', user=user)
+    return render_template('edit_profile.template.html', user=user, cat=categories)
 
 
 @app.route('/edit_profile/<user_id>', methods=['POST'])
@@ -222,26 +220,21 @@ def process_edit_profile(user_id):
     client = data.get_client()
 
     user = check_user_log_in(client)
-    client[DB_NAME].users.update_one({
-        '_id': ObjectId(user_id)
-        },
-        {
-            '$set':{
-                'email':request.form.get('email'),
-                'name': request.form.get('name'),
-                'password': user['password'],
-                'age': request.form.get('age'),
-                'gender': request.form.get('gender'),
-                'occupation': request.form.get('occupation')
-            }
-        }
-    )
+    email = request.form.get('email')
+    name = request.form.get('name')
+    password = user['password']
+    age = request.form.get('age')
+    gender = request.form.get('gender')
+    occupation = request.form.get('occupation')
+
+    dao.update_user_profile(client, user_id, email, name, password, age, gender, occupation)
 
     user = dao.get_one_user(client, user_id)
+    categories = dao.get_all_categories(client)
 
-    msg = "Profile Updated"
+    flash('Profile Updated')
 
-    return render_template('edit_profile.template.html', user=user, msg=msg)
+    return render_template('edit_profile.template.html', user=user, cat=categories)
 
 
 @app.route('/my_reviews/<user_id>')
@@ -258,9 +251,7 @@ def view_my_reviews(user_id):
         current_user = flask_login.current_user
 
         if current_user:
-            user = client[DB_NAME].users.find_one({
-                'email': current_user.id
-            })
+            user = dao.get_user_by_email(client, current_user.id)
         else:
             user = None
     else:
@@ -279,7 +270,7 @@ def edit_review(review_id):
     categories = dao.get_all_categories(client)
 
     return render_template('edit_review.template.html', r=review, user=user, cat=categories, ratings=ratings)
-    
+
 
 @app.route('/edit_review/<review_id>', methods=['POST'])
 @flask_login.login_required
@@ -311,12 +302,11 @@ def process_edit_review(review_id):
         current_cat = dao.get_category_by_id(client, sc)
 
         cat_to_add.append({
-            'category_id':ObjectId(current_cat['_id']),
-            'name':current_cat['name']
+            'category_id': ObjectId(current_cat['_id']),
+            'name': current_cat['name']
         })
-    
-    dao.update_review_by_id(client, review_id, user_id, title, posted, product_name, product_brand, country_of_origin, rating, review, image, cat_to_add)
 
+    dao.update_review_by_id(client, review_id, user_id, title, posted, product_name, product_brand, country_of_origin, rating, review, image, cat_to_add)
 
     return redirect(url_for('view_my_reviews', user_id=user_id))
 
@@ -353,9 +343,7 @@ def add_user():
         current_user = flask_login.current_user
 
         if current_user:
-            user = client[DB_NAME].users.find_one({
-                'email': current_user.id
-            })
+            user = dao.get_user_by_email(client, current_user.id)
         else:
             user = None
 
@@ -364,14 +352,14 @@ def add_user():
 
 @app.route('/register_user', methods=['POST'])
 def process_add_user():
-    
+
     client = data.get_client()
 
     password = request.form.get('password')
     encrypted_password = pbkdf2_sha256.hash(password)
 
     client[DB_NAME].users.insert_one({
-        'email':request.form.get('email'),
+        'email': request.form.get('email'),
         'name': request.form.get('name'),
         'password': encrypted_password,
         'age': request.form.get('age'),
@@ -380,8 +368,8 @@ def process_add_user():
     })
 
     redirect_url = request.args.get('redirect')
-    
-    if redirect_url == None:
+
+    if redirect_url is None:
         redirect_url = "/"
 
     return redirect(redirect_url)
@@ -389,7 +377,7 @@ def process_add_user():
 
 @app.route('/search', methods=['POST'])
 def search():
-    
+
     client = data.get_client()
     search_str = request.form.get('search')
     results = dao.search_by_query(client, search_str)
@@ -404,36 +392,30 @@ def search():
 @app.route('/user_login')
 def user_login():
     return render_template('user_login.template.html')
-    
+
 
 @app.route('/user_login', methods=['POST'])
 def proccess_user_login():
 
     client = data.get_client()
 
-    user_in_db = dao.get_user_by_email(request.form.get('email'))
+    user_in_db = dao.get_user_by_email(client, request.form.get('email'))
 
     print(user_in_db)
     user = User()
     user.id = user_in_db['email']
 
     redirect_url = request.args.get('redirect')
-    
+
     if redirect_url == None:
         redirect_url = "/"
-    
+
     if verify_password(request.form.get('password'), user_in_db['password']):
         flask_login.login_user(user)
         return redirect(redirect_url)
     else:
         flash('Login Failed. Invalid Email or Password')
         return render_template('user_login.template.html')
-        
-
-@app.route('/protected')
-@flask_login.login_required
-def private_section():
-    return "Only member can see this"
 
 
 @app.route('/logout')

@@ -1,5 +1,4 @@
 import os
-import data
 import pymongo
 from dotenv import load_dotenv
 from bson.objectid import ObjectId
@@ -7,6 +6,14 @@ from bson.objectid import ObjectId
 load_dotenv()
 
 DB_NAME = os.environ.get('DB_NAME')
+
+
+# funtion to get all users
+def get_all_users(client):
+
+    users = client[DB_NAME].users.find()
+
+    return users
 
 
 # function to get one user with user_id
@@ -18,6 +25,7 @@ def get_one_user(client, user_id):
 
     return user
 
+
 # function to get one user with email address
 def get_user_by_email(client, email):
 
@@ -27,12 +35,14 @@ def get_user_by_email(client, email):
 
     return user
 
+
 # function to get all categories
 def get_all_categories(client):
 
     all_cat = client[DB_NAME].categories.find()
 
     return all_cat
+
 
 # function to get reviews in certain category
 def get_reviews_by_cat_id(client, cat_id):
@@ -41,12 +51,12 @@ def get_reviews_by_cat_id(client, cat_id):
         {
             'categories.category_id':ObjectId(cat_id)
         }
-    )
+    ).sort('posted', pymongo.DESCENDING)
 
     return reviews
 
 
-# function to get category by its id 
+# function to get category by its id
 def get_category_by_id(client, cat_id):
 
     current_cat = client[DB_NAME].categories.find_one({
@@ -64,7 +74,7 @@ def get_review_by_userid(client, user_id):
             'user_id': ObjectId(user_id)
         }
     )
-    
+
     return reviews
 
 
@@ -83,10 +93,11 @@ def delete_review_by_id(client, review_id):
         '_id': ObjectId(review_id)
     })
 
+
 def search_by_query(client, search_str):
 
     results = client[DB_NAME].user_reviews.find({
-      'product_name': { 
+      'product_name': {
           '$regex': search_str,
           '$options': 'i'
         }
@@ -101,19 +112,36 @@ def update_review_by_id(client, review_id, user_id, title, posted, product_name,
         '_id': ObjectId(review_id)
         },
         {
-            '$set': 
+            '$set':
             {
                 'title': title,
                 'user_id': ObjectId(user_id),
                 'posted': posted,
-                'product_name': product_name, 
-                'product_brand': product_brand, 
+                'product_name': product_name,
+                'product_brand': product_brand,
                 'country_of_origin': country_of_origin,
                 'categories': cat_to_add,
                 'rating': rating,
                 'review': review,
                 'image': image
+            }
+        }
+    )
 
+
+def update_user_profile(client, user_id, email, name, password, age, gender, occupation):
+
+    client[DB_NAME].users.update_one({
+        '_id': ObjectId(user_id)
+        },
+        {
+            '$set':{
+                'email': email,
+                'name': name,
+                'password': password,
+                'age': age,
+                'gender': gender,
+                'occupation': occupation
             }
         }
     )

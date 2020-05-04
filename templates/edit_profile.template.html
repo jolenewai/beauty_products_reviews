@@ -28,7 +28,17 @@
     {% endblock %}
 
 {% block content %}
-    <p class="text-center pink-text">{{ msg }}</p>            
+    <p class="text-center pink-text">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <span class=flashes>
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+        </span>
+    {% endif %}
+    {% endwith %}
+    </p>            
 
     <div class="container">
     <div class="row justify-content-around">
