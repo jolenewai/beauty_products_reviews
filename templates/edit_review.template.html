@@ -1,5 +1,12 @@
 {% extends 'main.template.html' %}
 
+    {% block externalscript %}
+
+    <script>UPLOADCARE_PUBLIC_KEY = "{{public_key}}";</script>
+    <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
+
+    {% endblock %}
+
     {% block title %} Edit Your Review {% endblock %}     
 
     {% block login_user %}
@@ -103,8 +110,17 @@
                 </div>
             </div>
 
+            <div class="form-group row justify-content-start mb-3">
+                <label class="col-form-label col-sm-3" for="categories">Image </label> 
+                <div class="col-sm-8 col-md-8">
+                    <img src="{{ r.image }}" height="100" />
+                   <input type="hidden" name="existing_product_image" value="{{ r.image }}" />
+                   <input type="hidden" role="uploadcare-uploader" name="product_image" />
+                </div>
+            </div>
+
             <div class="row justify-content-center mt-3">
-                <button class="col-sm-3 form-control btn link-border m-2 rounded-0" type="submit" value="Add Review">Update</button> 
+                <button class="col-sm-3 form-control btn link-border m-2 rounded-0" type="submit" value="Update Review">Update</button> 
                 <a class="col-sm-3 form-control btn link-border m-2 rounded-0" href="{{url_for('view_my_reviews',user_id=r._user_id)}}">Cancel</a>
             </div>
         </form>

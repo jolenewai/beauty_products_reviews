@@ -7,6 +7,7 @@ from passlib.hash import pbkdf2_sha256
 from dotenv import load_dotenv
 from bson.objectid import ObjectId
 import flask_login
+import dao
 
 load_dotenv()
 
@@ -40,9 +41,7 @@ def user_loader(email):
     client = data.get_client()
 
     # attempt to get the user
-    user_in_db = client[DB_NAME].users.find_one({
-        'email':email
-    })
+    user_in_db = dao.get_user_by_email(client, email)
 
     user = User()
     user.id = user_in_db['email']
@@ -57,9 +56,7 @@ def check_user_log_in(client):
     current_user = flask_login.current_user
 
     if current_user:
-        user = client[DB_NAME].users.find_one({
-            'email': current_user.id
-        })
+        user = dao.get_user_by_email(client, current_user.id)
     else:
         user = None
 
@@ -78,7 +75,7 @@ def read_reviews():
     latest_review = client[DB_NAME].user_reviews.find().sort('posted',pymongo.DESCENDING).limit(1)
 
     users = client[DB_NAME].users.find()
-    categories = client[DB_NAME].categories.find()
+    categories = dao.get_all_categories(client)
 
     skincare_reviews = client[DB_NAME].user_reviews.find(
         {
@@ -127,16 +124,8 @@ def read_reviews_by_category(cat_id):
 
     client = data.get_client()
     
-    reviews = client[DB_NAME].user_reviews.find(
-        {
-            'categories.category_id':ObjectId(cat_id)
-        }
-    )
-
-    current_cat = client[DB_NAME].categories.find_one({
-        '_id': ObjectId(cat_id)
-    },{'name':1})
-
+    reviews = dao.get_reviews_by_cat_id(client, cat_id)
+    current_cat = dao.get_category_by_id(client, cat_id)
     all_cat = client[DB_NAME].categories.find()
 
     if flask_login.current_user.is_authenticated:
@@ -159,7 +148,7 @@ def add_review():
     client = data.get_client()
     public_key = os.environ.get('UPLOADCARE_PUBLIC_KEY')
 
-    categories = client[DB_NAME].categories.find()
+    categories = dao.get_all_categories(client)
     cat_list = []
     
     for cat in categories:
@@ -193,9 +182,7 @@ def process_add_review():
     user_id = user['_id']       
 
     for sc in selected_categories:
-        current_cat = client[DB_NAME].categories.find_one({
-            '_id':ObjectId(sc)
-        })
+        current_cat = dao.get_category_by_id(client, sc)
 
         cat_to_add.append({
             'category_id':ObjectId(current_cat['_id']),
@@ -250,9 +237,7 @@ def process_edit_profile(user_id):
         }
     )
 
-    user = client[DB_NAME].users.find_one({
-            '_id': ObjectId(user_id)
-    })  
+    user = dao.get_one_user(client, user_id)
 
     msg = "Profile Updated"
 
@@ -265,17 +250,9 @@ def view_my_reviews(user_id):
 
     client = data.get_client()
 
-    my_reviews = client[DB_NAME].user_reviews.find(
-        {
-            'user_id': ObjectId(user_id)
-        }
-    )
-
-    categories = client[DB_NAME].categories.find()
-
-    user = client[DB_NAME].users.find({
-        '_id': ObjectId(user_id)
-    })
+    my_reviews = dao.get_review_by_userid(client, user_id)
+    categories = dao.get_all_categories(client)
+    user = dao.get_one_user(client, user_id)
 
     if flask_login.current_user.is_authenticated:
         current_user = flask_login.current_user
@@ -297,15 +274,9 @@ def view_my_reviews(user_id):
 def edit_review(review_id):
     client = data.get_client()
 
-    review = client[DB_NAME].user_reviews.find_one({
-        '_id': ObjectId(review_id)
-    })
-
-    user = client[DB_NAME].users.find_one({
-        '_id': review['user_id']
-    })
-
-    categories = client[DB_NAME].categories.find()
+    review = dao.get_review_by_review_id(client, review_id)
+    user = dao.get_one_user(client, review['user_id'])
+    categories = dao.get_all_categories(client)
 
     return render_template('edit_review.template.html', r=review, user=user, cat=categories, ratings=ratings)
     
@@ -318,36 +289,33 @@ def process_edit_review(review_id):
     selected_categories = request.form.getlist('categories')
     cat_to_add = []
 
+    review_to_edit = dao.get_review_by_review_id(client, review_id)
+
+    posted_date = review_to_edit['posted']
+
+    title = request.form.get('title')
+    posted = posted_date
     user_id = request.form.get('user_id')
+    product_name = request.form.get('product_name')
+    product_brand = request.form.get('product_brand')
+    country_of_origin = request.form.get('country_of_origin')
+    rating = request.form.get('rating')
+    review = request.form.get('review')
+
+    if request.form.get('product_image'):
+        image = request.form.get('product_image')
+    else:
+        image = request.form.get('existing_product_image')
 
     for sc in selected_categories:
-        current_cat = client[DB_NAME].categories.find_one({
-            '_id':ObjectId(sc)
-        })
+        current_cat = dao.get_category_by_id(client, sc)
 
         cat_to_add.append({
             'category_id':ObjectId(current_cat['_id']),
             'name':current_cat['name']
         })
-
-    client[DB_NAME].user_reviews.update_one({
-        '_id': ObjectId(review_id)
-        },
-        {
-            '$set':{
-            'title': request.form.get('title'),
-            'user_id': ObjectId(user_id),
-            'posted': datetime.datetime.now().isoformat(),
-            'product_name': request.form.get('product_name'), 
-            'product_brand': request.form.get('product_brand'), 
-            'country_of_origin': request.form.get('country_of_origin'),
-            'categories': cat_to_add,
-            'rating': request.form.get('rating'),
-            'review': request.form.get('review'),
-            'image': request.form.get('product_image')
-            }
-        }
-    )
+    
+    dao.update_review_by_id(client, review_id, user_id, title, posted, product_name, product_brand, country_of_origin, rating, review, image, cat_to_add)
 
 
     return redirect(url_for('view_my_reviews', user_id=user_id))
@@ -358,12 +326,8 @@ def confirm_delete_review(review_id):
 
     client = data.get_client()
 
-    review = client[DB_NAME].user_reviews.find_one({
-        '_id': ObjectId(review_id)
-    })
-
+    review = dao.get_review_by_review_id(client, review_id)
     user = check_user_log_in(client)
-
 
     return render_template('delete_review.template.html', r=review, user=user)
 
@@ -372,12 +336,8 @@ def confirm_delete_review(review_id):
 def delete_review(review_id):
     client = data.get_client()
 
-    review = client[DB_NAME].user_reviews.delete_one({
-        '_id': ObjectId(review_id)
-    })
-
+    dao.delete_review_by_id(client, review_id)
     user = check_user_log_in(client)
-
 
     return redirect(url_for('view_my_reviews', user_id=user._id))
 
@@ -387,7 +347,8 @@ def add_user():
 
     client = data.get_client()
 
-    categories = client[DB_NAME].categories.find()
+    categories = dao.get_all_categories(client)
+
     if flask_login.current_user.is_authenticated:
         current_user = flask_login.current_user
 
@@ -431,14 +392,9 @@ def search():
     
     client = data.get_client()
     search_str = request.form.get('search')
-    results = client[DB_NAME].user_reviews.find({
-      'product_name': { 
-          '$regex': search_str,
-          '$options': 'i'
-        }
-    })
+    results = dao.search_by_query(client, search_str)
 
-    categories = client[DB_NAME].categories.find()
+    categories = dao.get_all_categories(client)
 
     user = check_user_log_in(client)
 
@@ -455,9 +411,7 @@ def proccess_user_login():
 
     client = data.get_client()
 
-    user_in_db = client[DB_NAME].users.find_one({
-        'email': request.form.get('email')
-    })
+    user_in_db = dao.get_user_by_email(request.form.get('email'))
 
     print(user_in_db)
     user = User()
