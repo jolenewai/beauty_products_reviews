@@ -80,3 +80,15 @@ a:hover{
 }
 
 
+@media (max-width: 575.98px) {
+
+    body{
+        background-image: url('/static/images/mobile_background.png');
+        font-size: 1em;
+    }
+
+    #website-title a {
+        font-size: 2.5em;
+    }
+
+}

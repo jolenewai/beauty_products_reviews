@@ -9,6 +9,7 @@ body {
     font-size: 1.4em;
     font-family: 'Amatic SC', cursive;
     font-weight: 400;
+    margin-top: 20px;
 }
 
 .navbar-custom {
@@ -166,6 +167,9 @@ a:hover{
     font-size:0.85em;
 }
 
+.scrolled{
+        background-color: #FFF9F9;    
+}
 
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {
@@ -174,7 +178,7 @@ a:hover{
         margin-top: 15px;
         font-size: 1em;
         /* load smaller background for mobile layout */
-        background-image: url("/static/images/mobile_background.png");
+        background-image: url("/static/images/mobile_background_2.png");
 
     }
     
@@ -191,9 +195,9 @@ a:hover{
 
     .navbar-toggler{
         position: fixed;
-        top: 25px;
+        top: 50px;
         left: 15px;
-        z-index: 20;
+        z-index: 1030;
     }
 
     .navbar-close {
@@ -223,4 +227,11 @@ a:hover{
         font-family: 'Amatic SC', cursive;
         font-weight: 400;    
     }
+
+
+    .shift-position{
+        top: 35px;
+
+    }
+    
  }
