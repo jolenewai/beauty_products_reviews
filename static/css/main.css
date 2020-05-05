@@ -34,10 +34,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #website-desc {
-    font-size: 1.5em;
+    font-size: 0.9em;
     color: #000;
     font-family: 'Amatic SC', cursive;
-    font-weight: 400;    
+    font-weight: 300;    
 }
 
 .navbar {
@@ -169,7 +169,16 @@ a:hover{
 
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {
+
+    body {
+        margin-top: 15px;
+        font-size: 1em;
+        /* load smaller background for mobile layout */
+        background-image: url("/static/images/mobile_background.png");
+
+    }
     
+
     .navbar-custom {
         background-color:#FF8080;
         width: 100%;
@@ -204,7 +213,7 @@ a:hover{
 
 
     #website-title a{
-        font-size: 2.5em;
+        /* font-size: 2.5em; */
         line-height: 0.9em;
     }
 
