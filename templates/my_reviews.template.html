@@ -4,24 +4,7 @@
 
 {% block login_user %}
     {% if user %}
-        <div class="container my-3">
-            <h1 class="text-center pink-text mb-3">Hello, {{user.name}}</h1>
-        
-            <div class="row justify-content-center mx-0 px-0">
-                <div class="col-sm-2 text-center">
-                    <div id="edit-profile" class="mb-1 border border-dark rounded-circle"></div>
-                    <div><a href="{{url_for('edit_profile', user_id=user._id)}}">Edit Profile</a></div>
-                </div>
-                <div class="col-sm-2 text-center">
-                    <div id="write-review" class="mb-1 border border-dark rounded-circle"></div>
-                    <div><a href="{{url_for('add_review', user_id=user._id)}}">Add A Review</a></div>
-                </div>
-                <div class="col-sm-2 text-center">
-                    <div id="my-reviews"  class="mb-1 border border-dark rounded-circle"></div>
-                    <div><a href="{{url_for('view_my_reviews',user_id=user._id)}}">My Reviews</a></div>
-                </div>
-            </div>
-        </div>
+        {% include 'users_section.template.html' %}
     {% endif %}
 
 {% endblock %}
