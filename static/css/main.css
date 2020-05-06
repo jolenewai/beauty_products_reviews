@@ -26,16 +26,9 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
 }
 
-#website-title a{
-    font-size: 3.63em;
-    color: #FF8080;
-    font-family: 'Amatic SC', cursive;
-    font-weight: 400;
-    line-height: 0.9em;
-}
 
 #website-desc {
-    font-size: 0.9em;
+    font-size: 1em;
     color: #000;
     font-family: 'Amatic SC', cursive;
     font-weight: 300;    
