@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Nunito+Sans:wght@300;400;600&display=swap');
 
-body {
-        
+body {        
     background-color: #FFF9F9;
     background-image: url("/static/images/second_background.png");
     background-attachment: fixed;
@@ -10,6 +9,7 @@ body {
     font-family: 'Amatic SC', cursive;
     font-weight: 400;
     margin-top: 20px;
+    transition:500ms ease;
 }
 
 .navbar-custom {
@@ -67,7 +67,6 @@ h1, h2, h3, h4, h5, h6 {
 .link-border{
     border-color: #FF8080 !important;
     border-width: 2px !important;
-    
 }
 
 .btn {
@@ -98,8 +97,10 @@ label {
     font-size: 1.25em !important;
 }
 
-input, textarea, .custom-checkbox-label {
+input, textarea, .custom-checkbox-label, select>option {
     font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.8em !important;
+    font-weight: 300;
 }
 
 a:visited, a:link{
@@ -186,7 +187,7 @@ a:hover{
     .navbar-custom {
         background-color:#FF8080;
         width: 100%;
-        z-index: 999;
+        z-index: 1030;
         position: fixed;
         top: 0;
         left: 0;
@@ -201,7 +202,7 @@ a:hover{
     }
 
     .navbar-close {
-        z-index: 1000;
+        z-index: 1030;
         position: fixed;
         top: 20px;
         visibility: visible;
@@ -209,6 +210,7 @@ a:hover{
 
     .navbar a {
         color: #FFF;
+        font-size: 1.8em;
     }
 
     .btn a:visited, .btn a:link{

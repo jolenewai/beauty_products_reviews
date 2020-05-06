@@ -134,14 +134,13 @@ def read_reviews_by_category(cat_id):
 
         if current_user:
             user = dao.get_user_by_email(client, current_user.id)
-        else:
-            user = None
+    else:
+        user = None    
 
     return render_template('read_reviews_by_cat.template.html', current_cat=current_cat, cat=all_cat, reviews=reviews, user=user)
 
 
 @app.route('/add_review')
-@flask_login.login_required
 def add_review():
 
     client = data.get_client()

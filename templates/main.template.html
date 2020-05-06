@@ -10,14 +10,14 @@
     {% block externalscript %}{% endblock %}
     <!-- FontAwesome kit code -->
     <script src="https://kit.fontawesome.com/d302b3e2ff.js" crossorigin="anonymous"></script>
-
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/main.css" />
 
     <title>Pretty Good - 100% Consumers' Reviews on Beauty Products</title>
 </head>
 <body>
 
-    <div id="top-bar" class="container sticky-top">
+    <div id="top-bar" class="container sticky-top py-2">
         <div class="row justify-content-end pr-0 mr-0 ">
             
                 <div class="col-sm-3 col-6 col-md-4 col-lg-3 text-right">
@@ -53,41 +53,37 @@
             </div> 
         </div>
 
+        <nav class="navbar navbar-expand-lg link-border ">
+            <button class="navbar-toggler btn rounded-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="text-white custom-icon"> <i class="fas fa-bars"></i></span>
+            </button>
             
-
-            <nav class="navbar navbar-expand-lg link-border ">
-                <button class="navbar-toggler btn rounded-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="text-white custom-icon"> <i class="fas fa-bars"></i></span>
+            <div class="collapse navbar-collapse nav navbar-custom" id="navbarSupportedContent">
+                <button class="navbar-close btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="text-white custom-icon"><i class="fas fa-times"></i></span>
                 </button>
-                
-                <div class="collapse navbar-collapse nav navbar-custom" id="navbarSupportedContent">
-                    <button class="navbar-close btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="text-white custom-icon"><i class="fas fa-times"></i></span>
-                    </button>
-                    <ul class="navbar-nav mx-auto my-2">
+                <ul class="navbar-nav mx-auto my-2">
+                <li class="nav-item mx-2 border link-border text-center btn p-0 rounded-0">
+                    <a href="{{url_for('read_reviews')}}" class="nav-link px-5 py-2 text-decoration-none">All</a>
+                </li>
+                {% for c in cat %}
+                    {% if c.name != "For Women" %} 
                     <li class="nav-item mx-2 border link-border text-center btn p-0 rounded-0">
-                        <a href="{{url_for('read_reviews')}}" class="nav-link px-5 py-2 text-decoration-none">All</a>
-                    </li>
-                    {% for c in cat %}
-                        {% if c.name != "For Women" %} 
-                        <li class="nav-item mx-2 border link-border text-center btn p-0 rounded-0">
-                            <a href="{{url_for('read_reviews_by_category', cat_id=c._id)}}" class="nav-link px-4 py-2 text-decoration-none">{{c.name}}</a> 
-                        </li>    
-                        {% endif %}
-                    {% endfor %}
-                    </ul>
-                </div>
-            </nav>
-
+                        <a href="{{url_for('read_reviews_by_category', cat_id=c._id)}}" class="nav-link px-4 py-2 text-decoration-none">{{c.name}}</a> 
+                    </li>    
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            </div>
+        </nav>
     </div>
     {% block login_user %} {% endblock %}
     <div class="container-flex mt-2 mt-sm-5">
-    <div class="row justify-content-center mx-0 px-0">
+        <div class="row justify-content-center mx-0 px-0">
             <div class="col-sm-12 col-lg-10 col-md-10 mx-auto px-0">
-            
-        <h1 class="text-center mb-3">{% block title %} {% endblock %} </h1>
-             </div>
-    </div>
+                <h1 class="text-center mb-3">{% block title %} {% endblock %} </h1>
+            </div>
+        </div>
     </div>
     
     {% block content %} {% endblock %}
@@ -106,6 +102,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!-- My own javascript -->
     <script src="/static/scripts/script.js"></script>
 </body>

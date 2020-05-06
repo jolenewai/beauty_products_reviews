@@ -11,18 +11,20 @@
 
                 <div class="card-columns">
                     {% for r in reviews %}
-                    <div class="card">
+                    <div class="card" data-aos="fade-up" data-aos-delay="20">
                         {% if r.image %}
                         <img src="{{r.image}}" class="card-img-top" alt="{{r.product_name}}">
                         {% endif %}
                         <div class="card-body">
-                        <h5 class="card-title">{{r.title}}</h5>
                         <p class="card-text">{{r.product_name}}<br/>
+                        {{r.product_brand}} from {{r.country_of_origin}}<br/>
                             {% set rating = r.rating | int %}
                             {% for i in range(0,rating) %}
                                 <span class="pink-text stars"> <i class="fas fa-star"></i></span>
                             {% endfor %}
                         </p>
+                        <h5 class="card-title pink-text mb-0 pb-0">{{r.title}}</h5>
+
                         <p class="card-text"><small class="text-muted">Posted by {% for u in users if r.user_id==u._id %}{{u.name}}{% endfor%} on {{r.posted.strftime("%d-%m-%Y, %H:%M:%S")}}</small></p>
                         </div>
                     </div>

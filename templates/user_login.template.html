@@ -5,17 +5,16 @@
                 <h1 class="text-center mb-5">Login</h1>
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
-                    <span class=flashes>
+                    <p class="flashes text-center pink-text" >
                     {% for message in messages %}
                     {{ message }}
                     {% endfor %}
-                    </span>
+                    </p>
                 {% endif %}
                 {% endwith %}
                 <form method="POST">
                     <div class="form-group row justify-content-center mb-3">
-                    <label class="col-form-label col-sm-2 col-md-2" for="InputEmail"
-                        >Email
+                    <label class="col-form-label col-sm-2 col-md-2" for="InputEmail"> Email
                     </label>
                     <div class="col-sm-8 col-md-8">
                         <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="email" />
@@ -34,7 +33,7 @@
                         value="Login"
                         class="col-sm-3 form-control btn link-border m-2"
                     />
-                    <a class="m-2 col-sm-3 link-border btn" href="">Cancel</a>
+                    <a class="m-2 col-sm-3 link-border btn" href="{{ url_for('read_reviews')}}">Cancel</a>
                     </div>
                 </form>
                 <div class="text-center">
