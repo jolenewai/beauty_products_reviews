@@ -196,6 +196,10 @@ a:hover{
     height: 12px;
 }
 
+.card-columns {
+        column-count: 4;
+    }
+
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 576px) and (max-width: 991.98px) { 
     .card-columns {

@@ -133,7 +133,8 @@ def read_reviews_by_category(cat_id):
     
     reviews = dao.get_reviews_by_cat_id(client, cat_id)
     current_cat = dao.get_category_by_id(client, cat_id)
-    all_cat = client[DB_NAME].categories.find()
+    all_cat = dao.get_all_categories(client)
+    all_users = dao.get_all_users(client)
 
     if flask_login.current_user.is_authenticated:
         current_user = flask_login.current_user
@@ -143,7 +144,7 @@ def read_reviews_by_category(cat_id):
     else:
         user = None    
 
-    return render_template('read_reviews_by_cat.template.html', current_cat=current_cat, cat=all_cat, reviews=reviews, user=user)
+    return render_template('read_reviews_by_cat.template.html', current_cat=current_cat, cat=all_cat, reviews=reviews, user=user, all_users=all_users)
 
 
 @app.route('/add_review')
