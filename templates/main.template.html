@@ -14,9 +14,17 @@
     <!-- <script src="https://kit.fontawesome.com/d302b3e2ff.js" crossorigin="anonymous"></script> -->
     <script src="https://unpkg.com/feather-icons"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->    
     <link rel="stylesheet" href="/static/css/main.css" />
 
-    <title>Pretty Good - 100% Consumers' Reviews on Beauty Products</title>
+    <!-- for favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <title>Pretty Good - 100% Consumers Based Reviews for Beauty Products</title>
 </head>
 <body>
     <div id="top-bar" class="container-flex sticky-top py-md-2 py-sm-2">
@@ -30,7 +38,7 @@
                     {% else %}
                         <a class="px-2" href="{{url_for('user_login')}}?redirect={{request.path}}">Login</a>  
                         |
-                        <a class="px-2" href="{{url_for('add_review')}}">Add A Review </a></span>
+                        <a class="px-2" href="{{url_for('add_review')}}">Add A Review </a>
                     {% endif %} 
                 </div>
                 
@@ -51,7 +59,7 @@
     <div class="container-flex mx-0 px-0">
         <div class="row mx-0 px-0">
             <div class="col mt-1 mt-sm-2 mt-lg-3 text-center mx-0 px-0">
-                <a class="text-decoration-none" href="/"><img src="/static/images/pretty_good_logo.svg" width="291"></a>
+                <a class="text-decoration-none" href="/"><img src="/static/images/pretty_good_logo.svg" width="291" alt="Pretty Good"></a>
                 <div id="website-desc" class="m-0 pt-0">100% Consumers’ Reviews on Beauty Products</div>
             </div> 
         </div>
