@@ -8,7 +8,6 @@ body {
     font-size: 1.4em;
     font-family: 'Amatic SC', cursive;
     font-weight: 400;
-    margin-top: 20px;
     transition:500ms ease;
 }
 
@@ -41,6 +40,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar a {
     color: #000;
+    font-family: 'Amatic SC', cursive !important; 
+    font-weight: 400; 
+    font-size:1.25em !important; 
 }
 
 .navbar a:hover {
@@ -63,7 +65,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn {
-    font-size: 1.25em !important;
+    font-size: 0.9em !important;
+    font-weight: 300;
 }
 
 .btn a:visited, .btn a:link{
@@ -90,14 +93,17 @@ label {
     font-size: 1.25em !important;
 }
 
-input, textarea, .custom-checkbox-label, select>option {
-    font-family: 'Nunito Sans', sans-serif;
+input, textarea, label.custom-checkbox-label, select>option {
+    font-family: 'Nunito Sans', sans-serif !important;
     font-size: 0.8em !important;
     font-weight: 300;
 }
 
 a:visited, a:link{
-    color: #676767;
+    color: #676767;    
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight:300;
+    font-size: 0.8em;
 }
 
 a:hover{
@@ -105,8 +111,18 @@ a:hover{
     text-decoration: none;
 }
 
+.form-control{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.8em !important;
+
+}
+
 .pink-text {
     color:#FF8080;
+}
+
+.small-link{
+    font-size: 0.75em !important;
 }
 
 .uploadcare--widget__button_type_open {
@@ -162,20 +178,29 @@ a:hover{
 }
 
 .scrolled{
-        background-color: #FFF9F9;    
+    background-color: #FFF9F9;    
 }
 
-/* Extra small devices (portrait phones, less than 576px) */
-@media (max-width: 575.98px) {
+.feather-32 {
+    width: 32px;
+    height: 32px;
+}
 
-    body {
-        margin-top: 15px;
-        font-size: 1em;
-        /* load smaller background for mobile layout */
-        background-image: url("/static/images/mobile_background_2.png");
+.feather-18 {
+    width: 18px;
+    height: 18px;
+}
 
+.feather-12 {
+    width: 12px;
+    height: 12px;
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 576px) and (max-width: 991.98px) { 
+    .card-columns {
+        column-count: 2;
     }
-    
 
     .navbar-custom {
         background-color:#FF8080;
@@ -185,11 +210,58 @@ a:hover{
         top: 0;
         left: 0;
         padding: 20px;
+        transition: ease-in-out 0.2s;
     }
 
     .navbar-toggler{
         position: fixed;
-        top: 50px;
+        top: 15px;
+        left: 25px;
+        z-index: 1030;
+    }
+
+    .navbar-close {
+        z-index: 1030;
+        position: fixed;
+        top: 0px;
+        left: 35px;
+        visibility: visible;
+        font-size:2em !important;
+    }
+
+    .navbar a {
+        color: #FFF !important;
+        font-size: 1.8em;
+    }
+
+    
+
+ }
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+
+    body {
+        margin-top: 15px;
+        /* font-size: 1em; */
+        /* load smaller background for mobile layout */
+        background-image: url("/static/images/mobile_background_2.png");
+    }
+
+    .navbar-custom {
+        background-color:#FF8080;
+        width: 100%;
+        z-index: 1030;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 20px;
+        transition: ease-in-out 0.2s;
+
+    }
+
+    .navbar-toggler{
+        position: fixed;
+        top: 25px;
         left: 15px;
         z-index: 1030;
     }
@@ -203,7 +275,7 @@ a:hover{
 
     .navbar a {
         color: #FFF;
-        font-size: 1.8em;
+        font-size: 2em !important;
     }
 
     .btn a:visited, .btn a:link{
@@ -223,10 +295,11 @@ a:hover{
         font-weight: 400;    
     }
 
-
     .shift-position{
         top: 35px;
-
     }
-    
+
  }
+
+
+

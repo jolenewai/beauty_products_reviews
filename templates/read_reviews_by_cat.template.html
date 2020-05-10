@@ -5,9 +5,8 @@
 
 {% block content %}
 
-    <div class="container">
-        <div class="row justify-content-around">
-            <div class="col-md-10">
+    <div class="container-flex">
+        <div class="row justify-content-around px-3 mx-0">
 
                 <div class="card-columns">
                     {% for r in reviews %}
@@ -24,7 +23,7 @@
                             {% endfor %}
                         </p>
                         <h5 class="card-title pink-text mb-0 pb-0">{{r.title}}</h5>
-
+                        <p class="card-text">{{ r.review }}</p>
                         <p class="card-text"><small class="text-muted">Posted by {% for u in users if r.user_id==u._id %}{{u.name}}{% endfor%} on {{r.posted.strftime("%d-%m-%Y, %H:%M:%S")}}</small></p>
                         </div>
                     </div>

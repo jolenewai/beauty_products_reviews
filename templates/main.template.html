@@ -10,66 +10,69 @@
     {% block externalscript %}{% endblock %}
     <!-- FontAwesome kit code -->
     <script src="https://kit.fontawesome.com/d302b3e2ff.js" crossorigin="anonymous"></script>
+
+    <!-- <script src="https://kit.fontawesome.com/d302b3e2ff.js" crossorigin="anonymous"></script> -->
+    <script src="https://unpkg.com/feather-icons"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/main.css" />
 
     <title>Pretty Good - 100% Consumers' Reviews on Beauty Products</title>
 </head>
 <body>
-
-    <div id="top-bar" class="container sticky-top py-2">
-        <div class="row justify-content-end pr-0 mr-0 ">
+    <div id="top-bar" class="container-flex sticky-top py-md-2 py-sm-2">
+        <div class="row justify-content-end pr-0 mr-0 align-items-center">
             
-                <div class="col-sm-3 col-6 col-md-4 col-lg-3 text-right">
+                <div class="col-sm-4 col-6 col-md-4 col-lg-4 text-right small-link">
                     {% if current_user.is_authenticated %}
-                        <a class="small-link px-2" href="{{url_for('view_my_reviews', user_id=user._id)}}">My Account </a>
-                        | <a class="small-link px-2" href="{{url_for('logout')}}?redirect={{request.path}}">Logout</a>
+                        <a class="px-2" href="{{url_for('view_my_reviews', user_id=user._id)}}">My Account </a>
+                        |
+                        <a class="px-2" href="{{url_for('logout')}}?redirect={{request.path}}">Logout</a>
                     {% else %}
-                        <a class="small-link px-2" href="{{url_for('user_login')}}?redirect={{request.path}}">Login</a>  | 
-                        <a class="small-link px-2" href="{{url_for('add_review')}}">Add A Review </a></span>
+                        <a class="px-2" href="{{url_for('user_login')}}?redirect={{request.path}}">Login</a>  
+                        |
+                        <a class="px-2" href="{{url_for('add_review')}}">Add A Review </a></span>
                     {% endif %} 
                 </div>
                 
-                <div class="col-sm-3 col-md-4 col-10 col-lg-3">
+                <div class="px-2 mr-2">
                     <form class="form-inline my-2 my-lg-0" action="{{url_for('search')}}" method="POST">
-                        <div class="input-group ml-auto text-shadow">
+                        <div class="input-group ml-auto text-shadow ">
                             <input type="text" class="form-control rounded-left border-white shadow-sm" id="search" name="search"
                                 placeholder="Search" aria-label="Search">
                             <div class="input-group-append">
                                 <button type="submit" class="input-group-text pink-bg lighten-3 rounded-right border-white px-3 shadow-sm"
-                                    id="btn-search-home" role="link"><i class="fas fa-search text-white"
-                                        aria-hidden="true"></i></button>
+                                    id="btn-search-home" role="link"><i data-feather="search" class="feather-18 text-white"></i></button>
                             </div>
                         </div>
                     </form> 
                 </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col mt-1 mt-sm-2 mt-lg-3 text-center">
+    <div class="container-flex mx-0 px-0">
+        <div class="row mx-0 px-0">
+            <div class="col mt-1 mt-sm-2 mt-lg-3 text-center mx-0 px-0">
                 <a class="text-decoration-none" href="/"><img src="/static/images/pretty_good_logo.svg" width="291"></a>
                 <div id="website-desc" class="m-0 pt-0">100% Consumers’ Reviews on Beauty Products</div>
             </div> 
         </div>
 
-        <nav class="navbar navbar-expand-lg link-border ">
-            <button class="navbar-toggler btn rounded-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="text-white custom-icon"> <i class="fas fa-bars"></i></span>
+        <nav class="navbar navbar-expand-lg link-border mx-0 px-0">
+            <button class="navbar-toggler btn rounded-1" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="text-white custom-icon"> <i class="feather-18" data-feather="menu"></i></span>
             </button>
             
             <div class="collapse navbar-collapse nav navbar-custom" id="navbarSupportedContent">
                 <button class="navbar-close btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="text-white custom-icon"><i class="fas fa-times"></i></span>
+                    <span class="text-white custom-icon"><i class="feather-32" data-feather="x"></i></span>
                 </button>
                 <ul class="navbar-nav mx-auto my-2">
-                <li class="nav-item mx-2 border link-border text-center btn p-0 rounded-0">
-                    <a href="{{url_for('read_reviews')}}" class="nav-link px-5 py-2 text-decoration-none">All</a>
+                <li class="nav-item mx-2 border link-border text-center p-0 rounded-0">
+                    <a href="{{url_for('read_reviews')}}" class="nav-link px-5 text-decoration-none">All</a>
                 </li>
                 {% for c in cat %}
                     {% if c.name != "For Women" %} 
-                    <li class="nav-item mx-2 border link-border text-center btn p-0 rounded-0">
-                        <a href="{{url_for('read_reviews_by_category', cat_id=c._id)}}" class="nav-link px-4 py-2 text-decoration-none">{{c.name}}</a> 
+                    <li class="nav-item mx-2 border link-border text-center p-0 rounded-0">
+                        <a href="{{url_for('read_reviews_by_category', cat_id=c._id)}}" class="nav-link px-5 text-decoration-none">{{c.name}}</a> 
                     </li>    
                     {% endif %}
                 {% endfor %}
@@ -101,7 +104,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!-- My own javascript -->
     <script src="/static/scripts/script.js"></script>

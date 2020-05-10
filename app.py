@@ -75,7 +75,7 @@ def index():
 def read_reviews():
     client = data.get_client()
 
-    latest_review = client[DB_NAME].user_reviews.find().sort('posted', pymongo.DESCENDING).limit(1)
+    latest_review = client[DB_NAME].user_reviews.find().sort('posted', pymongo.DESCENDING).limit(4)
 
     users = dao.get_all_users(client)
     categories = dao.get_all_categories(client)
@@ -84,25 +84,31 @@ def read_reviews():
         {
              'categories.name': 'Skin Care'
         }
-    ).sort('posted', pymongo.DESCENDING).limit(3)
+    ).sort('posted', pymongo.DESCENDING).limit(4)
 
     cosmetic_reviews = client[DB_NAME].user_reviews.find(
         {
             'categories.name': 'Cosmetic'
         }
-    ).sort('posted', pymongo.DESCENDING).limit(3)
+    ).sort('posted', pymongo.DESCENDING).limit(4)
 
     bodycare_reviews = client[DB_NAME].user_reviews.find(
         {
             'categories.name': 'Body Care'
         }
-    ).sort('posted', pymongo.DESCENDING).limit(2)
+    ).sort('posted', pymongo.DESCENDING).limit(1)
 
     haircare_reviews = client[DB_NAME].user_reviews.find(
         {
             'categories.name': 'Hair Care'
         }
-    ).sort('posted', pymongo.DESCENDING).limit(2)
+    ).sort('posted', pymongo.DESCENDING).limit(1)
+
+    formen_reviews = client[DB_NAME].user_reviews.find(
+        {
+            'categories.name': 'For Men'
+        }
+    ).sort('posted', pymongo.DESCENDING).limit(1)
 
     user_list = []
     for user in users:
@@ -117,7 +123,7 @@ def read_reviews():
             user = None
 
 
-    return render_template('read_reviews.template.html', review=latest_review, cat=categories, users=user_list, skincare=skincare_reviews, cosmetics=cosmetic_reviews, bodycare=bodycare_reviews, haircare=haircare_reviews, user=user)
+    return render_template('read_reviews.template.html', review=latest_review, cat=categories, users=user_list, skincare=skincare_reviews, cosmetics=cosmetic_reviews, bodycare=bodycare_reviews, haircare=haircare_reviews, formen=formen_reviews, user=user)
 
 
 @app.route('/read_reviews/<cat_id>')

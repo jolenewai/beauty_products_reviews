@@ -1,160 +1,228 @@
-{% extends 'main.template.html' %}
+{% extends 'main.template.html' %} {% block title %} Latest Review {% endblock
+%} {% block content %}
 
-    {% block title %} Latest Review {% endblock %}     
+<div class="container-flex my-1 py-3 mx-auto px-0">
+  <h2 class="text-center pink-text mb-2">SKIN CARE</h2>
 
-    {% block content %}
-    <div class="container">
-    <div class="row justify-content-around">
-
-        <div class="col-sm-10 col-md-10 col-10">
-        {% for r in review %}
-        <div class="card mb-3 lightpink-bg rounded-0 border-0 py-sm-3" data-aos="fade-up" data-aos-delay="50">
-            <div class="row no-gutters justify-content-around">
-                {% if r.image %}
-                <div class="col-md-5">
-                <img src="{{r.image}}" class="card-img rounded-0" alt="{{r.title}}">
-                </div>
-                {% endif %}
-                <div class="col-md-6">
-                <div class="card-body">                    
-                    <p class="card-text"><strong>{{r.product_name}}</strong><br/>      
-                    {{r.product_brand}} from {{r.country_of_origin}}<br/>
-                    {% set rating = r.rating | int %}
-                    {% for i in range(0,rating) %}
-                        <span class="pink-text stars"> <i class="fas fa-star"></i></span>
-                    {% endfor %}
-                    </p>
-                    <h3 class="card-title mb-0 mt-0 pink-text">{{r.title}}</h3>
-                    <p class="card-text">
-                    {{ r.review }}
-                    </p>
-                    <p class="card-text"><small class="text-muted">Posted by {% for u in users if r.user_id==u._id %}{{u.name}}{% endfor%} on {{r.posted.strftime("%d-%m-%Y, %H:%M:%S")}}</small></p>
-                </div>
-                </div>
-            </div>
+  <div
+    class="row row-cols-1 row-cols-md-2 row-cols-lg-4 justify-content-center mx-0 px-3 py-2"
+  >
+    {% for item in skincare %}
+    <div class="col">
+      <div class="card h-100" data-aos="fade-up" data-aos-delay="50">
+        {% if item.image %}
+        <img
+          src="{{item.image}}}"
+          class="card-img-top"
+          alt="{{item.product_name}}"
+        />
+        {% endif %}
+        <div class="card-body">
+          <p class="card-text">
+            <strong>{{item.product_name}}</strong><br />
+            {{item.product_brand}} from {{item.country_of_origin}}<br />
+            {% set rating = item.rating | int %} {% for i in range(0,rating) %}
+            <span class="pink-text stars"> <i class="fas fa-star"></i></span>
+            {% endfor %}
+          </p>
+          <h5 class="card-title mb-0 mt-0 pink-text">{{item.title}}</h5>
+          <p class="card-text">
+            {{ item.review }}
+          </p>
+          <p class="card-text">
+            <small class="text-muted">
+              Posted by {% for u in users if item.user_id==u._id
+              %}{{u.name}}{%endfor%} on {{item.posted.strftime("%d-%m-%Y,
+              %H:%M:%S")}}</small
+            >
+          </p>
         </div>
-        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+    <div class="text-right ml-auto px-3 small-link">
+      <a
+        href="{{url_for('read_reviews_by_category', cat_id='5e9ffc631c9d440000be6574')}}"
+        >more<i data-feather="more-horizontal"></i
+      ></a>
+    </div>
+  </div>
+</div>
 
+<div class="container-flex my-3 py-5 mx-auto px-0 lightpink-bg">
+  <h2 class="text-center pink-text mb-2">COSMETICS</h2>
+
+  <div
+    class="row row-cols-1 row-cols-md-2 row-cols-lg-4 justify-content-center mx-0 px-3 py-2"
+  >
+    {% for item in cosmetics %}
+    <div class="col">
+      <div class="card h-100" data-aos="fade-up" data-aos-delay="50">
+        {% if item.image %}
+        <img
+          src="{{item.image}}}"
+          class="card-img-top"
+          alt="{{item.product_name}}"
+        />
+        {% endif %}
+        <div class="card-body">
+          <p class="card-text">
+            <strong>{{item.product_name}}</strong><br />
+            {{item.product_brand}} from {{item.country_of_origin}}<br />
+            {% set rating = item.rating | int %} {% for i in range(0,rating) %}
+            <span class="pink-text stars"> <i class="fas fa-star"></i></span>
+            {% endfor %}
+          </p>
+          <h5 class="card-title mb-0 mt-0 pink-text">{{item.title}}</h5>
+          <p class="card-text">
+            {{ item.review }}
+          </p>
+          <p class="card-text">
+            <small class="text-muted">
+              Posted by {% for u in users if item.user_id==u._id
+              %}{{u.name}}{%endfor%} on {{item.posted.strftime("%d-%m-%Y,
+              %H:%M:%S")}}</small
+            >
+          </p>
         </div>
-
-        </div>
+      </div>
     </div>
+    {% endfor %}
+    <div class="text-right ml-auto px-3">
+      <a
+        href="{{url_for('read_reviews_by_category', cat_id='5e9ffcb91c9d440000be6575')}}"
+        >more<i data-feather="more-horizontal"></i
+      ></a>
     </div>
+  </div>
+</div>
 
-    <div class="container-flex my-3 py-5 mx-0 px-0">
-        <div class="row justify-content-center mx-0 px-0">
-            <div class="col-md-9 mx-0 px-0">
-            <h2 class="text-center pink-text">SKIN CARE</h2>
-            <div class="card-group">
-                {% for s in skincare %}
-                <div class="card" data-aos="fade-up" data-aos-delay="50">
-                    {% if s.image %}
-                    <img src="{{s.image}}}" class="card-img-top" alt="{{s.product_name}}">
-                    {% endif %}
-                    <div class="card-body">
-                    <p class="card-text"><strong>{{s.product_name}}</strong><br/>
-                    {{s.product_brand}} from {{s.country_of_origin}}<br/>
-                        {% set rating = s.rating | int %}
-                        {% for i in range(0,rating) %}
-                            <span class="pink-text stars"> <i class="fas fa-star"></i></span>
-                        {% endfor %}
-                    </p>
-                    <h5 class="card-title  mb-0 mt-0 pink-text">{{s.title}}</h5>
-                    <p class="card-text">
-                    {{ s.review }}
-                    </p>
-                    <p class="card-text"><small class="text-muted">Posted by {% for u in users if s.user_id==u._id %}{{u.name}}{% endfor%} on {{s.posted.strftime("%d-%m-%Y, %H:%M:%S")}}</small></p>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            <div class="text-right"><a href="{{url_for('read_reviews_by_category', cat_id='5e9ffc631c9d440000be6574')}}">more...</a></div>
 
-            </div>
-            </div>
-    </div>
-  <div class="container-flex lightpink-bg my-3 py-5 mx-0 px-0">
-        <div class="row justify-content-center mx-0 px-0">
-            <div class="col-md-9 mx-0 px-0">
-    <h2 class="text-center pink-text">COSMETICS</h2>
-    <div class="card-group">
-        {% for c in cosmetics %}
-        <div class="card" data-aos="fade-up" data-aos-delay="50">
-            <img src="{{c.image}}}" class="card-img-top" alt="{{c.product_name}}">
-            <div class="card-body">
-            <p class="card-text"><strong>{{c.product_name}}</strong><br/>
-            {{c.product_brand}} from {{c.country_of_origin}}<br/>
-                {% set rating = c.rating | int %}
-                {% for i in range(0,rating) %}
-                    <span class="pink-text stars"> <i class="fas fa-star"></i></span>
-                {% endfor %}
+<div class="container-flex my-3 py-5 mx-0 px-0">
+
+<div class="row row-cols-1 row-cols-md-3 px-5 mx-0">
+  <div class="col mb-4">
+    <h2 class="text-center pink-text mb-2">BODY CARE</h2>
+      {% for item in bodycare %}
+        <div class="card h-100 mb-2" data-aos="fade-up" data-aos-delay="50">
+          {% if item.image %}
+          <img
+            src="{{item.image}}}"
+            class="card-img-top"
+            alt="{{item.product_name}}"
+          />
+          {% endif %}
+          <div class="card-body">
+            <p class="card-text">
+              <strong>{{item.product_name}}</strong><br />
+              {{item.product_brand}} from {{item.country_of_origin}}<br />
+              {% set rating = item.rating | int %} {% for i in range(0,rating)
+              %}
+              <span class="pink-text stars"> <i class="fas fa-star"></i></span>
+              {% endfor %}
             </p>
-            <h5 class="card-title mb-0 mt-0 pink-text">{{c.title}}</h5>
-            <p class="card-text"> {{c.review}}</p>
-            <p class="card-text"><small class="text-muted">Posted by {% for u in users if c.user_id==u._id %}{{u.name}}{% endfor%} on {{c.posted.strftime("%d-%m-%Y, %H:%M:%S")}}</small></p>
-            </div>
+            <h5 class="card-title mb-0 mt-0 pink-text">{{item.title}}</h5>
+            <p class="card-text">
+              {{ item.review }}
+            </p>
+            <p class="card-text">
+              <small class="text-muted">
+                Posted by {% for u in users if item.user_id==u._id
+                %}{{u.name}}{%endfor%} on {{item.posted.strftime("%d-%m-%Y,
+                %H:%M:%S")}}</small
+              >
+            </p>
+          </div>
         </div>
-        {% endfor %}
-    </div>
-     <div class="text-right"><a href="{{url_for('read_reviews_by_category', cat_id='5e9ffcb91c9d440000be6575')}}">more...</a></div>
+      {% endfor %}
+      <div class="text-right ml-auto px-3">
+        <a
+          href="{{url_for('read_reviews_by_category', cat_id='5e9ffde81c9d440000be6576')}}"
+          >more<i data-feather="more-horizontal"></i
+        ></a>
+      </div>
+  </div>
+  <div class="col mb-4">
+    <h2 class="text-center pink-text mb-2">HAIR CARE</h2>
+      {% for item in haircare %}
+      <div class="card h-100" data-aos="fade-up" data-aos-delay="50">
+        {% if item.image %}
+        <img
+          src="{{item.image}}}"
+          class="card-img-top"
+          alt="{{item.product_name}}"
+        />
+        {% endif %}
+        <div class="card-body">
+          <p class="card-text">
+            <strong>{{item.product_name}}</strong><br />
+            {{item.product_brand}} from {{item.country_of_origin}}<br />
+            {% set rating = item.rating | int %} {% for i in range(0,rating) %}
+            <span class="pink-text stars"> <i class="fas fa-star"></i></span>
+            {% endfor %}
+          </p>
+          <h5 class="card-title mb-0 mt-0 pink-text">{{item.title}}</h5>
+          <p class="card-text">
+            {{ item.review }}
+          </p>
+          <p class="card-text">
+            <small class="text-muted">
+              Posted by {% for u in users if item.user_id==u._id
+              %}{{u.name}}{%endfor%} on {{item.posted.strftime("%d-%m-%Y,
+              %H:%M:%S")}}</small
+            >
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+      <div class="text-right ml-auto px-3">
+        <a
+          href="{{url_for('read_reviews_by_category', cat_id='5e9ffde81c9d440000be6576')}}"
+          >more<i data-feather="more-horizontal"></i
+        ></a>
+      </div>
+  </div>
+  <div class="col mb-4">
+    <h2 class="text-center pink-text mb-2">FOR MEN</h2>
+      {% for item in formen %}
+      <div class="card h-100" data-aos="fade-up" data-aos-delay="50">
+        {% if item.image %}
+        <img
+          src="{{item.image}}}"
+          class="card-img-top"
+          alt="{{item.product_name}}"
+        />
+        {% endif %}
+        <div class="card-body">
+          <p class="card-text">
+            <strong>{{item.product_name}}</strong><br />
+            {{item.product_brand}} from {{item.country_of_origin}}<br />
+            {% set rating = item.rating | int %} {% for i in range(0,rating) %}
+            <span class="pink-text stars"> <i class="fas fa-star"></i></span>
+            {% endfor %}
+          </p>
+          <h5 class="card-title mb-0 mt-0 pink-text">{{item.title}}</h5>
+          <p class="card-text">
+            {{ item.review }}
+          </p>
+          <p class="card-text">
+            <small class="text-muted">
+              Posted by {% for u in users if item.user_id==u._id
+              %}{{u.name}}{%endfor%} on {{item.posted.strftime("%d-%m-%Y,
+              %H:%M:%S")}}</small
+            >
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+      <div class="text-right ml-auto px-3">
+        <a
+          href="{{url_for('read_reviews_by_category', cat_id='5e9ffde81c9d440000be6576')}}"
+          >more<i data-feather="more-horizontal"></i
+        ></a>
+      </div>
+  </div>
+</div>
+</div>
 
-    </div>
-    </div>
-    </div>
-    <div class="container-flex my-3 py-5 mx-0 px-0">
-        <div class="row justify-content-center mx-0 px-0">
-            <div class="col-md-5 mx-1 px-0">
-            <h2 class="pink-text">BODY CARE</h2>
-            <div class="card-group">
-                {% for b in bodycare %}
-                <div class="card" data-aos="fade-up" data-aos-delay="50">
-                    <img src="{{b.image}}}" class="card-img-top" alt="{{b.product_name}}" height="295"> 
-                    <div class="card-body">
-                    <p class="card-text"><strong>{{b.product_name}}</strong><br/>
-                    {{b.product_brand}} from {{b.country_of_origin}}<br/>
-                        {% set rating = b.rating | int %}
-                        {% for i in range(0,rating) %}
-                            <span class="pink-text stars"> <i class="fas fa-star"></i></span>
-                        {% endfor %}
-                    </p>
-                    
-                    <h5 class="card-title pink-text mb-0 mt-0 ">{{b.title}}</h5>
-                    <p class="card-text">{{b.review}}</p>
-                    <p class="card-text"><small class="text-muted">Posted by {% for u in users if b.user_id==u._id %}{{u.name}}{% endfor%} on {{b.posted.strftime("%d-%m-%Y, %H:%M:%S")}}</small></p>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-             <div class="text-right"><a href="{{url_for('read_reviews_by_category', cat_id='5e9ffde81c9d440000be6576')}}">more...</a></div>
-
-            </div>
-
-            <div class="col-md-5 mx-1 px-0">
-            <h2 class="pink-text">HAIR CARE</h2>
-            <div class="card-group">
-                {% for h in haircare %}
-                <div class="card" data-aos="fade-up" data-aos-delay="20">
-                    <img src="{{h.image}}}" class="card-img-top" alt="{{h.product_name}}" >
-                    <div class="card-body">
-                    <p class="card-text"><strong>{{h.product_name}}</strong><br/>
-                    {{h.product_brand}} from {{h.country_of_origin}}<br/>
-
-                        {% set rating = h.rating | int %}
-                        {% for i in range(0,rating) %}
-                            <span class="pink-text"> <i class="fas fa-star"></i></span>
-                        {% endfor %}
-                    </p>
-                    <h5 class="card-title pink-text mb-0 mt-0">{{h.title}}</h5>
-                    <p class="card-text">{{h.review}}</p>
-                    <p class="card-text"><small class="text-muted">Posted by {% for u in users if h.user_id==u._id %}{{u.name}}{% endfor%} on {{h.posted.strftime("%d-%m-%Y, %H:%M:%S")}}</small></p>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            <div class="text-right"><a href="{{url_for('read_reviews_by_category', cat_id='5ea004bd1c9d440000be657b')}}">more...</a></div>
-
-            </div>
-
-            </div>
-    </div>
-    {% endblock %}
+{% endblock %}

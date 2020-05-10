@@ -15,13 +15,13 @@
     {% endblock %}
 
 
-    {% block title %} Add A Beauty Product Review {% endblock %}     
+    {% block title %} Add A Review {% endblock %}     
 
     {% block content %}
     <div class="container">
     <div class="row justify-content-around">
 
-    <div id="add-review" class="col-8 mx-auto bg-white shadow p-5">   
+    <div id="add-review" class="col-8 mx-auto bg-white shadow py-4 px-5">   
         {% if user %}
 
         <form method="POST">
@@ -98,7 +98,7 @@
                 </div>
             </div>
             
-            <div class="row justify-content-center mt-3">
+            <div class="row justify-content-center mt-5">
                 <button class="col-sm-3 form-control btn link-border m-2 rounded-0" type="submit" value="Add Review">Add Review</button> 
                 <a class="col-sm-3 form-control btn link-border m-2 rounded-0" href="{{url_for('index')}}">Cancel</a>
             </div>
@@ -107,7 +107,9 @@
         {% else %}
             <p class="text-center">
                 Please login to write a review. <br/>
-                <a href="{{url_for('user_login')}}?redirect={{request.path}}">Login</a>
+                <a class="col-sm-3 form-control btn link-border m-2 rounded-0" href="{{url_for('user_login')}}?redirect={{request.path}}">Login</a>
+                <a class="col-sm-3 form-control btn link-border m-2 rounded-0" href="{{url_for('index')}}">Cancel</a>
+
             </p>
         {% endif %}
     </div>

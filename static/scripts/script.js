@@ -4,3 +4,5 @@ $(window).scroll(function(){
 });
 
 AOS.init();
+
+feather.replace()
