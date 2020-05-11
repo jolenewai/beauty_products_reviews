@@ -5,14 +5,16 @@
 
 {% block content %}
 
-    <div class="container">
+    <div class="container">        
         <div class="row justify-content-around">
             <div class="col-md-10">
 
                 <div class="card-columns">
                     {% for r in results %}
                     <div class="card">
+                        {% if r.image %}
                         <img src="{{r.image}}" class="card-img-top" alt="{{r.product_name}}">
+                        {% endif %}
                         <div class="card-body">
                         <h5 class="card-title">{{r.title}}</h5>
                         <p class="card-text">{{r.product_name}}<br/>

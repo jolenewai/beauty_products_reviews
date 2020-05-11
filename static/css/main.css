@@ -12,8 +12,8 @@ body {
 }
 
 .navbar-custom {
-        background-color: transparent;
-    }
+    background-color: transparent;
+}
 
 .navbar-close {
     visibility: hidden;
@@ -25,6 +25,12 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
 }
 
+p {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-weight: 300;
+    font-size: 0.8em;
+    color: #848484;
+}
 
 #website-desc {
     font-size: 1em;
@@ -186,6 +192,7 @@ a:hover{
     height: 32px;
 }
 
+
 .feather-18 {
     width: 18px;
     height: 18px;
@@ -301,6 +308,10 @@ a:hover{
 
     .shift-position{
         top: 35px;
+    }
+
+    .card-columns {
+        column-count: 1;
     }
 
  }
