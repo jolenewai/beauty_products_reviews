@@ -147,6 +147,25 @@ def read_reviews_by_category(cat_id):
     return render_template('read_reviews_by_cat.template.html', current_cat=current_cat, cat=all_cat, reviews=reviews, user=user, all_users=all_users)
 
 
+@app.route('/read_review/<review_id>')
+def view_review_details(review_id):
+
+    client = data.get_client()
+
+    review = dao.get_review_by_review_id(client, review_id)
+    all_users = dao.get_all_users(client)
+    all_cat = dao.get_all_categories(client)
+
+    if flask_login.current_user.is_authenticated:
+        current_user = flask_login.current_user
+
+        if current_user:
+            user = dao.get_user_by_email(client, current_user.id)
+    else:
+        user = None    
+
+    return render_template('review_details.template.html', cat=all_cat, review=review, user=user, all_users=all_users)
+
 @app.route('/add_review')
 def add_review():
 

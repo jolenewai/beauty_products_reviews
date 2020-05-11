@@ -2,20 +2,22 @@
 %} {% block content %}
 
 <div class="container-flex my-1 py-3 mx-auto px-0">
-  <h2 class="text-center pink-text mb-2">SKIN CARE</h2>
+  <h2 class="text-center pink-text mb-2">
+  <a class="cursive-font" href="{{url_for('read_reviews_by_category', cat_id='5e9ffc631c9d440000be6574')}}">SKIN CARE</a>
+  </h2>
 
-  <div
-    class="row row-cols-1 row-cols-md-2 row-cols-lg-4 justify-content-center mx-0 px-3 py-2"
-  >
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 justify-content-center mx-0 px-3 py-2">
     {% for item in skincare %}
-    <div class="col">
+    <div class="col mb-2">
       <div class="card h-100" data-aos="fade-up" data-aos-delay="50">
         {% if item.image %}
+        <a href="{{ url_for('view_review_details', review_id=item._id)}}">
         <img
           src="{{item.image}}"
           class="card-img-top"
           alt="{{item.product_name}}"
         />
+        </a>
         {% endif %}
         <div class="card-body">
           <p class="card-text">
@@ -25,45 +27,46 @@
             <span class="pink-text stars"> <i class="fas fa-star"></i></span>
             {% endfor %}
           </p>
-          <h5 class="card-title mb-0 mt-0 pink-text">{{item.title}}</h5>
-          <p class="card-text">
-            {{ item.review }}
-          </p>
           <p class="card-text">
             <small class="text-muted">
               Posted by {% for u in users if item.user_id==u._id
               %}{{u.name}}{%endfor%} on {{item.posted.strftime("%d-%m-%Y,
-              %H:%M:%S")}}</small
-            >
+              %H:%M:%S")}}</small>
           </p>
+          <h5 class="card-title mb-1 mt-0 pink-text">
+                <a href="{{ url_for('view_review_details', review_id=item._id)}}">
+                {{item.title}}
+                </a>
+          </h5>
+          <p class="card-text text-truncate">
+            {{ item.review }}
+          </p>
+          <a class="btn btn-sm link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
+
+          
         </div>
       </div>
     </div>
     {% endfor %}
-    <div class="text-right ml-auto px-3 small-link">
-      <a
-        href="{{url_for('read_reviews_by_category', cat_id='5e9ffc631c9d440000be6574')}}"
-        >more<i data-feather="more-horizontal"></i
-      ></a>
-    </div>
   </div>
 </div>
 
 <div class="container-flex my-3 py-5 mx-auto px-0 lightpink-bg">
-  <h2 class="text-center pink-text mb-2">COSMETICS</h2>
+  <h2 class="text-center pink-text mb-2">
+    <a class="cursive-font" href="{{url_for('read_reviews_by_category', cat_id='5e9ffcb91c9d440000be6575')}}">COSMETICS</a>
+  </h2>
 
-  <div
-    class="row row-cols-1 row-cols-md-2 row-cols-lg-4 justify-content-center mx-0 px-3 py-2"
-  >
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 justify-content-center mx-0 px-3 py-2">
     {% for item in cosmetics %}
-    <div class="col">
+    <div class="col mb-2">
       <div class="card h-100" data-aos="fade-up" data-aos-delay="50">
         {% if item.image %}
+        <a href="{{ url_for('view_review_details', review_id=item._id)}}">
         <img
           src="{{item.image}}"
           class="card-img-top"
           alt="{{item.product_name}}"
-        />
+        /></a>  
         {% endif %}
         <div class="card-body">
           <p class="card-text">
@@ -73,10 +76,6 @@
             <span class="pink-text stars"> <i class="fas fa-star"></i></span>
             {% endfor %}
           </p>
-          <h5 class="card-title mb-0 mt-0 pink-text">{{item.title}}</h5>
-          <p class="card-text">
-            {{ item.review }}
-          </p>
           <p class="card-text">
             <small class="text-muted">
               Posted by {% for u in users if item.user_id==u._id
@@ -84,33 +83,42 @@
               %H:%M:%S")}}</small
             >
           </p>
+          <h5 class="card-title mb-1 mt-0 pink-text">
+                <a href="{{ url_for('view_review_details', review_id=item._id)}}">
+                {{item.title}}
+                </a>
+          </h5>
+          <p class="card-text text-truncate">
+            {{ item.review }}
+          </p>
+          <a class="btn btn-sm link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
+          
         </div>
       </div>
     </div>
     {% endfor %}
-    <div class="text-right ml-auto px-3">
-      <a
-        href="{{url_for('read_reviews_by_category', cat_id='5e9ffcb91c9d440000be6575')}}"
-        >more<i data-feather="more-horizontal"></i
-      ></a>
-    </div>
+   
   </div>
 </div>
 
 
-<div class="container-flex my-3 py-5 mx-0 px-0">
+<div class="container my-3 py-5 mx-auto px-0">
 
 <div class="row row-cols-1 row-cols-md-3 px-5 mx-0">
   <div class="col mb-4">
-    <h2 class="text-center pink-text mb-2">BODY CARE</h2>
+    <h2 class="text-center pink-text mb-2">
+        <a class="cursive-font" href="{{url_for('read_reviews_by_category', cat_id='5e9ffde81c9d440000be6576')}}">BODY CARE</a>
+    </h2>
       {% for item in bodycare %}
         <div class="card h-100 mb-2" data-aos="fade-up" data-aos-delay="50">
           {% if item.image %}
-          <img
-            src="{{item.image}}"
-            class="card-img-top"
-            alt="{{item.product_name}}"
-          />
+            <a href="{{ url_for('view_review_details', review_id=item._id)}}">
+
+            <img
+                src="{{item.image}}"
+                class="card-img-top"
+                alt="{{item.product_name}}" />
+            </a>
           {% endif %}
           <div class="card-body">
             <p class="card-text">
@@ -121,10 +129,6 @@
               <span class="pink-text stars"> <i class="fas fa-star"></i></span>
               {% endfor %}
             </p>
-            <h5 class="card-title mb-0 mt-0 pink-text">{{item.title}}</h5>
-            <p class="card-text">
-              {{ item.review }}
-            </p>
             <p class="card-text">
               <small class="text-muted">
                 Posted by {% for u in users if item.user_id==u._id
@@ -132,26 +136,34 @@
                 %H:%M:%S")}}</small
               >
             </p>
+            <h5 class="card-title mb-1 mt-0 pink-text">
+                <a href="{{ url_for('view_review_details', review_id=item._id)}}">
+                {{item.title}}
+                </a>
+            </h5>
+            <p class="card-text text-truncate">
+              {{ item.review }}
+            </p>
+            <a class="btn btn-sm link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
+            
           </div>
         </div>
       {% endfor %}
-      <div class="text-right ml-auto px-3">
-        <a
-          href="{{url_for('read_reviews_by_category', cat_id='5e9ffde81c9d440000be6576')}}"
-          >more<i data-feather="more-horizontal"></i
-        ></a>
-      </div>
+      
   </div>
   <div class="col mb-4">
-    <h2 class="text-center pink-text mb-2">HAIR CARE</h2>
+    <h2 class="text-center pink-text mb-2">
+        <a class="cursive-font" href="{{url_for('read_reviews_by_category', cat_id='5ea004bd1c9d440000be657b')}}">HAIR CAR</a>
+    </h2>
       {% for item in haircare %}
       <div class="card h-100" data-aos="fade-up" data-aos-delay="50">
         {% if item.image %}
+        <a href="{{ url_for('view_review_details', review_id=item._id)}}">
         <img
           src="{{item.image}}"
           class="card-img-top"
           alt="{{item.product_name}}"
-        />
+        /></a>
         {% endif %}
         <div class="card-body">
           <p class="card-text">
@@ -161,10 +173,6 @@
             <span class="pink-text stars"> <i class="fas fa-star"></i></span>
             {% endfor %}
           </p>
-          <h5 class="card-title mb-0 mt-0 pink-text">{{item.title}}</h5>
-          <p class="card-text">
-            {{ item.review }}
-          </p>
           <p class="card-text">
             <small class="text-muted">
               Posted by {% for u in users if item.user_id==u._id
@@ -172,18 +180,24 @@
               %H:%M:%S")}}</small
             >
           </p>
+          <h5 class="card-title mb-1 mt-0 pink-text">
+                <a href="{{ url_for('view_review_details', review_id=item._id)}}">
+                {{item.title}}
+                </a>
+          </h5>
+          <p class="card-text text-truncate">
+            {{ item.review }}
+          </p>
+          <a class="btn btn-sm link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
+          
         </div>
       </div>
       {% endfor %}
-      <div class="text-right ml-auto px-3">
-        <a
-          href="{{url_for('read_reviews_by_category', cat_id='5ea004bd1c9d440000be657b')}}"
-          >more<i data-feather="more-horizontal"></i
-        ></a>
-      </div>
   </div>
   <div class="col mb-4">
-    <h2 class="text-center pink-text mb-2">FOR MEN</h2>
+    <h2 class="text-center pink-text mb-2">
+        <a class="cursive-font" href="{{url_for('read_reviews_by_category', cat_id='5ea10232b5fbd91dd843ca13')}}">FOR MEN</a>
+    </h2>
       {% for item in formen %}
       <div class="card h-100" data-aos="fade-up" data-aos-delay="50">
         {% if item.image %}
@@ -201,26 +215,27 @@
             <span class="pink-text stars"> <i class="fas fa-star"></i></span>
             {% endfor %}
           </p>
-          <h5 class="card-title mb-0 mt-0 pink-text">{{item.title}}</h5>
-          <p class="card-text">
-            {{ item.review }}
-          </p>
           <p class="card-text">
             <small class="text-muted">
               Posted by {% for u in users if item.user_id==u._id
               %}{{u.name}}{%endfor%} on {{item.posted.strftime("%d-%m-%Y,
               %H:%M:%S")}}</small
             >
+          <h5 class="card-title mb-1 mt-0 pink-text">
+                <a href="{{ url_for('view_review_details', review_id=item._id)}}">
+                {{item.title}}
+                </a>
+          </h5>
+          <p class="card-text text-truncate">
+            {{ item.review }}
+          </p>
+          <a class="btn btn-sm link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
+          
           </p>
         </div>
       </div>
       {% endfor %}
-      <div class="text-right ml-auto px-3">
-        <a
-          href="{{url_for('read_reviews_by_category', cat_id='5ea10232b5fbd91dd843ca13')}}"
-          >more<i data-feather="more-horizontal"></i
-        ></a>
-      </div>
+      
   </div>
 </div>
 </div>

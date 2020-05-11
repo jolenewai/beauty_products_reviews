@@ -1,0 +1,56 @@
+{% extends 'main.template.html' %}
+
+{% block title %}{{review.title}}{% endblock %}
+
+{% block login_user %}
+    {% if user %}
+        {% include 'users_section.template.html' %}
+    {% endif %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container-flex mx-0 px-0">
+    <div class="row justify-content-center mx-0 px-0">
+            <div class="my-reviews media justify-content-center mb-3 py-3">
+
+                {% if review.image %}
+                <div class="col-3 mx-2 px-0">
+                    <img src="{{review.image}}}" class="img-thumbnail" alt="{{review.product_name}}">
+                </div>
+                {% endif %}
+
+                <div class="media-body pr-4 col-5 bg-white mx-2 py-3 px-4">
+                    
+                    <p><strong>{{review.product_name}}</strong><br/>
+                    {{review.product_brand}} from {{review.country_of_origin}}<br/>
+                    {% set rating = review.rating | int %}
+                    {% for i in range(0,rating) %}
+                        <span class="pink-text stars"> <i class="fas fa-star"></i></span>
+                    {% endfor %}</p>
+
+                    <div class="mb-3">
+                    <!-- Get Categories from Categories table-->
+                    {% for c in review.categories %}
+                        {% set _stub = cat.rewind() %}
+
+                            {% for category in cat if category._id == c.category_id %}
+                                    <span class="badge lightpink-bg">
+                                    <a href="{{url_for('read_reviews_by_category', cat_id=category._id)}}" class="p-2 text-black text-decoration-none">{{category.name}}</a></span>
+                            {% endfor %}
+
+                    {% endfor %}
+                    </div>
+
+                    <p>{{review.review}}</p>
+                    <p class="card-text"><small class="text-muted">
+                    Posted by {% for u in all_users if review.user_id==u._id %}{{u.name}}{% endfor%} on {{review.posted.strftime("%d-%m-%Y, %H:%M:%S")}}</small></p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

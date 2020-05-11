@@ -9,6 +9,7 @@ body {
     font-family: 'Amatic SC', cursive;
     font-weight: 400;
     transition:500ms ease;
+    margin-bottom: 3em;
 }
 
 .navbar-custom {
@@ -20,9 +21,11 @@ body {
 }
 
 /* define font style for headers */
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Amatic SC', cursive;
-    font-weight: 700;
+h1, h2, h3, h4, h5, h6, 
+h1>a, h2>a, h3>a, h4>a, h5>a, h6>a,
+ {
+    font-family: 'Amatic SC', cursive !important;
+    font-weight: 700 !important;
 }
 
 p {
@@ -37,6 +40,13 @@ p {
     color: #000;
     font-family: 'Amatic SC', cursive;
     font-weight: 300;    
+}
+
+.cursive-font {
+    font-family: 'Amatic SC', cursive !important;
+    font-size: 1.1em !important;
+    font-weight: 400 !important;
+
 }
 
 .navbar {
@@ -84,6 +94,10 @@ p {
     color:#FFF !important;
     text-decoration: none;
 }
+
+.btn-sm {
+        font-size: 0.65em !important;
+    }
 
 .pink-bg {
     background-color:#FF8080 !important;
@@ -172,6 +186,17 @@ a:hover{
     font-family: 'Nunito Sans', sans-serif;
     font-weight:300;
     font-size: 0.63em;
+}
+
+.card-title a {
+    color: #FF8080;
+    font-weight: 500;
+    line-height: 0.8em;
+}
+
+.card-title a:hover{
+    border-bottom: 2px dotted #FF8080;
+    transition: 200ms ease-in-out;
 }
 
 .card-text strong, .my-reviews p strong {
@@ -293,6 +318,7 @@ a:hover{
         color: #FFF;
     }
 
+    
 
     #website-title a{
         /* font-size: 2.5em; */

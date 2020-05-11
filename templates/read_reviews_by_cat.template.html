@@ -16,7 +16,9 @@
                     {% for r in reviews %}
                     <div class="card" data-aos="fade-up" data-aos-delay="20">
                         {% if r.image %}
+                        <a href="{{ url_for('view_review_details', review_id=r._id)}}">
                         <img src="{{r.image}}" class="card-img-top" alt="{{r.product_name}}">
+                        </a>
                         {% endif %}
                         <div class="card-body">
                         <p class="card-text">{{r.product_name}}<br/>
@@ -26,7 +28,11 @@
                                 <span class="pink-text stars"> <i class="fas fa-star"></i></span>
                             {% endfor %}
                         </p>
-                        <h5 class="card-title pink-text mb-0 pb-0">{{r.title}}</h5>
+                        <h5 class="card-title pink-text mb-0 pb-0">
+                            <a href="{{ url_for('view_review_details', review_id=r._id)}}">
+                            {{r.title}}
+                            </a>
+                        </h5>
                         <p class="card-text">{{ r.review }}</p>
                         
                         {% set _stub = all_users.rewind() %}
