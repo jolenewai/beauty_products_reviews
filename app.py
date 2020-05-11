@@ -381,11 +381,11 @@ def process_add_user():
     return redirect(redirect_url)
 
 
-@app.route('/search', methods=['POST'])
+@app.route('/search')
 def search():
 
     client = data.get_client()
-    search_str = request.form.get('search')
+    search_str = request.args.get('search')
     results = dao.search_by_query(client, search_str)
 
     categories = dao.get_all_categories(client)
