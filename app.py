@@ -356,8 +356,15 @@ def confirm_delete_review(review_id):
 def delete_review(review_id):
     client = data.get_client()
 
-    dao.delete_review_by_id(client, review_id)
-    user = dao.get_user_by_email(client, current_user.id)
+    if flask_login.current_user.is_authenticated:
+        current_user = flask_login.current_user
+
+        if current_user:
+            user = dao.get_user_by_email(client, current_user.id)
+        else:
+            user = None
+
+    # dao.delete_review_by_id(client, review_id)
 
 
     return redirect(url_for('view_my_reviews', user_id=user['_id']))
