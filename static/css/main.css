@@ -35,10 +35,10 @@ p {
     color: #848484;
 }
 
-img {
+/* img {
    width: 100%;
    height: auto;
- }
+ } */
 
 #logo{
     width: 292px;
@@ -198,6 +198,11 @@ a:hover{
     font-size: 0.63em;
 }
 
+.card{
+    max-width:335px;
+    min-width: 250px;
+}
+
 .card-title a {
     color: #FF8080;
     font-weight: 500;
@@ -288,7 +293,7 @@ a:hover{
 
     body {
         margin-top: 15px;
-        /* font-size: 1em; */
+        font-size: 1.2em; */
         /* load smaller background for mobile layout */
         background-image: url("/static/images/mobile_background_2.png");
     }

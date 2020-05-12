@@ -1,23 +1,25 @@
 {% extends 'main.template.html' %}
 
+{% block page_title %}Reviews for {{current_cat.name}}{% endblock %}
+
 {% block title %}Reviews for {{current_cat.name}}{% endblock %}
 
 {% block content %}
 
-    <div class="container-flex">
-        <div class="row justify-content-center mx-0">
+    <div class="container-flex px-0 mx-0">
+        <div class="row justify-content-center px-0 mx-0">
             <div class="col-sm-8 text-center">
                 <p>{{ current_cat.desc}}</p>
             </div>
         </div>
-        <div class="row justify-content-around px-3 mx-0">
-
+        <div class="row justify-content-center px-0 mx-0">
+                <div class="col justify-content-center">
                 <div class="card-columns">
                     {% for r in reviews %}
                     <div class="card" data-aos="fade-up" data-aos-delay="20">
                         {% if r.image %}
                         <a href="{{ url_for('view_review_details', review_id=r._id)}}">
-                        <img src="{{r.image}}-/resize/355x/" class="card-img-top" alt="{{r.product_name}}">
+                        <img src="{{r.image}}-/resize/355x/" class="card-img-top" alt="{{r.product_name}}" >
                         </a>
                         {% endif %}
                         <div class="card-body">
@@ -33,14 +35,25 @@
                             {{r.title}}
                             </a>
                         </h5>
-                        <p class="card-text">{{ r.review }}</p>
-                        
-                        {% set _stub = all_users.rewind() %}
+                        <div class="card-text">
+                            <!-- reset the cursor for all_users --> 
+                            {% set _stub = all_users.rewind() %}
 
-                        <p class="card-text"><small class="text-muted">Posted by {% for u in all_users if r.user_id==u._id %}{{u.name}}{% endfor%} on {{r.posted.strftime("%d-%m-%Y, %H:%M:%S")}}</small></p>
+                            <!-- get user name using user id, format datatime string to readable format -->
+                            <small class="text-muted">
+                            Posted by {% for u in users if r.user_id==u._id
+                            %}{{u.name}}{%endfor%} on {{r.posted.strftime("%d-%m-%Y,
+                            %H:%M:%S")}}</small>
+                            <p class="text-truncate">
+                            {{ r.review }}
+                        </p>
+                        </div>
+                        <a class="btn btn-sm link-border" href="{{ url_for('view_review_details', review_id=r._id)}}">read more</a>
+
                         </div>
                     </div>
                     {% endfor %}
+                </div>
                 </div>
             </div>
         </div>

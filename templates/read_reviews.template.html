@@ -41,22 +41,24 @@
             <span class="pink-text stars"> <i class="fas fa-star"></i></span>
             {% endfor %}
           </p>
-          <p class="card-text">
-            <!-- get user name using user id, format datatime string to readable format -->
-            <small class="text-muted">
-              Posted by {% for u in users if item.user_id==u._id
-              %}{{u.name}}{%endfor%} on {{item.posted.strftime("%d-%m-%Y,
-              %H:%M:%S")}}</small>
-          </p>
+          
           <h5 class="card-title mb-1 mt-0 pink-text">
                 <a href="{{ url_for('view_review_details', review_id=item._id)}}">
                 {{item.title}}
                 </a>
           </h5>
-          <!-- truncate the review text into 1 line to keep the page cleaner -->
-          <p class="card-text text-truncate">
+          <div class="card-text">
+            <!-- get user name using user id, format datatime string to readable format -->
+            <small class="text-muted">
+              Posted by {% for u in users if item.user_id==u._id
+              %}{{u.name}}{%endfor%} on {{item.posted.strftime("%d-%m-%Y,
+              %H:%M:%S")}}</small>
+            <p class="text-truncate">
             {{ item.review }}
           </p>
+          </div>
+          <!-- truncate the review text into 1 line to keep the page cleaner -->
+          
           <!-- end of displaying details for the review -->
           <a class="btn btn-sm link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
         </div>
@@ -92,21 +94,22 @@
             <span class="pink-text stars"> <i class="fas fa-star"></i></span>
             {% endfor %}
           </p>
-          <p class="card-text">
-            <small class="text-muted">
-              Posted by {% for u in users if item.user_id==u._id
-              %}{{u.name}}{%endfor%} on {{item.posted.strftime("%d-%m-%Y,
-              %H:%M:%S")}}</small
-            >
-          </p>
+          
           <h5 class="card-title mb-1 mt-0 pink-text">
                 <a href="{{ url_for('view_review_details', review_id=item._id)}}">
                 {{item.title}}
                 </a>
           </h5>
-          <p class="card-text text-truncate">
+          <div class="card-text">
+            <!-- get user name using user id, format datatime string to readable format -->
+            <small class="text-muted">
+              Posted by {% for u in users if item.user_id==u._id
+              %}{{u.name}}{%endfor%} on {{item.posted.strftime("%d-%m-%Y,
+              %H:%M:%S")}}</small>
+            <p class="text-truncate">
             {{ item.review }}
           </p>
+          </div>
           <a class="btn btn-sm link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
           
         </div>
@@ -146,21 +149,22 @@
               <span class="pink-text stars"> <i class="fas fa-star"></i></span>
               {% endfor %}
             </p>
-            <p class="card-text">
-              <small class="text-muted">
-                Posted by {% for u in users if item.user_id==u._id
-                %}{{u.name}}{%endfor%} on {{item.posted.strftime("%d-%m-%Y,
-                %H:%M:%S")}}</small
-              >
-            </p>
+            
             <h5 class="card-title mb-1 mt-0 pink-text">
                 <a href="{{ url_for('view_review_details', review_id=item._id)}}">
                 {{item.title}}
                 </a>
             </h5>
-            <p class="card-text text-truncate">
-              {{ item.review }}
-            </p>
+            <div class="card-text">
+            <!-- get user name using user id, format datatime string to readable format -->
+            <small class="text-muted">
+              Posted by {% for u in users if item.user_id==u._id
+              %}{{u.name}}{%endfor%} on {{item.posted.strftime("%d-%m-%Y,
+              %H:%M:%S")}}</small>
+            <p class="text-truncate">
+            {{ item.review }}
+          </p>
+          </div>
             <a class="btn btn-sm link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
             
           </div>
@@ -192,21 +196,22 @@
                 <span class="pink-text stars"> <i class="fas fa-star"></i></span>
                 {% endfor %}
             </p>
-            <p class="card-text">
-                <small class="text-muted">
-                Posted by {% for u in users if item.user_id==u._id
-                %}{{u.name}}{%endfor%} on {{item.posted.strftime("%d-%m-%Y,
-                %H:%M:%S")}}</small
-                >
-            </p>
+            
             <h5 class="card-title mb-1 mt-0 pink-text">
                     <a href="{{ url_for('view_review_details', review_id=item._id)}}">
                     {{item.title}}
                     </a>
             </h5>
-            <p class="card-text text-truncate">
-                {{ item.review }}
-            </p>
+            <div class="card-text">
+            <!-- get user name using user id, format datatime string to readable format -->
+            <small class="text-muted">
+              Posted by {% for u in users if item.user_id==u._id
+              %}{{u.name}}{%endfor%} on {{item.posted.strftime("%d-%m-%Y,
+              %H:%M:%S")}}</small>
+            <p class="text-truncate">
+            {{ item.review }}
+          </p>
+          </div>
             <a class="btn btn-sm link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
             
             </div>
@@ -223,11 +228,12 @@
     {% for item in formen %}
     <div class="card h-100" data-aos="fade-up" data-aos-delay="50">
     {% if item.image %}
+    <a href="{{ url_for('view_review_details', review_id=item._id)}}">
     <img
         src="{{item.image}}-/resize/355x/"
         class="card-img-top"
         alt="{{item.product_name}}"
-    />
+    /></a>
     {% endif %}
     <div class="card-body">
         <p class="card-text">
@@ -237,23 +243,24 @@
         <span class="pink-text stars"> <i class="fas fa-star"></i></span>
         {% endfor %}
         </p>
-        <p class="card-text">
-        <small class="text-muted">
-            Posted by {% for u in users if item.user_id==u._id
-            %}{{u.name}}{%endfor%} on {{item.posted.strftime("%d-%m-%Y,
-            %H:%M:%S")}}</small
-        >
+        
         <h5 class="card-title mb-1 mt-0 pink-text">
             <a href="{{ url_for('view_review_details', review_id=item._id)}}">
             {{item.title}}
             </a>
         </h5>
-        <p class="card-text text-truncate">
-        {{ item.review }}
-        </p>
+        <div class="card-text">
+            <!-- get user name using user id, format datatime string to readable format -->
+            <small class="text-muted">
+              Posted by {% for u in users if item.user_id==u._id
+              %}{{u.name}}{%endfor%} on {{item.posted.strftime("%d-%m-%Y,
+              %H:%M:%S")}}</small>
+            <p class="text-truncate">
+            {{ item.review }}
+          </p>
+          </div>
         <a class="btn btn-sm link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
         
-        </p>
     </div>
     </div>
     {% endfor %}

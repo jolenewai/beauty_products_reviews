@@ -292,12 +292,13 @@ def view_my_reviews(user_id):
 @flask_login.login_required
 def edit_review(review_id):
     client = data.get_client()
+    public_key = os.environ.get('UPLOADCARE_PUBLIC_KEY')
 
     review = dao.get_review_by_review_id(client, review_id)
     user = dao.get_one_user(client, review['user_id'])
     categories = dao.get_all_categories(client)
 
-    return render_template('edit_review.template.html', r=review, user=user, cat=categories, ratings=ratings)
+    return render_template('edit_review.template.html', r=review, user=user, cat=categories, public_key=public_key, ratings=ratings)
 
 
 @app.route('/edit_review/<review_id>', methods=['POST'])
@@ -413,8 +414,9 @@ def search():
     categories = dao.get_all_categories(client)
 
     user = check_user_log_in(client)
+    all_users = dao.get_all_users(client)
 
-    return render_template('search_result.template.html',results=results, search_str=search_str, user=user, cat=categories)
+    return render_template('search_result.template.html',results=results, search_str=search_str, user=user, cat=categories, all_users=all_users)
 
 
 @app.route('/user_login')
