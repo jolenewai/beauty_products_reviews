@@ -18,12 +18,12 @@
             <div class="row justify-content-around mx-2 px-0 mb-3 py-3 my-2 bg-white shadow">
 
                 {% if r.image %}
-                <div class="col-sm-3">
+                <div class="col-sm-3 mr-2">
                 <img src="{{r.image}}-/resize/355x/" class="mx-3" alt="{{r.product_name}}">
                 </div>
                 {% endif %}
 
-                <div class="pr-4 col-sm-8">
+                <div class="pr-4 col-sm-6">
                     <h4 class="mt-0">{{r.title}} 
                         <span class="float-right">
                             <a href="{{url_for('edit_review', review_id=r._id)}}">
