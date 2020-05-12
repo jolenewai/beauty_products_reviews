@@ -91,7 +91,7 @@ def read_reviews():
 
     cosmetic_reviews = client[DB_NAME].user_reviews.find(
         {
-            'categories.name': 'Cosmetic'
+            'categories.name': 'Make Up'
         }
     ).sort('posted', pymongo.DESCENDING).limit(4)
 
