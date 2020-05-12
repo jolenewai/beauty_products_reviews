@@ -19,12 +19,12 @@
     <link rel="stylesheet" href="/static/css/main.css" />
 
     <!-- for favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
 
-    <title>Pretty Good - 100% Consumers Based Reviews for Beauty Products</title>
+    <title>{% block page_title %}{% endblock %} | Pretty Good</title>
 </head>
 <body>
     <div id="top-bar" class="container-flex sticky-top py-md-2 py-sm-2">
@@ -59,7 +59,9 @@
     <div class="container-flex mx-0 px-0">
         <div class="row mx-0 px-0">
             <div class="col mt-1 mt-sm-2 mt-lg-3 text-center mx-0 px-0">
-                <a class="text-decoration-none" href="{{url_for('read_reviews')}}"><img src="/static/images/pretty_good_logo.svg" width="291" alt="Pretty Good"></a>
+                <div id="logo" class="mx-auto">
+                    <a class="text-decoration-none" href="{{url_for('read_reviews')}}"><img src="/static/images/pretty_good_logo.svg"  alt="Pretty Good"></a>
+                </div>
                 <div id="website-desc" class="m-0 pt-0">100% Consumers Based Reviews for Beauty Products</div>
             </div> 
         </div>

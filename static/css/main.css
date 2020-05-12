@@ -35,6 +35,15 @@ p {
     color: #848484;
 }
 
+img {
+   width: 100%;
+   height: auto;
+ }
+
+#logo{
+    width: 292px;
+    height: auto;
+}
 #website-desc {
     font-size: 1em;
     color: #000;
