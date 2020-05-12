@@ -17,7 +17,7 @@
                     <div class="card" data-aos="fade-up" data-aos-delay="20">
                         {% if r.image %}
                         <a href="{{ url_for('view_review_details', review_id=r._id)}}">
-                        <img src="{{r.image}}" class="card-img-top" alt="{{r.product_name}}">
+                        <img src="{{r.image}}-/resize/355x/" class="card-img-top" alt="{{r.product_name}}">
                         </a>
                         {% endif %}
                         <div class="card-body">

@@ -1,5 +1,7 @@
 {% extends 'main.template.html' %}
 
+{% block page_title %} My Reviews {% endblock %}
+
 {% block title %} My Reviews {% endblock %}
 
 {% block login_user %}
@@ -11,17 +13,17 @@
 
 {% block content %}
 
-<div class="container-flex mx-0 px-0">
-    <div class="row justify-content-center mx-0 px-0">
-        <div class="col-md-10 mx-0 px-0">
+<div class="container mx-auto px-0">
         {% for r in reviews %}
+            <div class="row justify-content-around mx-2 px-0 mb-3 py-3 my-2 bg-white shadow">
 
-            <div class="my-reviews media justify-content-center mb-3 py-3 bg-white shadow">
                 {% if r.image %}
-                <img src="{{r.image}}}" class="mx-3 img-thumbnail" alt="{{r.product_name}}" width="200">
+                <div class="col-sm-3">
+                <img src="{{r.image}}-/resize/355x/" class="mx-3" alt="{{r.product_name}}">
+                </div>
                 {% endif %}
 
-                <div class="media-body pr-4">
+                <div class="pr-4 col-sm-8">
                     <h4 class="mt-0">{{r.title}} 
                         <span class="float-right">
                             <a href="{{url_for('edit_review', review_id=r._id)}}">
@@ -42,10 +44,10 @@
                     
                 </div>
                 
-            </div>
+                <div class="vw-100 clearfix"></div>
+                </div>
+
         {% endfor %}
-        </div>
-    </div>
 </div>
     
 {% endblock %}

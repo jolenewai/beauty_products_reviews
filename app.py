@@ -227,7 +227,7 @@ def process_add_review():
         'image': request.form.get('product_image')
     })
 
-    return redirect(url_for('index'))
+    return redirect(url_for('view_my_reviews', user_id=user_id))
 
 
 @app.route('/edit_profile/<user_id>')
