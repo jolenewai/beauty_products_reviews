@@ -18,8 +18,8 @@ ratings = [1,2,3,4,5]
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY')
 # add favicon to the website
-app.add_url_rule('/favicon.ico',
-                 redirect_to=url_for('static', filename='favicon.ico'))
+# app.add_url_rule('/favicon.ico',
+#                  redirect_to=url_for('static', filename='favicon.ico'))
 
 
 #create the login manager
