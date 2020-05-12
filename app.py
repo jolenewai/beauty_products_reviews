@@ -364,7 +364,7 @@ def delete_review(review_id):
         else:
             user = None
 
-    # dao.delete_review_by_id(client, review_id)
+    dao.delete_review_by_id(client, review_id)
 
 
     return redirect(url_for('view_my_reviews', user_id=user['_id']))
