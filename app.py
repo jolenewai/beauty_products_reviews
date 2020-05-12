@@ -347,8 +347,9 @@ def confirm_delete_review(review_id):
 
     review = dao.get_review_by_review_id(client, review_id)
     user = check_user_log_in(client)
+    categories = dao.get_all_categories(client)
 
-    return render_template('delete_review.template.html', r=review, user=user)
+    return render_template('delete_review.template.html', r=review, user=user, cat=categories)
 
 
 @app.route('/delete_review/<review_id>', methods=['POST'])
@@ -356,9 +357,10 @@ def delete_review(review_id):
     client = data.get_client()
 
     dao.delete_review_by_id(client, review_id)
-    user = check_user_log_in(client)
+    user = dao.get_user_by_email(client, current_user.id)
 
-    return redirect(url_for('view_my_reviews', user_id=user._id))
+
+    return redirect(url_for('view_my_reviews', user_id=user['_id']))
 
 
 @app.route('/register_user')
