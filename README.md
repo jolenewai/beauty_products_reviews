@@ -2,6 +2,8 @@
 
 **Pretty Good** is a informal website that allow consumers to freely post their honest reviews on any type of beauty products. The aim is to assure the audience that there's no paid review here. It serves as a information exchange platform. Users may read the reviews for free and without the needs to login. However, to add a review, registation and login are required so that the user may edit or delete their review(s) in the future.
  
+You may access the deployed website from [here](https://beauty-reviews-app.herokuapp.com/)
+
 ## UX/UI
  
 This website targets to girls/ladies who are looking for 100% consumers based reviews on beauty products including skin care, cosmetics, body care, hair care and also products for men. 
@@ -50,10 +52,12 @@ Different shades of pink and black are used in this website as the intended user
 - Add A Review, allow login user to add a review to the website
 - My Reviews, list out all the reviews the login user has posted and allow them to delete and edit from there
 - Edit Profile, allow login user to edit their personal information registered with the website
+- Review Details, display all information for selected review, user can view reviewer's basic info by clicking on their name
 
 
 ### Features Left to Implement
 - To allow users to change the sorting of the reviews (currently it's sorted automatically by Descending order of Posted Date)
+- To allow users to edit/delete their review/s from any page after they have login
 
 ## Technologies Used
 
@@ -72,7 +76,8 @@ Different shades of pink and black are used in this website as the intended user
 
 The animation on the website are created using the following plugin created by [michalsnik](https://github.com/michalsnik/aos)
 
-* Animate on Scroll [AOS] (https://michalsnik.github.io/aos/)
+* Animate on Scroll [AOS] (https://michalsnik.github.io/aos/) for animations on the cards
+* [Uploadcare API](https://uploadcare.com/) for uploading images on a separate cloud
 
 ## Testing
 
@@ -88,13 +93,68 @@ For any scenarios that have not been automated, test the user stories manually a
     3. Try to submit the form with an invalid email address and verify that a relevant error message appears
     4. Try to submit the form with all inputs valid and verify that a success message appears.
 
-In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
+1. User Registration
+    1. On the home page, click on Register
+    2. Try to submit the empty form and verify that error messages about the required fields appear and highlighted in red
 
-You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
+2. Login 
+    1. On one of the review page, click on Login
+    2. Try to submit the empty form and verify that error messages about the required fields appear and highlighted in red
+    3. Try to submit the form with an invalid email address and verify that it is an invalid login
+    4. Try to submit the form with a wrong password and verify that it is an invalid login
+    5. Try to submit the form with all inputs valid and verify that the redirection is successful and the navigation changed from "Login" to "Logout"
 
-If this section grows too long, you may want to split it off into a separate file and link to it from here.
+3. Add A Review (before login)
+    1. On home page, click on Write A Review
+    2. The page will be redirected to Login
+    3. Repeat steps in Login testing
+
+4. Add A Review (after login)
+    1. On one of the review page, click on My Account, then Add A Review on My Account Page
+    2. Try to submit the empty form and verify that error messages about the required fields appear and highlighted in red
+    3. Try to submit the form with all inputs valid and verify the review has been added when redirected to My Reviews page
+
+5. Update A Review 
+    1. On My Reivews page, click on the edit icon beside the title of the review
+    2. Verify that information from the database are presented in the form inputs, try to change one of the field and verify that the field is updated after submit the form
+    3. Try to change image and submit and verify that the image is updated after submit the form
+
+6. Delete A Review
+    1. On My Reviews page, click on the delete icon beside the title of the review
+    2. Verify that confirmation message is displayed and try to press confirm and verify that the review is deleted when redirected to My Reviews page
+
+7. Update Profile
+    1. On My Account page, click on the Update Profile link in login user section
+    2. Verify that information from the database are presented in the form inputs, try to change one of the field and verify that the field is updated after submit the form
+    3. Try to change image and submit and verify that the image is updated after submit the for
+
+8. Search 
+    1. On one of the review page, type in any keyword in the search bar, choose one of the search options from the select box, repeat with the other 2 options and verify that the matching results appear in Search Result page
+    2. On Search Result page, apply filter with one of the product category and rating, and verify that the matching results displayed
+
+9. Browsing Reviews by Category on Main Navigation
+    1. Click on each button and verify that the matching reviews are displayed
+
+10. Responsivenesss
+    1. This website is responsive on various devices such as Desktop, iPad (works better in vertical), Mobile Phone
+    <img scr="https://drive.google.com/file/d/1JVNPitvB0CV7hwWH7W7ZOx9E4_nDQpNh/view?usp=sharing" alt="Pretty Good Screenshot across devices">
+
+11. Unsolved bugs/problems 
+    1. Bootstrap form validation unable to enforce at least one of the multiple checkboxes to be selected
+    2. Product name is not able to be enforced to standardised, for example, different user will enter a different name for the same product, this problem is not resolveable unless we build a database with all the products stored on the database.
+    3. There's horizontal overflow on the page that displays all the product categories on iPad horizontal format due to the size of the card column
+
 
 ## Deployment
+
+This website is deployed on [Heroku](https://www.heroku.com). The deployed website can be accessed [here](https://beauty-reviews-app.herokuapp.com/)
+
+- All the requirements for the app to run is listed in requirements.txt which will be automatically run by Heroku when deployed
+- Debug is set to False after the website is launched
+- All public keys and private keys for various are set in Heroku Config Vars including:
+    1. Uploadcare API
+    2. MongoDB URI and Dabatase Name
+- App will run automatically on Heroku after deployment without the need to manually run the app as we were developing
 
 This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
 
@@ -112,8 +172,8 @@ In addition, if it is not obvious, you should also describe how to run your code
 - The text for the reviews was copied from the [MakeupAlley](https://www.makeupalley.com/)
 
 ### Media
-- The photos used in this site were obtained from ...
+- The photos used in this site were obtained from [MakeupAlley](https://www.makeupalley.com/)
+- The vector graphics used in the background were obtained from [Freepik](https://www.freepik.com/)
 
 ### Acknowledgements
-
-- I received inspiration for this project from X
+- I received inspiration for this project from beauty reviews websites
