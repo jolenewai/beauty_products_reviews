@@ -34,19 +34,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #home h1 {
-    font-size: 6.6em
+    font-size: 6.6rem
 }
 
 #home p{
-    font-size: 2.8em;
+    font-size: 2.2rem;
 }
 
 #home a{
-    font-size: 1.06em;
+    font-size: 1.06rem;
 }
 
 #home .btn {
-    font-size: 2.4em;
+    font-size: 2.4rem;
 }
 
 .small-link {
@@ -79,6 +79,10 @@ a:hover{
     
 }
 
+#logo{
+    width: 292px;
+    height: 111px;
+}
 
 @media (max-width: 575.98px) {
 
@@ -87,8 +91,12 @@ a:hover{
         font-size: 1em;
     }
 
-    #website-title a {
-        font-size: 2.5em;
+    .btn {
+        width: 250px;
+    }
+
+    #home p{
+        font-size: 1.8rem;
     }
 
 }

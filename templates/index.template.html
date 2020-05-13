@@ -6,10 +6,12 @@
     <div id="home" class="m-0 p-0 mx-auto mh-100 vh-100 h-100">
         <div class="row align-items-center h-100 mh-100 mr-0">
             <div class="col mx-auto text-center pr-0">
-                <img src="/static/images/pretty_good_logo.svg" width="457" alt="Pretty Good">
+                <div id="logo mx-auto">
+                    <img src="/static/images/pretty_good_logo.svg"  width="292" alt="Pretty Good">
+                </div>
                 <p class="mt-0">100% Consumers Based Reviews for Beauty Products</p>
                 <div class="mt-3 pb-3 pt-3">
-                    <a class="p-4 link-border btn" href="{{url_for('read_reviews')}}">Read Reviews</a> <a class="ml-2 p-4 link-border btn" href="{{url_for('add_review')}}">Write A Review</a>
+                    <a class="mx-1 p-4 link-border btn mb-2" href="{{url_for('read_reviews')}}">Read Reviews</a><a class="mx-1 p-4 link-border btn mb-2" href="{{url_for('add_review')}}">Write A Review</a>
                 </div>
                 <div class="text-center mt-2">
                     <a class="small-link" href="{{url_for('user_login')}}?redirect=/">Login</a> / <a class="small-link" href="{{url_for('add_user')}}?redirect=/user_login">Register</a>
