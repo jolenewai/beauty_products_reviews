@@ -133,7 +133,7 @@ Testing process conducted as follows:
 
 10. Responsivenesss
     1. This website is responsive on various devices such as Desktop, iPad (works better in vertical), Mobile Phone
-    <img scr="https://drive.google.com/uc?id=1JVNPitvB0CV7hwWH7W7ZOx9E4_nDQpNh" alt="Pretty Good Screenshot across devices">
+    <img src="https://drive.google.com/uc?id=1JVNPitvB0CV7hwWH7W7ZOx9E4_nDQpNh" style="margin:0" alt="Pretty Good Screenshots">
 
 11. Unsolved bugs/problems 
     1. Bootstrap form validation unable to enforce at least one of the multiple checkboxes to be selected
@@ -147,19 +147,10 @@ This website is deployed on [Heroku](https://www.heroku.com). The deployed websi
 
 - All the requirements for the app to run is listed in requirements.txt which will be automatically run by Heroku when deployed
 - Debug is set to False after the website is launched
-- All public keys and private keys for various are set in Heroku Config Vars including:
+- All public keys and private keys for the following need to be set in Heroku Config Vars for the app to run:
     1. Uploadcare API
     2. MongoDB URI and Dabatase Name
 - App will run automatically on Heroku after deployment without the need to manually run the app as we were developing
-
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
-
-In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:
-- Different values for environment variables (Heroku Config Vars)?
-- Different configuration files?
-- Separate git branch?
-
-In addition, if it is not obvious, you should also describe how to run your code locally.
 
 
 ## Credits
