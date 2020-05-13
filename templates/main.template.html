@@ -10,8 +10,8 @@
     {% block externalscript %}{% endblock %}
     <!-- FontAwesome kit code -->
     <script src="https://kit.fontawesome.com/d302b3e2ff.js" crossorigin="anonymous"></script>
-
-    <!-- <script src="https://kit.fontawesome.com/d302b3e2ff.js" crossorigin="anonymous"></script> -->
+    
+    <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
@@ -29,8 +29,8 @@
 <body>
     <div id="top-bar" class="container-flex sticky-top py-md-2 py-sm-2 pt-3">
         <div class="row justify-content-end pl-0 mr-0 align-items-center">
-            
-                <div class="mr-2 text-right small-link">
+                <!-- Display User Information after User Login -->
+                <div class="mr-2 text-right small-link">    
                     {% if current_user.is_authenticated %}
                         <a class="px-2" href="{{url_for('view_my_reviews', user_id=user._id)}}">My Account </a>
                         |
@@ -57,7 +57,6 @@
                                 <button type="submit" class="input-group-text pink-bg lighten-3 rounded-right border-white px-3 shadow-sm"
                                     id="btn-search-home" role="link"><i data-feather="search" class="feather-16 text-white"></i></button>
                             </div>
-                            
                         </div>
                     </form> 
                 </div>

@@ -46,8 +46,32 @@
 
                     <p>{{review.review}}</p>
                     <p class="card-text"><small class="text-muted">
-                    Posted by {% for u in all_users if review.user_id==u._id %}{{u.name}}{% endfor%} on {{review.posted.strftime("%d-%m-%Y, %H:%M:%S")}}</small></p>
-                    
+                    Posted by {% for u in all_users if review.user_id==u._id %}
+                    <a class="text-reset text-decoration border-bottom link-border" data-toggle="collapse" href="#userdata" role="button" aria-expanded="false" aria-controls="collapseExample">{{u.name}}</a>
+                    {% endfor%} on {{review.posted.strftime("%d-%m-%Y, %H:%M:%S")}}</small>
+                    </p>
+                    <div class="collapse" id="userdata">
+                    <div class="card card-body">
+                    {% set _stub = all_users.rewind() %}
+
+                      {% for u in all_users if review.user_id==u._id %}
+
+                        <h5>About {{ u.name }} </h5>
+                        <p>
+                            {% if u.gender == 'F' %}
+                            <span class="pink-text"><i class="fas fa-female"></i></span> Female 
+                            {% elif u.gender == 'M' %} 
+                            <span class="pink-text"><i class="fas fa-male"></i></span> Male
+                            {% else %}
+                            Gender Unspecified
+                            {% endif %}
+                             | 
+                            {{ u.age }} | {{ u.occupation}}
+                        </p>
+                        {% endfor %}
+
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
