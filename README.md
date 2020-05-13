@@ -133,7 +133,7 @@ Testing process conducted as follows:
 
 10. Responsivenesss
     1. This website is responsive on various devices such as Desktop, iPad (works better in vertical), Mobile Phone
-    <img src="https://drive.google.com/uc?id=1JVNPitvB0CV7hwWH7W7ZOx9E4_nDQpNh" style="margin:0" alt="Pretty Good Screenshots">
+    <img src="./static/images/readme/Pretty_Good_Screenshot.png" style="margin:0">
 
 11. Unsolved bugs/problems 
     1. Bootstrap form validation unable to enforce at least one of the multiple checkboxes to be selected
