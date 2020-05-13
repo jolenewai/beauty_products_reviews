@@ -1,4 +1,5 @@
 # Pretty Good 
+<img src="Pretty_Good_Screenshot.png" style="margin:0">
 
 **Pretty Good** is a informal website that allow consumers to freely post their honest reviews on any type of beauty products. The aim is to assure the audience that there's no paid review here. It serves as a information exchange platform. Users may read the reviews for free and without the needs to login. However, to add a review, registation and login are required so that the user may edit or delete their review(s) in the future.
  
@@ -133,7 +134,6 @@ Testing process conducted as follows:
 
 10. Responsivenesss
     1. This website is responsive on various devices such as Desktop, iPad (works better in vertical), Mobile Phone
-    <img src="Pretty_Good_Screenshot.png" style="margin:0">
 
 11. Unsolved bugs/problems 
     1. Bootstrap form validation unable to enforce at least one of the multiple checkboxes to be selected
