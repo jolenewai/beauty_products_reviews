@@ -5,11 +5,11 @@ body {
     background-image: url("/static/images/second_background.png");
     background-attachment: fixed;
     background-position: center top;
-    font-size: 1.4em;
+    font-size: 1.4rem;
     font-family: 'Amatic SC', cursive;
     font-weight: 400;
     transition:500ms ease;
-    margin-bottom: 3em;
+    margin-bottom: 3rem;
 }
 
 .navbar-custom {
@@ -31,7 +31,7 @@ h1>a, h2>a, h3>a, h4>a, h5>a, h6>a,
 p {
     font-family: 'Nunito Sans', sans-serif !important;
     font-weight: 300;
-    font-size: 0.8em;
+    font-size: 0.75rem;
     color: #848484;
 }
 
@@ -68,7 +68,7 @@ p {
     color: #000;
     font-family: 'Amatic SC', cursive !important; 
     font-weight: 400; 
-    font-size:1.25em !important; 
+    font-size: 2rem !important; 
 }
 
 .navbar a:hover {
@@ -120,20 +120,21 @@ p {
 label {
     font-family: 'Amatic SC', cursive;
     font-weight: 400;  
-    font-size: 1.25em !important;
+    font-size: 1.25rem !important;
 }
 
 input, textarea, label.custom-checkbox-label, select>option {
     font-family: 'Nunito Sans', sans-serif !important;
-    font-size: 0.8em !important;
+    font-size: 0.8rem !important;
     font-weight: 300;
 }
+
 
 a:visited, a:link{
     color: #676767;    
     font-family: 'Nunito Sans', sans-serif;
     font-weight:300;
-    font-size: 0.8em;
+    font-size: 0.8rem;
 }
 
 a:hover{
@@ -143,8 +144,17 @@ a:hover{
 
 .form-control{
     font-family: 'Nunito Sans', sans-serif;
-    font-size: 0.8em !important;
+    font-size: 0.75rem !important;
+    font-weight: 300;
+}
 
+
+.custom-select{
+    width: 14rem;
+} 
+
+.pink-bg-50 {
+    background-color: rgba(255, 222, 222, 0.5)
 }
 
 .pink-text {
@@ -195,18 +205,18 @@ a:hover{
 .my-reviews p, .card-text {
     font-family: 'Nunito Sans', sans-serif;
     font-weight:300;
-    font-size: 0.63em;
+    font-size: 0.75rem;
 }
 
 .card{
-    max-width:335px;
-    min-width: 250px;
+    max-width: 20rem;
+    min-width: 18rem;
 }
 
 .card-title a {
     color: #FF8080;
     font-weight: 500;
-    line-height: 0.8em;
+    line-height: 0.8rem;
 }
 
 .card-title a:hover{
@@ -242,6 +252,11 @@ a:hover{
     width: 12px;
     height: 12px;
 }
+
+
+#search_results>.card-columns {
+        column-count: 2;
+    }
 
 .card-columns {
         column-count: 4;
@@ -285,6 +300,9 @@ a:hover{
         font-size: 1.8em;
     }
 
+    .custom-select{
+        width: 160px;
+    } 
     
 
  }

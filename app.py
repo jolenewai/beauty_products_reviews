@@ -366,7 +366,6 @@ def delete_review(review_id):
 
     dao.delete_review_by_id(client, review_id)
 
-
     return redirect(url_for('view_my_reviews', user_id=user['_id']))
 
 
@@ -417,15 +416,22 @@ def process_add_user():
 def search():
 
     client = data.get_client()
+    search_by = request.args.get('search_by')
     search_str = request.args.get('search')
-    results = dao.search_by_query(client, search_str)
+    filter_by_cat = request.args.get('filter_by_cat')
+    filter_by_rating = request.args.get('filter_by_rating')
+    results = dao.search_by_query(client, search_str,
+                                  search_by,
+                                  filter_by_cat,
+                                  filter_by_rating)
 
+    no_of_result = results.count()
     categories = dao.get_all_categories(client)
 
     user = check_user_log_in(client)
     all_users = dao.get_all_users(client)
 
-    return render_template('search_result.template.html',results=results, search_str=search_str, user=user, cat=categories, all_users=all_users)
+    return render_template('search_result.template.html',results=results, search_str=search_str, user=user, cat=categories, all_users=all_users, no_of_result=no_of_result)
 
 
 @app.route('/user_login')
@@ -446,7 +452,7 @@ def proccess_user_login():
 
     redirect_url = request.args.get('redirect')
 
-    if redirect_url == None:
+    if redirect_url is None:
         redirect_url = "/"
 
     if verify_password(request.form.get('password'), user_in_db['password']):

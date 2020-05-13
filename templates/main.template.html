@@ -28,7 +28,7 @@
 </head>
 <body>
     <div id="top-bar" class="container-flex sticky-top py-md-2 py-sm-2">
-        <div class="row justify-content-end pr-0 mr-0 align-items-center">
+        <div class="row justify-content-end pl-0 mr-0 align-items-center">
             
                 <div class="col-sm-4 col-6 col-md-4 col-lg-4 text-right small-link">
                     {% if current_user.is_authenticated %}
@@ -44,13 +44,22 @@
                 
                 <div class="px-2 mr-2">
                     <form class="form-inline my-2 my-lg-0" action="{{url_for('search')}}" method="GET">
-                        <div class="input-group ml-auto text-shadow ">
-                            <input type="text" class="form-control rounded-left border-white shadow-sm" id="search" name="search"
-                                placeholder="Search" aria-label="Search">
+                        <div class="input-group ml-auto">
+                            <select class="custom-select form-control rounded-0 border-0 shadow-sm" name="search_by">
+                                <option value="1">Product Name</option>
+                                <option value="2">Brand Name</option>
+                                <option value="3">Keyword in Review</option>
+                                </select>
+                            <div class="input-group-append">
+                                <input type="text" class="custom-input form-control rounded-left border-white shadow-sm" id="search" name="search" placeholder="Search" aria-label="Search">
+                            </div>
                             <div class="input-group-append">
                                 <button type="submit" class="input-group-text pink-bg lighten-3 rounded-right border-white px-3 shadow-sm"
-                                    id="btn-search-home" role="link"><i data-feather="search" class="feather-18 text-white"></i></button>
+                                    id="btn-search-home" role="link"><i data-feather="search" class="feather-16 text-white"></i></button>
                             </div>
+                            <div class="col-sm">
+                            
+                        </div>
                         </div>
                     </form> 
                 </div>

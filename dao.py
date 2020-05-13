@@ -94,14 +94,111 @@ def delete_review_by_id(client, review_id):
     })
 
 
-def search_by_query(client, search_str):
+def search_by_query(client, search_str, search_by, cat_id, rating):
+    
+    print(search_by)
 
-    results = client[DB_NAME].user_reviews.find({
-      'product_name': {
-          '$regex': search_str,
-          '$options': 'i'
-        }
-    })
+    if (cat_id is None or cat_id == '') and (rating is None or rating == ''):
+
+        if search_by == '1':
+            results = client[DB_NAME].user_reviews.find({
+                'product_name': {
+                    '$regex': search_str,
+                    '$options': 'i'
+                }
+            })
+        elif search_by == '2':
+            results = client[DB_NAME].user_reviews.find({
+                'product_brand': {
+                    '$regex': search_str,
+                    '$options': 'i'
+                }
+            })
+        else:
+            results = client[DB_NAME].user_reviews.find({
+                'review': {
+                    '$regex': search_str,
+                    '$options': 'i'
+                }
+            })
+    elif (cat_id or cat_id != '') and (rating is None or rating == ''):
+        if search_by == '1':
+            results = client[DB_NAME].user_reviews.find({
+                'product_name': {
+                    '$regex': search_str,
+                    '$options': 'i'
+                }, 
+                'categories.category_id': ObjectId(cat_id)
+            })
+        elif search_by == '2':
+            results = client[DB_NAME].user_reviews.find({
+                'product_brand': {
+                    '$regex': search_str,
+                    '$options': 'i'
+                },
+                'categories.category_id': ObjectId(cat_id)
+            })
+        else:
+            results = client[DB_NAME].user_reviews.find({
+                'review': {
+                    '$regex': search_str,
+                    '$options': 'i'
+                },
+                'categories.category_id': ObjectId(cat_id)
+            })
+    elif (cat_id is None or cat_id == '') and (rating or rating != ''):
+        if search_by == '1':
+            results = client[DB_NAME].user_reviews.find({
+                'product_name': {
+                    '$regex': search_str,
+                    '$options': 'i'
+                }, 
+                'rating': rating
+            })
+        elif search_by == '2':
+            results = client[DB_NAME].user_reviews.find({
+                'product_brand': {
+                    '$regex': search_str,
+                    '$options': 'i'
+                },
+                'rating': rating
+            })
+        else:
+            results = client[DB_NAME].user_reviews.find({
+                'review': {
+                    '$regex': search_str,
+                    '$options': 'i'
+                },
+                'rating': rating
+            })
+    else:
+        if search_by == '1':
+            results = client[DB_NAME].user_reviews.find({
+                'product_name': {
+                    '$regex': search_str,
+                    '$options': 'i'
+                }, 
+                'rating': rating,
+                'categories.category_id': ObjectId(cat_id)
+            })
+        elif search_by == '2':
+            results = client[DB_NAME].user_reviews.find({
+                'product_brand': {
+                    '$regex': search_str,
+                    '$options': 'i'
+                },
+                'rating': rating,
+                'categories.category_id': ObjectId(cat_id)
+            })
+        else:
+            results = client[DB_NAME].user_reviews.find({
+                'review': {
+                    '$regex': search_str,
+                    '$options': 'i'
+                },
+                'rating': rating,
+                'categories.category_id': ObjectId(cat_id)
+            })
 
     return results
 

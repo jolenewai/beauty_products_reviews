@@ -2,16 +2,52 @@
 
 {% block page_title %}Search {% endblock %}
 
-{% block title %}Search Results for {{ search_str }}{% endblock %}
+{% block title %}Showing <span class="pink-text">{{ no_of_result }}</span> Search Results for <span class="pink-text">{{ search_str }}</span>{% endblock %}
 
 {% block content %}
-
-    <div class="container-flex px-0 mx-0">
-        <div class="row justify-content-center px-0 mx-0">
-                <div class="col justify-content-center">
-                <div class="card-columns">
+    <div class="container">
+        <div class="row justify-content-around">
+            <div class="col-sm-3 pink-bg-50"><form class="my-2" action="{{url_for('search')}}" method="GET">
+                    <div class="form-group">
+                        <label>Searching for </label>
+                        <input type="text" class="custom-input form-control rounded-left border-white shadow-sm" id="search" name="search" value="{{ request.args.get('search') }}" aria-label="Search">
+                    </div>
+                    <div class="form-group"> 
+                    <label>Searching by</label>
+                        <select class="custom-select form-control" name="search_by">
+                            <option value="1" {% if request.args.get('search_by') == '1' %}selected{% endif %}>Product Name</option>
+                            <option value="2" {% if request.args.get('search_by') == '2' %}selected{% endif %}>Brand Name</option>
+                            <option value="3" {% if request.args.get('search_by') == '3' %}selected{% endif %}>Keyword in Review</option>
+                        </select>
+                    </div>
+            
+                    <div class="form-group">
+                        <label>Filter by </label><br/>
+                        <select class="custom-select form-control" name="filter_by_cat">
+                            <option value="">All Category</option>
+                            {% set _stub = cat.rewind() %}
+                            {% for c in cat %}
+                            {% if c.name != "For Women" %} 
+                            <option value="{{c._id}}">{{c.name}}</option>
+                            {% endif %}
+                        {% endfor %}
+                        </select>
+                        <select name="filter_by_rating" class="custom-select form-control my-2"> 
+                            <option value="">All Rating</option>
+                            <option value="5">5 - Excellent</option>
+                            <option value="4">4 - Very Good</option>
+                            <option value="3">3 - Good</option>
+                            <option value="2">2 - Bad</option>
+                            <option value="1">1 - Very Bad</option>
+                        </select>
+                    </div>
+                        <button class="form-control btn link-border rounded-0" type="submit">Update Results</button> 
+            </form> 
+            </div>
+            
+            <div id="search_results" class="col-sm-8"><div class="card-columns">
                     {% for r in results %}
-                    <div class="card" data-aos="fade-up" data-aos-delay="20">
+                    <div class="card h-100" data-aos="fade-up" data-aos-delay="20">
                         {% if r.image %}
                         <a href="{{ url_for('view_review_details', review_id=r._id)}}">
                         <img src="{{r.image}}-/resize/355x/" class="card-img-top" alt="{{r.product_name}}" >
@@ -49,9 +85,9 @@
                     </div>
                     {% endfor %}
                 </div>
-                </div>
             </div>
         </div>
+    </div>
 
-
+    
 {% endblock %}
