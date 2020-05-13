@@ -76,16 +76,12 @@ Different shades of pink and black are used in this website as the intended user
 
 The animation on the website are created using the following plugin created by [michalsnik](https://github.com/michalsnik/aos)
 
-* Animate on Scroll [AOS] (https://michalsnik.github.io/aos/) for animations on the cards
+* Animate on Scroll [AOS](https://michalsnik.github.io/aos/) for animations on the cards
 * [Uploadcare API](https://uploadcare.com/) for uploading images on a separate cloud
 
 ## Testing
 
-In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
-
-Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
-
-For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as:
+Testing process conducted as follows:
 
 1. Contact form:
     1. Go to the "Contact Us" page
@@ -137,7 +133,7 @@ For any scenarios that have not been automated, test the user stories manually a
 
 10. Responsivenesss
     1. This website is responsive on various devices such as Desktop, iPad (works better in vertical), Mobile Phone
-    <img scr="https://drive.google.com/file/d/1JVNPitvB0CV7hwWH7W7ZOx9E4_nDQpNh/view?usp=sharing" alt="Pretty Good Screenshot across devices">
+    <img scr="https://drive.google.com/uc?id=1JVNPitvB0CV7hwWH7W7ZOx9E4_nDQpNh" alt="Pretty Good Screenshot across devices">
 
 11. Unsolved bugs/problems 
     1. Bootstrap form validation unable to enforce at least one of the multiple checkboxes to be selected
