@@ -22,37 +22,49 @@
     <div class="container">
     <div class="row justify-content-around">
 
-    <div id="add-review" class="col-8 mx-auto bg-white shadow py-4 px-5">   
+    <div id="add-review" class="col-sm-8 col-md-10 col-lg-8 mx-auto bg-white shadow py-4 px-5">   
         {% if user %}
 
-        <form method="POST">
+        <form method="POST" class="needs-validation" novalidate>
         
             <!-- Add Review Form -->
             <div class="form-group row justify-content-start mb-3">
                 <label class="col-form-label col-sm-3" for="title">Title </label> 
                 <div class="col-sm-8 col-md-8">
-                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="title" id="title" />
+                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="title" id="title" required />
+                    <div class="invalid-feedback">
+                    Please enter a title
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row justify-content-start mb-3">
                 <label class="col-form-label col-sm-3" for="product_name">Product Name </label> 
                 <div class="col-sm-8 col-md-8">
-                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="product_name" id="product_name" />
+                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="product_name" id="product_name" required />
+                    <div class="invalid-feedback">
+                    Please enter the product name
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row justify-content-start mb-3">
                 <label class="col-form-label col-sm-3" for="product_brand">Brand </label> 
                 <div class="col-sm-8 col-md-8">
-                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="product_brand" id="product_brand" />
+                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="product_brand" id="product_brand" required />
+                    <div class="invalid-feedback">
+                    Please enter the brand of the product
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row justify-content-start mb-3">
                 <label class="col-form-label col-sm-3" for="country_of_origin">Country of Origin </label> 
                 <div class="col-sm-7 col-md-7">
-                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="country_of_origin" id="country_of_origin" />
+                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="country_of_origin" id="country_of_origin" required />
+                    <div class="invalid-feedback">
+                    Please enter the country of origin for the product
+                    </div>
                 </div>
             </div>
 
@@ -66,15 +78,16 @@
                             <label class="form-check-label custom-checkbox-label" for="{{c._id}}">{{c.name}}</label>
                         </div>
                     {% endfor %}
+
                 </div>
             </div>
 
             <!-- Add Review Form Section Two -- Review  -->
 
             <div class="form-group row justify-content-start mb-3">
-                <label class="col-form-label col-sm-3" for="categories">Rating </label> 
+                <label class="col-form-label col-sm-3" for="rating" required>Rating </label> 
                 <div class="col-sm-8 col-md-8">
-                    <select name="rating" class="custom-select"> 
+                    <select name="rating" class="custom-select" required> 
                         <option value="5" selected>5 - Excellent</option>
                         <option value="4">4 - Very Good</option>
                         <option value="3">3 - Good</option>
@@ -85,12 +98,15 @@
             </div>
                     
             <div class="form-group row justify-content-start mb-3">
-                <label class="col-form-label col-sm-3" for="categories">Review </label> 
+                <label class="col-form-label col-sm-3" for="review">Review </label> 
                 <div class="col-sm-8 col-md-8">
-                     <textarea name="review" class="form-control" rows="4"></textarea>
+                     <textarea name="review" class="form-control" rows="4" required ></textarea>
+                     <div class="invalid-feedback">
+                    Please write your review for the product!
+                    </div>
                 </div>
             </div>
-    
+
             <div class="form-group row justify-content-start mb-3">
                 <label class="col-form-label col-sm-3" for="categories">Upload an Image </label> 
                 <div class="col-sm-8 col-md-8">
@@ -115,4 +131,5 @@
     </div>
     </div>
     </div>
+
     {% endblock %}

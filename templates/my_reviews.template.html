@@ -15,15 +15,15 @@
 
 <div class="container mx-auto px-0">
         {% for r in reviews %}
-            <div class="row justify-content-around mx-2 px-0 mb-3 py-3 my-2 bg-white shadow">
+            <div class="row justify-content-center mx-3 px-0 mb-3 py-3 my-2 bg-white shadow">
 
                 {% if r.image %}
-                <div class="col-sm-3 mr-2">
-                <img src="{{r.image}}-/resize/355x/" class="mx-3" alt="{{r.product_name}}">
+                <div class="col-sm-4 col-md-3">
+                <img src="{{r.image}}-/resize/300x/" alt="{{r.product_name}}">
                 </div>
                 {% endif %}
 
-                <div class="pr-4 col-sm-6">
+                <div class="col-sm-6 col-md">
                     <h4 class="mt-0">{{r.title}} 
                         <span class="float-right">
                             <a href="{{url_for('edit_review', review_id=r._id)}}">
@@ -39,12 +39,26 @@
                     {% for i in range(0,rating) %}
                         <span class="pink-text stars"> <i class="fas fa-star"></i></span>
                     {% endfor %}</p>
+
+                    <div class="mb-3">
+                    <!-- Get Categories from Categories table-->
+                    {% for c in r.categories %}
+                        {% set _stub = cat.rewind() %}
+
+                            {% for category in cat if category._id == c.category_id %}
+                                    <span class="badge lightpink-bg">
+                                    <a href="{{url_for('read_reviews_by_category', cat_id=category._id)}}" class="p-2 text-black text-decoration-none">{{category.name}}</a></span>
+                            {% endfor %}
+
+                    {% endfor %}
+                    </div>
+
                     <p>{{r.review}}</p>
-                    <p class="card-text"><small class="text-muted">Posted on {{r.posted.strftime("%d-%m-%Y, %H:%M:%S")}}</small></p>
+                    <p><small class="text-muted">Posted on {{r.posted.strftime("%d-%m-%Y, %H:%M:%S")}}</small></p>
                     
                 </div>
                 
-                <div class="vw-100 clearfix"></div>
+                <div class="w-100 clearfix"></div>
                 </div>
 
         {% endfor %}

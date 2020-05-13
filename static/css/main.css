@@ -9,7 +9,6 @@ body {
     font-family: 'Amatic SC', cursive;
     font-weight: 400;
     transition:500ms ease;
-    margin-bottom: 4.2rem;
 }
 
 .navbar-custom {
@@ -39,10 +38,11 @@ p {
     font-family: 'Nunito Sans', sans-serif !important;
     font-weight: 300;
 }
-/* img {
+
+img {
    width: 100%;
    height: auto;
- } */
+ }
 
 #logo{
     width: 292px;
@@ -58,7 +58,7 @@ p {
 
 .cursive-font {
     font-family: 'Amatic SC', cursive !important;
-    font-size: 1.1em !important;
+    font-size: 1.54rem !important;
     font-weight: 400 !important;
 
 }
@@ -132,14 +132,13 @@ input, textarea, label.custom-checkbox-label{
     font-family: 'Nunito Sans', sans-serif !important;
     font-weight: 300;
     font-size: 0.875rem !important;
-
 }
 
 a:visited, a:link{
     color: #676767;    
     font-family: 'Nunito Sans', sans-serif;
     font-weight:300;
-    font-size: 0.8rem;
+    font-size: 0.875rem;
 }
 
 a:hover{
@@ -224,6 +223,7 @@ a:hover{
     color: #FF8080;
     font-weight: 500;
     line-height: 0.875rem;
+    font-size: 1rem;
 }
 
 .card-title a:hover{
@@ -240,7 +240,7 @@ a:hover{
     font-size:1.19em;
 }
 
-.scrolled{
+.scrolled, #footer{
     background-color: #FFF9F9;    
 }
 
@@ -266,11 +266,16 @@ a:hover{
     }
 
 .card-columns {
-        column-count: 4;
+        column-count: 3;
     }
 
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 576px) and (max-width: 991.98px) { 
+
+    body{
+        overflow-x:hidden;
+    }
+
     .card-columns {
         column-count: 2;
     }
@@ -322,7 +327,7 @@ a:hover{
 
     body {
         margin-top: 15px;
-        font-size: 1rem; 
+        font-size: 0.75rem; 
         /* load smaller background for mobile layout */
         background-image: url("/static/images/mobile_background_2.png");
     }
@@ -341,7 +346,7 @@ a:hover{
 
     .navbar-toggler{
         position: fixed;
-        top: 25px;
+        top: 61px;
         left: 15px;
         z-index: 1030;
     }
@@ -355,14 +360,16 @@ a:hover{
 
     .navbar a {
         color: #FFF;
-        font-size: 2em !important;
+        font-size: 2rem !important;
     }
 
     .btn a:visited, .btn a:link{
         color: #FFF;
     }
 
-    
+    .card{
+        min-width: 12rem;
+    }
 
     #website-title a{
         /* font-size: 2.5em; */
@@ -370,20 +377,27 @@ a:hover{
     }
 
     #website-desc {
-        font-size: 1.2em;
+        font-size: 1.2rem;
         color: #000;
         font-family: 'Amatic SC', cursive;
         font-weight: 400;    
     }
 
     .shift-position{
-        top: 35px;
+        top: 45px;
     }
 
     .card-columns {
         column-count: 1;
     }
 
+    #search_results>.card-columns {
+        column-count: 1;
+    }
+
+    #search-by{
+        display: none;
+    }
  }
 
 

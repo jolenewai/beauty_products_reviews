@@ -10,7 +10,7 @@
 {% block content %}
 
 <div class="container-flex my-1 py-3 mx-auto px-0">
-  <h2 class="text-center pink-text mb-2">
+  <h2 class="text-center mb-2">
   <a class="cursive-font" href="{{url_for('read_reviews_by_category', cat_id='5e9ffc631c9d440000be6574')}}">SKIN CARE</a>
   </h2>
 
@@ -60,7 +60,7 @@
           <!-- truncate the review text into 1 line to keep the page cleaner -->
           
           <!-- end of displaying details for the review -->
-          <a class="btn btn-sm link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
+          <a class="btn link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
         </div>
       </div>
     </div>
@@ -69,7 +69,7 @@
 </div>
 
 <div class="container-flex my-3 py-5 mx-auto px-0 lightpink-bg">
-  <h2 class="text-center pink-text mb-2">
+  <h2 class="text-center mb-2">
     <a class="cursive-font" href="{{url_for('read_reviews_by_category', cat_id='5e9ffcb91c9d440000be6575')}}">MAKE UP</a>
   </h2>
 
@@ -110,7 +110,7 @@
             {{ item.review }}
           </p>
           </div>
-          <a class="btn btn-sm link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
+          <a class="btn link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
           
         </div>
       </div>
@@ -120,17 +120,15 @@
   </div>
 </div>
 
-
 <div class="container my-3 py-5 mx-auto px-0">
-
-<div class="row row-cols-1 row-cols-md-3 px-5 mx-0">
-  <div class="col mb-4">
-    <h2 class="text-center pink-text mb-2">
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 px-sm-2 mx-0 justify-content-center">
+  <div class="col-sm mb-4">
+    <h2 class="text-center mb-2">
         <a class="cursive-font" href="{{url_for('read_reviews_by_category', cat_id='5e9ffde81c9d440000be6576')}}">BODY CARE</a>
     </h2>
       <!-- display the latest review in Body Care category -->
       {% for item in bodycare %}
-        <div class="card h-100 mb-2" data-aos="fade-up" data-aos-delay="50">
+        <div class="card mb-2 mx-auto" data-aos="fade-up" data-aos-delay="50">
           {% if item.image %}
             <a href="{{ url_for('view_review_details', review_id=item._id)}}">
 
@@ -165,20 +163,20 @@
             {{ item.review }}
           </p>
           </div>
-            <a class="btn btn-sm link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
+            <a class="btn link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
             
           </div>
         </div>
       {% endfor %}
       
   </div>
-  <div class="col mb-4">
-    <h2 class="text-center pink-text mb-2">
+  <div class="col-sm">
+    <h2 class="text-center mb-2">
         <a class="cursive-font" href="{{url_for('read_reviews_by_category', cat_id='5ea004bd1c9d440000be657b')}}">HAIR CARE</a>
     </h2>
         <!-- display the latest review in Hair Care category -->
         {% for item in haircare %}
-        <div class="card h-100" data-aos="fade-up" data-aos-delay="50">
+        <div class="card mb-4 mx-auto" data-aos="fade-up" data-aos-delay="50">
             {% if item.image %}
             <a href="{{ url_for('view_review_details', review_id=item._id)}}">
             <img
@@ -212,21 +210,21 @@
             {{ item.review }}
           </p>
           </div>
-            <a class="btn btn-sm link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
+            <a class="btn link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
             
             </div>
         </div>
         {% endfor %}
   </div>
-  <div class="col mb-4">
-    <h2 class="text-center pink-text mb-2">
+  <div class="col-sm">
+    <h2 class="text-center mb-2">
         <a class="cursive-font" href="{{url_for('read_reviews_by_category', cat_id='5ea10232b5fbd91dd843ca13')}}">FOR MEN</a>
     </h2>
 
     <!-- display the latest review in For Men category -->
 
     {% for item in formen %}
-    <div class="card h-100" data-aos="fade-up" data-aos-delay="50">
+    <div class="card mb-4 mx-auto" data-aos="fade-up" data-aos-delay="50">
     {% if item.image %}
     <a href="{{ url_for('view_review_details', review_id=item._id)}}">
     <img
@@ -259,7 +257,7 @@
             {{ item.review }}
           </p>
           </div>
-        <a class="btn btn-sm link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
+        <a class="btn link-border" href="{{ url_for('view_review_details', review_id=item._id)}}">read more</a>
         
     </div>
     </div>

@@ -27,7 +27,7 @@
     <title>{% block page_title %}{% endblock %} | Pretty Good</title>
 </head>
 <body>
-    <div id="top-bar" class="container-flex sticky-top py-md-2 py-sm-2">
+    <div id="top-bar" class="container-flex sticky-top py-md-2 py-sm-2 pt-3">
         <div class="row justify-content-end pl-0 mr-0 align-items-center">
             
                 <div class="col-sm-4 col-6 col-md-4 col-lg-4 text-right small-link">
@@ -45,7 +45,7 @@
                 <div class="px-2 mr-2 float-right">
                     <form class="form-inline my-2 my-lg-0" action="{{url_for('search')}}" method="GET">
                         <div class="input-group ml-auto">
-                            <select class="custom-select form-control rounded-0 border-0 shadow-sm" name="search_by">
+                            <select class="custom-select form-control rounded-0 border-0 shadow-sm" name="search_by" id="search-by">
                                 <option value="1">Product Name</option>
                                 <option value="2">Brand Name</option>
                                 <option value="3">Keyword in Review</option>
@@ -57,9 +57,7 @@
                                 <button type="submit" class="input-group-text pink-bg lighten-3 rounded-right border-white px-3 shadow-sm"
                                     id="btn-search-home" role="link"><i data-feather="search" class="feather-16 text-white"></i></button>
                             </div>
-                            <div class="col-sm">
                             
-                        </div>
                         </div>
                     </form> 
                 </div>
@@ -102,17 +100,13 @@
         </nav>
     </div>
     {% block login_user %} {% endblock %}
-    <div class="container-flex mt-2 mt-sm-5">
-        <div class="row justify-content-center mx-0 px-0">
-            <div class="col-sm-12 col-lg-10 col-md-10 mx-auto px-0">
-                <h1 class="text-center mb-3">{% block title %} {% endblock %} </h1>
-            </div>
-        </div>
-    </div>
-    
+    <h1 class="text-center pink-text mb-3">{% block title %} {% endblock %} </h1>
+
     {% block content %} {% endblock %}
    
-
+    <section id="footer" class="p-2 text-center mt-2">
+        <p>Created by Jolene Wai &copy; 2020</p>
+    </section>
 
     <!-- For Boostrap -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>    <!-- Bootstrap JS -->

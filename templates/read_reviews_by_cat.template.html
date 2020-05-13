@@ -6,14 +6,13 @@
 
 {% block content %}
 
-    <div class="container-flex px-0 mx-0">
+    <div class="container mx-auto">
         <div class="row justify-content-center px-0 mx-0">
             <div class="col-sm-8 text-center">
                 <p>{{ current_cat.desc}}</p>
             </div>
         </div>
         <div class="row justify-content-center px-0 mx-0">
-                <div class="col justify-content-center">
                 <div class="card-columns">
                     {% for r in reviews %}
                     <div class="card" data-aos="fade-up" data-aos-delay="20">
@@ -48,12 +47,11 @@
                             {{ r.review }}
                         </p>
                         </div>
-                        <a class="btn btn-sm link-border" href="{{ url_for('view_review_details', review_id=r._id)}}">read more</a>
+                        <a class="btn link-border" href="{{ url_for('view_review_details', review_id=r._id)}}">read more</a>
 
                         </div>
                     </div>
                     {% endfor %}
-                </div>
                 </div>
             </div>
         </div>
