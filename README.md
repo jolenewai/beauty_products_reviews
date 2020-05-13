@@ -143,10 +143,12 @@ Testing process conducted as follows:
 
 ## Deployment
 
-This website is deployed on [Heroku](https://www.heroku.com). The deployed website can be accessed [here](https://beauty-reviews-app.herokuapp.com/)
+This website is deployed on [Heroku](https://www.heroku.com). 
+The URL for the deployed website is https://beauty-reviews-app.herokuapp.com/
 
 - All the requirements for the app to run is listed in requirements.txt which will be automatically run by Heroku when deployed
 - Debug is set to False after the website is launched
+- Procfile need to be created to run gunicorn upon deployment
 - All public keys and private keys for the following need to be set in Heroku Config Vars for the app to run:
     1. Uploadcare API
     2. MongoDB URI and Dabatase Name
