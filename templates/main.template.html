@@ -30,7 +30,7 @@
     <div id="top-bar" class="container-flex sticky-top py-md-2 py-sm-2 pt-3">
         <div class="row justify-content-end pl-0 mr-0 align-items-center">
             
-                <div class="col-sm-4 col-6 col-md-4 col-lg-4 text-right small-link">
+                <div class="mr-2 text-right small-link">
                     {% if current_user.is_authenticated %}
                         <a class="px-2" href="{{url_for('view_my_reviews', user_id=user._id)}}">My Account </a>
                         |
