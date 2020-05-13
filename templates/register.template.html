@@ -1,45 +1,71 @@
-{% extends 'home.template.html' %}
+{% extends 'main.template.html' %}
 
 {% block page_title %} Register {% endblock %}
 
 {% block title %} Register {% endblock %}
 
 {% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <p class="flashes text-center pink-text" >
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+    </p>
+{% endif %}
+{% endwith %}
     <div class="container">
     <div class="row justify-content-around">
 
-    <div id="register" class="col-8 mx-auto bg-white shadow p-5">               
-        <form method="POST">
+    <div id="register" class="col-sm-8 col-md-10 col-lg-8 mx-auto bg-white shadow p-5">               
+        <form method="POST" class="needs-validation" novalidate>
             <div class="form-group row justify-content-start mb-3">
-                <label class="col-form-label col-sm-3" for="InputEmail">Email Address  </label> 
+                <label class="col-form-label col-sm-3" for="validationCustomEmail">Email Address  </label> 
                 <div class="col-sm-8 col-md-8">
-                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="email" name="email" placeholder="eg. abc@your-email-domain.com" />
+                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="email" name="email" placeholder="eg. abc@your-email-domain.com" id="validationCustomEmail" required />
+                    <div class="invalid-feedback">
+                    Please provide a valid email address
+                    </div>
                 </div>
+                
             </div>
             <div class="form-group row justify-content-start mb-3">
             <label class="col-form-label col-sm-3" for="DisplayName">Display Name </label> 
             <div class="col-sm-8 col-md-8 ">
-                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="name" placeholder="Name to be displayed for your review" />
+                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="name" placeholder="Name to be displayed for your review" required/>
+                <div class="invalid-feedback">
+                    Please choose a display name for your reviews
+                </div>
             </div>
             </div>
             <div class="form-group row justify-content-start mb-3">
             <label class="col-form-label col-sm-3" for="Password">Password  </label> 
             <div class="col-sm-8 col-md-8">
-                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="password" name="password" placeholder="at least 8 characters" />
+                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="password" name="password" placeholder="at least 8 characters" required/>
+                <div class="invalid-feedback">
+                    Please enter a password
+                </div>
             </div>
             </div>
             
             <div class="form-group row justify-content-start mb-3">
             <label class="col-sm-3 col-form-label" for="Occupation">Occupation </label> 
             <div class="col-sm-8 col-md-8">
-                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="occupation" placeholder="Your Occupation" />
+                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="occupation" placeholder="Your Occupation" required />
+                <div class="invalid-feedback">
+                    Please tell us your occupation
+                </div>
             </div>
             </div>
 
             <div class="form-group row justify-content-start mb-3">
             <label class="col-form-label col-sm-1" for="Age">Age  </label> 
             <div class="col-sm-3 mx-sm-2">
-                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="age" placeholder="Your age"/>
+                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="age" placeholder="Your age" required />
+                <div class="invalid-feedback">
+                    Please tell us your age
+                </div>
             </div>
             
             <label class="col-form-label col-sm-1 mx-2" for="Gender">Gender </label>

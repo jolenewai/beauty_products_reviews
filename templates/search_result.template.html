@@ -7,8 +7,8 @@
 {% block content %}
     <div class="container">
         <div class="row justify-content-around">
-            <div class="col-sm-3 pink-bg-50"><form class="my-2" action="{{url_for('search')}}" method="GET">
-                    <div class="form-group">
+            <div class="col-sm-3 col-md-4 pink-bg-50"><form class="my-2" action="{{url_for('search')}}" method="GET">
+                    <div class="form-group ">
                         <label>Searching for </label>
                         <input type="text" class="custom-input form-control rounded-left border-white shadow-sm" id="search" name="search" value="{{ request.args.get('search') }}" aria-label="Search">
                     </div>

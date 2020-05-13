@@ -36,6 +36,18 @@ def get_user_by_email(client, email):
     return user
 
 
+def add_user_to_db(client, email, name, encrypted_password, age, gender, occupation):
+
+    client[DB_NAME].users.insert_one({
+            'email': email,
+            'name': name,
+            'password': encrypted_password,
+            'age': age,
+            'gender': gender,
+            'occupation': occupation
+        })
+
+
 # function to get all categories
 def get_all_categories(client):
 

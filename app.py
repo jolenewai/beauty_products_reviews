@@ -381,8 +381,8 @@ def add_user():
 
         if current_user:
             user = dao.get_user_by_email(client, current_user.id)
-        else:
-            user = None
+    else:
+        user = None
 
     return render_template('register.template.html', cat=categories, user=user)
 
@@ -391,25 +391,39 @@ def add_user():
 def process_add_user():
 
     client = data.get_client()
+    categories = dao.get_all_categories(client)
 
     password = request.form.get('password')
     encrypted_password = pbkdf2_sha256.hash(password)
 
-    client[DB_NAME].users.insert_one({
-        'email': request.form.get('email'),
-        'name': request.form.get('name'),
-        'password': encrypted_password,
-        'age': request.form.get('age'),
-        'gender': request.form.get('gender'),
-        'occupation': request.form.get('occupation')
-    })
+    email = request.form.get('email')
+    name = request.form.get('name')
+    age = request.form.get('age')
+    gender = request.form.get('gender')
+    occupation = request.form.get('occupation')
 
-    redirect_url = request.args.get('redirect')
+    user_exist = dao.get_user_by_email(client, email)
 
-    if redirect_url is None:
-        redirect_url = "/"
+    if flask_login.current_user.is_authenticated:
+        current_user = flask_login.current_user
 
-    return redirect(redirect_url)
+        if current_user:
+            user = dao.get_user_by_email(client, current_user.id)
+    else:
+        user = None
+
+    if user_exist:
+        flash('You have already registered! Please login.')
+        return render_template('register.template.html', cat=categories, user=user)
+    else:
+        dao.add_user_to_db(client, email, name, encrypted_password, age, gender, occupation)
+        
+        redirect_url = request.args.get('redirect')
+
+        if redirect_url is None:
+            redirect_url = "/"
+
+        return redirect(redirect_url)
 
 
 @app.route('/search')
@@ -447,17 +461,20 @@ def proccess_user_login():
     user_in_db = dao.get_user_by_email(client, request.form.get('email'))
 
     print(user_in_db)
-    user = User()
-    user.id = user_in_db['email']
 
-    redirect_url = request.args.get('redirect')
+    if user_in_db:
+    
+        user = User()
+        user.id = user_in_db['email']
 
-    if redirect_url is None:
-        redirect_url = "/"
+        redirect_url = request.args.get('redirect')
 
-    if verify_password(request.form.get('password'), user_in_db['password']):
-        flask_login.login_user(user)
-        return redirect(redirect_url)
+        if redirect_url is None:
+            redirect_url = "/"
+
+        if verify_password(request.form.get('password'), user_in_db['password']):
+            flask_login.login_user(user)
+            return redirect(redirect_url)
     else:
         flash('Login Failed. Invalid Email or Password')
         return render_template('user_login.template.html')
