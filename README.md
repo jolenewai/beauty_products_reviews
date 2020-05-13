@@ -1,5 +1,5 @@
 # Pretty Good 
-<img src="Pretty_Good_Screenshots.jpg" style="margin:0">
+<img src="static/images/readme/Pretty_Good_Screenshots.jpg" style="margin:0">
 
 **Pretty Good** is a informal website that allow consumers to freely post their honest reviews on any type of beauty products. The aim is to assure the audience that there's no paid review here. It serves as a information exchange platform. Users may read the reviews for free and without the needs to login. However, to add a review, registation and login are required so that the user may edit or delete their review(s) in the future.
  
@@ -18,7 +18,7 @@ The wireframes and mockup of the website can be accessed here:
 - For [Desktop](https://xd.adobe.com/view/b6c63e20-4de9-4ee9-6413-0442a04b7214-c0f7/) 
 - For [Mobile](https://xd.adobe.com/view/6d136527-3e95-45ec-5ecf-4f18ca32edfb-1b22/)
 
-The ER diagrams can be accessed [here](https://drive.google.com/open?id=119lge3_tqhiwuxFHjstO4N5Cng6vkmdG)
+The ER diagrams can be accessed [here](https://github.com/jolenewai/beauty_products_reviews/blob/master/static/images/readme/er_diagram.png)
 
 
 ### Navigation
