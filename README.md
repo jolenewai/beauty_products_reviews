@@ -214,6 +214,7 @@ Files are organised properly based on their functionality and purposes.
 - The photos used in this site were obtained from [MakeupAlley](https://www.makeupalley.com/)
 - The vector graphics used in the background were obtained from [Freepik](https://www.freepik.com/)
 - The screenshot is created using [Material.io Resizer](https://material.io/resources/resizer/)
+- The favicon is created using [favicon.io](https://favicon.io/)
 
 ### Acknowledgements
 - I received inspiration for this project from beauty reviews websites
