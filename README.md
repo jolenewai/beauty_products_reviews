@@ -88,6 +88,7 @@ Each review will have an indiviual page that displays every single details
 #### Features Left to Implement
 - To allow users to change the sorting of the reviews (currently it's sorted automatically by Descending order of Posted Date)
 - To allow users to edit/delete their review/s from any page after they have login
+- Lazy loading of the reviews
 
 ## Technologies Used
 
@@ -203,7 +204,7 @@ pip3 freeze --local > requirements.txt
 Files are organised properly based on their functionality and purposes.
 - __static__ folder contains images / css / scripts required by the website, in their respective folders
 - __templates__ folder contains all html templates with jinja codes to render the display of the information from the database 
-- python codes are also splitted into different files accordingly based on their functionality
+- python codes are also splitted into different files _app.py_, _dao.py_ and _data.py_ accordingly based on their functionality
 
 ## Credits
 
@@ -217,4 +218,6 @@ Files are organised properly based on their functionality and purposes.
 - The favicon is created using [favicon.io](https://favicon.io/)
 
 ### Acknowledgements
-- I received inspiration for this project from beauty reviews websites
+I received inspiration for this project from
+- [MakeupAlley](https://www.makeupalley.com/)
+- [BeautyPedia](https://www.beautypedia.com/)
