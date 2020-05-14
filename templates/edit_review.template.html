@@ -25,7 +25,7 @@
     <div class="row justify-content-around">
 
         <div id="update-review" class="col-sm-8 col-md-10 col-lg-8 mx-auto bg-white shadow p-5">  
-
+        <!-- Review information is retrieved from database and displayed here -->
         <form method="POST" class="needs-validation" novalidate>
             <input type="hidden" name="user_id" value="{{r.user_id}}" />
 
@@ -60,7 +60,7 @@
             {% set _stub = cat.rewind() %}
 
             <div class="form-group row justify-content-start mb-3">
-                <label class="col-form-label col-sm-3" for="categories">Categories </label> 
+                <label class="col-form-label col-sm-3">Categories </label> 
                 <div class="col-sm-8 col-md-8">
                     <!-- Get Categories from Categories table-->
                     {% for c in cat %}
@@ -78,7 +78,7 @@
             <div class="form-group row justify-content-start mb-3">
                 <label class="col-form-label col-sm-3" for="rating">Rating </label> 
                 <div class="col-sm-8 col-md-8">
-                    <select name="rating" class="custom-select">
+                    <select name="rating" id="rating" class="custom-select">
                         <option value="5" {% if r.rating == "4" %} selected {% endif %}>5 - Excellent</option>
                         <option value="4" {% if r.rating == "4" %} selected {% endif %}>4 - Very Good</option>
                         <option value="3" {% if r.rating == "3" %} selected {% endif %}>3 - Good</option>
@@ -89,18 +89,18 @@
             </div>
 
             <div class="form-group row justify-content-start mb-3">
-                <label class="col-form-label col-sm-3" for="categories">Review </label> 
+                <label class="col-form-label col-sm-3" for="review">Review </label> 
                 <div class="col-sm-8 col-md-8">
-                     <textarea name="review" class="form-control" rows="4" >{{ r.review }}</textarea>
+                     <textarea name="review" id="review" class="form-control" rows="4" >{{ r.review }}</textarea>
                 </div>
             </div>
 
             <div class="form-group row justify-content-start mb-3">
-                <label class="col-form-label col-sm-3" for="categories">Image </label> 
+                <label class="col-form-label col-sm-3">Image </label> 
                 <div class="col-sm-8 col-md-8">
-                    <img src="{{ r.image }}" height="100" />
-                   <input type="hidden" name="existing_product_image" value="{{ r.image }}" />
-                   <input type="hidden" role="uploadcare-uploader" name="product_image" />
+                    <img src="{{ r.image }}" height="100" alt="{{ r.product_name }}" />
+                   <input type="hidden" name="existing_product_image" id="existing_product_image" value="{{ r.image }}" />
+                   <input type="hidden" role="uploadcare-uploader" name="product_image" id="product_image" />
                 </div>
             </div>
 

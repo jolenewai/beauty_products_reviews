@@ -171,6 +171,7 @@ Password : testing@testing
 - [x] This website is responsive on various devices such as Desktop, iPad (works better in vertical), Mobile Phone
 
 ### HTML validation
+All pages are validated with the following website and returns no error (except the page with uploadcare attribute)
 - [x] [FREEFORMATTER](https://www.freeformatter.com/html-validator.html)
 - [x] [validator.nu](https://html5.validator.nu/)
 

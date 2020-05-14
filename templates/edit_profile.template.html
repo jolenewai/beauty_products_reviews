@@ -16,7 +16,7 @@
     <p class="text-center pink-text">
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-        <span class=flashes>
+        <span class="flashes">
         {% for message in messages %}
         {{ message }}
         {% endfor %}
@@ -28,18 +28,18 @@
     <div class="container">
     <div class="row justify-content-around mx-2">
 
-    <div id="register" class="col-sm-8 col-md-10 col-lg-8 mx-auto bg-white shadow p-5">   
+    <div id="update-profile" class="col-sm-8 col-md-10 col-lg-8 mx-auto bg-white shadow p-5">   
         <form method="POST">
             <div class="form-group row justify-content-start mb-3">
                 <label class="col-form-label col-sm-3" for="InputEmail">Email Address </label> 
                 <div class="col-sm-8 col-md-8">
-                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="email" name="email" value="{{user.email}}" />
+                    <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="email" name="email" value="{{user.email}}" id="InputEmail" required />
                 </div>
             </div>
             <div class="form-group row justify-content-start mb-3">
             <label class="col-form-label col-sm-3" for="DisplayName">Display Name </label> 
             <div class="col-sm-8 col-md-8 ">
-                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="name" value="{{user.name}}" />
+                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="name" value="{{user.name}}" id="DisplayName" required />
             </div>
             </div>
             
@@ -47,19 +47,19 @@
             <div class="form-group row justify-content-start mb-3">
             <label class="col-sm-3 col-form-label" for="Occupation">Occupation </label> 
             <div class="col-sm-8 col-md-8">
-                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="occupation" value="{{user.occupation}}" />
+                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="occupation" value="{{user.occupation}}" id="Occupation" />
             </div>
             </div>
 
             <div class="form-group row justify-content-start mb-3">
             <label class="col-form-label col-sm-1" for="Age">Age  </label> 
             <div class="col-sm-3 mx-sm-2">
-                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="age" value="{{user.age}}"/>
+                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="age" value="{{user.age}}" id="Age" />
             </div>
             
             <label class="col-form-label col-sm-1 mx-2" for="Gender">Gender </label>
             <div class="mx-sm-2 col-sm-5">
-                <select name="gender" class="custom-select form-control">
+                <select name="gender" id="Gender" class="custom-select form-control">
                     <option value="F" {% if user.gender=='F' %} selected {% endif %} >Female</option>
                     <option value="M" {% if user.gender=='M' %} selected {% endif %}>Male</option>
                     <option value="S" {% if user.gender=='S' %} selected {% endif %}>Not Specified</option>

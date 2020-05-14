@@ -33,7 +33,7 @@
             <div class="form-group row justify-content-start mb-3">
             <label class="col-form-label col-sm-3" for="DisplayName">Display Name </label> 
             <div class="col-sm-8 col-md-8 ">
-                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="name" placeholder="Name to be displayed for your review" required/>
+                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="name" placeholder="Name to be displayed for your review" id="DisplayName" required/>
                 <div class="invalid-feedback">
                     Please choose a display name for your reviews
                 </div>
@@ -42,7 +42,7 @@
             <div class="form-group row justify-content-start mb-3">
             <label class="col-form-label col-sm-3" for="Password">Password  </label> 
             <div class="col-sm-8 col-md-8">
-                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="password" name="password" placeholder="at least 8 characters" required/>
+                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="password" name="password" id="Password" placeholder="at least 8 characters" required/>
                 <div class="invalid-feedback">
                     Please enter a password
                 </div>
@@ -52,7 +52,7 @@
             <div class="form-group row justify-content-start mb-3">
             <label class="col-sm-3 col-form-label" for="Occupation">Occupation </label> 
             <div class="col-sm-8 col-md-8">
-                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="occupation" placeholder="Your Occupation" required />
+                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="occupation" placeholder="Your Occupation" id="Occupation" required />
                 <div class="invalid-feedback">
                     Please tell us your occupation
                 </div>
@@ -62,7 +62,7 @@
             <div class="form-group row justify-content-start mb-3">
             <label class="col-form-label col-sm-1" for="Age">Age  </label> 
             <div class="col-sm-3 mx-sm-2">
-                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="age" placeholder="Your age" required />
+                <input class="form-control rounded-0 border-top-0 border-left-0 border-right-0 border-bottom" type="text" name="age" placeholder="Your age" id="Age" required />
                 <div class="invalid-feedback">
                     Please tell us your age
                 </div>
@@ -70,7 +70,7 @@
             
             <label class="col-form-label col-sm-1 mx-2" for="Gender">Gender </label>
             <div class="mx-sm-2 col-sm-5">
-                <select name="gender" class="custom-select">
+                <select name="gender" class="custom-select" id="Gender">
                     <option selected>Choose One.. </option>
                     <option value="F">Female</option>
                     <option value="M">Male</option>
