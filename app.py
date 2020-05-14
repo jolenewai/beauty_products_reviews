@@ -165,6 +165,7 @@ def view_review_details(review_id):
 
     return render_template('review_details.template.html', cat=all_cat, review=review, user=user, all_users=all_users)
 
+
 @app.route('/add_review')
 def add_review():
 
@@ -437,8 +438,15 @@ def search():
     no_of_result = results.count()
     categories = dao.get_all_categories(client)
 
-    user = check_user_log_in(client)
     all_users = dao.get_all_users(client)
+
+    if flask_login.current_user.is_authenticated:
+        current_user = flask_login.current_user
+
+        if current_user:
+            user = dao.get_user_by_email(client, current_user.id)
+    else:
+        user = None
 
     return render_template('search_result.template.html',results=results, search_str=search_str, user=user, cat=categories, all_users=all_users, no_of_result=no_of_result)
 
