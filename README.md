@@ -1,5 +1,5 @@
 # Pretty Good 
-<img src="static/images/readme/Pretty_Good_Screenshots.jpg" style="margin:0">
+<img src="static/images/readme/Pretty_Good_Screenshots_v2.jpg" style="margin:0">
 
 **Pretty Good** is a informal website that allow consumers to freely post their honest reviews on any type of beauty products. The aim is to assure the audience that there's no paid review here. It serves as a information exchange platform. Users may read the reviews for free and without the needs to login. However, to add a review, registation and login are required so that the user may edit or delete their review(s) in the future.
  
