@@ -5,7 +5,6 @@ body {
     background-image: url("/static/images/second_background.png");
     background-attachment: fixed;
     background-position: center top;
-    /* font-size: 1.4rem; */
     font-family: 'Amatic SC', cursive;
     font-weight: 400;
     transition:500ms ease;
@@ -372,7 +371,6 @@ a:hover{
     }
 
     #website-title a{
-        /* font-size: 2.5em; */
         line-height: 0.9em;
     }
 

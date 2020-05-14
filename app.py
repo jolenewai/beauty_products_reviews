@@ -12,22 +12,19 @@ import dao
 load_dotenv()
 
 DB_NAME = os.environ.get('DB_NAME')
-ratings = [1,2,3,4,5]
+ratings = [1, 2, 3, 4, 5]
 
 # create the flask app
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY')
-# add favicon to the website
-# app.add_url_rule('/favicon.ico',
-#                  redirect_to=url_for('static', filename='favicon.ico'))
 
 
-#create the login manager
+# create the login manager
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
 
-#create the user class
+# create the user class
 class User(flask_login.UserMixin):
     pass
 
@@ -133,7 +130,6 @@ def read_reviews():
 def read_reviews_by_category(cat_id):
 
     client = data.get_client()
-    
     reviews = dao.get_reviews_by_cat_id(client, cat_id)
     current_cat = dao.get_category_by_id(client, cat_id)
     all_cat = dao.get_all_categories(client)
@@ -145,7 +141,7 @@ def read_reviews_by_category(cat_id):
         if current_user:
             user = dao.get_user_by_email(client, current_user.id)
     else:
-        user = None    
+        user = None
 
     return render_template('read_reviews_by_cat.template.html', current_cat=current_cat, cat=all_cat, reviews=reviews, user=user, all_users=all_users)
 
@@ -165,7 +161,7 @@ def view_review_details(review_id):
         if current_user:
             user = dao.get_user_by_email(client, current_user.id)
     else:
-        user = None    
+        user = None
 
     return render_template('review_details.template.html', cat=all_cat, review=review, user=user, all_users=all_users)
 
@@ -417,7 +413,6 @@ def process_add_user():
         return render_template('register.template.html', cat=categories, user=user)
     else:
         dao.add_user_to_db(client, email, name, encrypted_password, age, gender, occupation)
-        
         redirect_url = request.args.get('redirect')
 
         if redirect_url is None:

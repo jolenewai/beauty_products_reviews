@@ -36,6 +36,7 @@ def get_user_by_email(client, email):
     return user
 
 
+# function to add user to database
 def add_user_to_db(client, email, name, encrypted_password, age, gender, occupation):
 
     client[DB_NAME].users.insert_one({
@@ -61,7 +62,7 @@ def get_reviews_by_cat_id(client, cat_id):
 
     reviews = client[DB_NAME].user_reviews.find(
         {
-            'categories.category_id':ObjectId(cat_id)
+            'categories.category_id': ObjectId(cat_id)
         }
     ).sort('posted', pymongo.DESCENDING)
 
@@ -215,9 +216,10 @@ def search_by_query(client, search_str, search_by, cat_id, rating):
     return results
 
 
+# function to update review
 def update_review_by_id(client, review_id, user_id, title, posted, product_name, product_brand, country_of_origin, rating, review, image, cat_to_add):
 
-     client[DB_NAME].user_reviews.update_one({
+    client[DB_NAME].user_reviews.update_one({
         '_id': ObjectId(review_id)
         },
         {
@@ -238,6 +240,7 @@ def update_review_by_id(client, review_id, user_id, title, posted, product_name,
     )
 
 
+#funtion to update user profile
 def update_user_profile(client, user_id, email, name, password, age, gender, occupation):
 
     client[DB_NAME].users.update_one({
