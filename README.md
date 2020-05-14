@@ -26,7 +26,7 @@ The ER diagrams can be accessed [here](https://github.com/jolenewai/beauty_produ
 - Search bar, Login and Add A Review link are on sticky-top bar on the page which enable users to access to them at any point of the website
 
 ### Colour Scheme
-<img src="static/images/readme/colour_scheme.png" style="margin:0">
+<img src="static/images/readme/colour_scheme.png" width="200" style="margin:0">
 Different shades of pink and black are used in this website as the intended users are mainly female.
 
 ### Typography
