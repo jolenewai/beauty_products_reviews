@@ -26,7 +26,7 @@ The ER diagrams can be accessed [here](https://github.com/jolenewai/beauty_produ
 - Search bar, Login and Add A Review link are on sticky-top bar on the page which enable users to access to them at any point of the website
 
 ### Colour Scheme
-<img src="static/images/readme/colour_scheme.jpg" style="margin:0">
+<img src="static/images/readme/colour_scheme.png" style="margin:0">
 Different shades of pink and black are used in this website as the intended users are mainly female.
 
 ### Typography
@@ -42,11 +42,11 @@ A mix of handwritten and sans serif fonts are used for this website, to achieve 
 #### Landing Page
 Greeting users with choice of actions such as "Read Reviews" or "Write A Review", there's also option to login or register
 
-### Home Page
+#### Home Page
 This will display the latest entries of reviews from each of the product category available
 
 
-### Navigate with Product categories
+#### Navigate with Product categories
 The main navigations for this website, allows user to access to the reviews for each product categories directly
 - __All__, perform the same as the Home Page 
 - __Skin Care__, displays all the reviews in "Skin Care" Category 
@@ -57,35 +57,35 @@ The main navigations for this website, allows user to access to the reviews for 
 
 Reviews that are belong to multiple categories will be displayed on both page, by default, the product categories are meant for women. Hence, there's a category "For Men" specifically meant for products that are targeting male audiences.
 
-### Search
+#### Search
 The search bar is placed on top of every page and stick to top when user scrolls down. In the search bar, user can only perform basic search by selecting the search options: _Product Name_, _Product Brand_, _Keywords in the Review_. By default, this will search product name that matches user input. 
 
 On the search result page, user can perform further filtering on the search results by limiting it to a specific _Product Category_ or _Rating_ or _Both_.
 
 
-### Login
+#### Login
 User can login to perform the following task:
 - [x] Add A Review
 - [x] Edit Profile
 - [x] Edit Review/s
 - [x] Delete Review/s
 
-### Register
+#### Register
 User can create an account before login to perform the abovementioned tasks
 
-### Add A Review
+#### Add A Review
 User can add a review to the website by filling up the form wit all the required fields
 
-### My Reviews
+#### My Reviews
 Reviews that were added by the login user will be listed here. User can edit or delete the reviews from this page
 
-### Edit Profile
+#### Edit Profile
 User can edit their personal information that was filled in during the registration
 
-### Review Details
+#### Review Details
 Each review will have an indiviual page that displays every single details 
 
-### Features Left to Implement
+#### Features Left to Implement
 - To allow users to change the sorting of the reviews (currently it's sorted automatically by Descending order of Posted Date)
 - To allow users to edit/delete their review/s from any page after they have login
 
@@ -103,7 +103,7 @@ Each review will have an indiviual page that displays every single details
 * [GitHub](https://github.com/) for versioning control
 
 
-## Software
+### Software
 * [Adobe XD](https://www.adobe.com/sea/products/xd.html) for wireframing and UI design 
 * [Adobe Photoshop](https://www.adobe.com/sea/products/photoshop.html) for photos editing and cropping
 * [Adobe Illustrator](https://www.adobe.com/sea/products/illustrator.html) to create background images
@@ -118,8 +118,10 @@ Each review will have an indiviual page that displays every single details
 
 A testing account is created to perform the following testing:
 
-> __Email__: abc@test.com
-> __Password__: testing@testing
+```
+Email : abc@test.com
+Password : testing@testing
+```
 
 ### User Registration
 - [x] On the home page, click on Register
